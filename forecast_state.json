@@ -1,0 +1,211 @@
+{
+  "1": 90.0,
+  "10": 79.0,
+  "2": 61.0,
+  "3": 4.0,
+  "4": 57.0,
+  "5": 77.5,
+  "6": 35.0,
+  "7": 14.0,
+  "8": 9.0,
+  "9": 30.0,
+  "_model_state": {
+    "tier1": {
+      "5": {
+        "simulations": 5000
+      }
+    },
+    "tier2": {},
+    "tier3": {
+      "1": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 2.0,
+            "name": "Bipartisan political momentum",
+            "rationale": "The mercantilist/tech-restriction posture toward China has bipartisan support and has continued across administrations. Only a small upward nudge: the base rate is already near the ceiling, so there is little headroom for an upward adjustment to move."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 3.0,
+            "name": "Diminishing room to tighten further",
+            "rationale": "Controls are already extensive after four years of near-continuous tightening; fewer high-value targets may remain to add before the Dec 2026 resolution, and a base rate near 100% has mild mean-reversion room and cannot rise. Small, and it does not threaten a YES on its own -- YES needs only one tightening action, which the cadence still easily supplies."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 2.0,
+            "name": "2025 H20 licensing reversal / transactional posture",
+            "rationale": "In 2025 the administration reversed an earlier restriction and authorized resumption of Nvidia H20 (and AMD) advanced-AI-chip sales to China under a licensing arrangement -- a concrete, item-specific relaxation NOT captured in the audited rule set (a licensing-policy action, not an Entity List/EAR rule), so it adds genuinely new downside information rather than double-counting. It signals willingness to relax specific China-chip controls for leverage/revenue, nudging toward the 'relax/unchanged' pole. Kept small: it is a per-item carve-out, not a repeal of the Entity List or the broad advanced-computing controls, and the resolution bar (any tightening action in the window) remains easily met."
+          }
+        ],
+        "base_rate_pct": 93.0,
+        "base_rate_source": "93% = tightening share of substantive actions in a full audit of 35 China advanced-computing/semiconductor Federal Register rules, 2022-2026: 26 tightening / 2 loosening / 7 noise, base rate = 26/(26+2). The 2 loosening actions are routine entity de-listings after review, NOT relaxation of chip controls -- there is no substantive loosening of China advanced-chip policy in the window. Bracketed 89-100% by inclusion definition: core chip-tech rules only = 9/0 = 100%; chip rules + China-only entity additions = 16/2 = 89%; full China-majority set = 26/2 = 93%. Tightening runs 89-100% every year 2022-2025 with no pause. Derived from the cached Federal Register docket (federal_register_bis_export_controls.json); replaces the earlier 55% placeholder.",
+        "reference_class": "China advanced-computing/semiconductor export control actions, 2022-2026, Federal Register"
+      },
+      "10": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 6.0,
+            "name": "Whole-of-government momentum and on-schedule execution",
+            "rationale": "Not just an announced agenda: the NRC already proposed Part 57 on cadence, DOE already selected the four sites, and four reinforcing May-2025 nuclear EOs plus the 2024 ADVANCE Act all push the same direction. The machine is executing, not just planning."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 7.0,
+            "name": "NRC finalization slippage and litigation risk",
+            "rationale": "NRC rulemakings routinely slip, and EO deadlines are directives agencies miss; the 'finalized, not proposed' bar is strict; final rules can be litigated or enjoined; and an administration-priority shift is a tail risk. Slightly outweighs the momentum factor, so the net lands just under the base rate."
+          }
+        ],
+        "base_rate_pct": 80.0,
+        "base_rate_source": "Timeline-based, not a generic prior. EO 14300 (May 23, 2025) directs the NRC to publish FINAL rules within 18 months -- by Nov 23, 2026 -- which sits ~13 months INSIDE the 2027-12-31 resolution window; the NRC has publicly committed to a timeline to meet it. Part 57 (path a) was proposed May 1, 2026 with comments closed Jun 15, 2026, so it is already in finalization. DOE's four selected sites (path b) target operations by end-2027, forcing permitting to be finalized in 2026-2027. Only ONE of three independent paths must finalize. Tempered from higher by the NRC's genuine history of slipping even statutory/EO deadlines and the strict 'finalized-not-proposed' bar. Historical NRC proposed-to-final pace is 3-6 years, but the current mandate + 18-month runway + three shots is the operative reference class here.",
+        "reference_class": "Finalization (not mere proposal) of at least one of three EO-accelerated federal nuclear-licensing/permitting actions within the resolution window, judged against the mandated rulemaking timeline rather than the historical NRC pace"
+      },
+      "2": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 9.0,
+            "name": "Administration's stated expansion intent",
+            "rationale": "State Dept on the record: 'this is only the beginning... dozens of additional projects in the pipeline... with more coming online soon.' Corroborated by EXIM's demonstrated adjacent pace ($14.8B in separate critical-minerals LOIs over the past year). The $14.8B is folded in here as supporting momentum evidence -- not a separate factor and not the base rate -- because it is related activity, not literally Vault's committed capacity."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 8.0,
+            "name": "Political/budget risk and first-year execution timing",
+            "rationale": "The Congressional-appropriation path is slow and uncertain; formal EXIM Board or private-capital actions can slip past Dec 31; general budget/political friction applies. The only identified counterfactor, sized to roughly offset the bullish intent so the estimate stays near the structural base rate."
+          }
+        ],
+        "base_rate_pct": 60.0,
+        "base_rate_source": "No clean tabulated frequency exists for this sparse, heterogeneous class (DOE LPO/ATVM, DPA Title III, CHIPS, EXIM facilities all differ in structure), so 60% is a reasoned structural prior -- stated as such -- not a counted rate. Anchored on Project Vault's own design: committed capacity scales with OEM purchase commitments rather than a fixed cap, so expansion is the program's default growth mechanism, not an exceptional event (prior above 50%). Three independent YES-paths exist (EXIM Board additional authorization; new private co-investment; Congressional appropriation), two of which do not require Congress. Held at 60% rather than higher by first-calendar-year timing risk: only ~11 months (Feb 2 -> Dec 31, 2026) for a formal expansion action to actually complete, and new programs often spend year one standing up the initial commitment.",
+        "reference_class": "First-year federal loan-based industrial-policy financing vehicles expanding committed capacity within their first calendar year of operation"
+      },
+      "3": {
+        "adjustments": [],
+        "base_rate_pct": 4.0,
+        "base_rate_source": "Qualitative, not a trend fit. Reframed from tier-2 because the real data cannot support a trustworthy fit (see tier2['3'] archive and methodology_notes.md #3). The reported gap is 68-80% and stable-to-widening: 2026 pipeline 68.75% (Feb) -> ~68% (Apr) per Sightline; 2027-specific 70.7% (Apr, Sightline/Bloomberg) -> ~80% (Jun, Jefferies). YES requires the gap to roughly HALVE -- ~45pp, from ~75% to <30% -- within ~18 months while it is currently WIDENING, with no supporting trend evidence. The only non-fanciful path is a large downward revision of the planned pipeline (an AI-capex pullback shrinking the denominator). CAVEAT: the two 2027-specific points are from different trackers (Sightline vs Jefferies) and the resolution-metric series is n=2 -- too small for any formal significance test; the abandoned tier-2 fit perversely returned 9-13% (rising with horizon) as an artifact of fat-tailed n=4 bands, which is rejected in favor of this ~4% qualitative call.",
+        "reference_class": "Direction of the reported US 2027 data-center capacity gap versus the <30% resolution threshold -- a qualitative read, since the trend data is too small and methodologically mixed to fit"
+      },
+      "4": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 6.0,
+            "name": "Q1 2026 real investment acceleration",
+            "rationale": "Real information-processing investment jumped QoQ ($1,564B Q4'25 -> $1,673B Q1'26 SAAR, ~+7%). Genuine momentum, but kept small: a single volatile, seasonally-strong quarter (Q1 prints run well above full-year averages), not proof of a full-year trend."
+          },
+          {
+            "direction": "up",
+            "magnitude_pts": 6.0,
+            "name": "Structures / physical-buildout boom",
+            "rationale": "Nonresidential structures/capex buildout is visibly elevated (data-center and CHIPS-fab construction). Sized conservatively because BEA structures data mixes in substantial non-AI construction and cannot isolate data centers -- a measurement-contamination caveat."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 5.0,
+            "name": "Resolution metric narrower than the estimate's scope",
+            "rationale": "The resolution line is the BEA IP-equipment/software contribution (historically ~0.4pp), narrower than the total AI-capex scope Bridgewater's 150bp covers; clearing 150bp on the narrow measured line is a harder bar than beating the headline estimate. A scope/definitional caveat, not a trend extrapolation; kept modest given genuine ambiguity in resolution scope."
+          }
+        ],
+        "base_rate_pct": 50.0,
+        "base_rate_source": "Judgment starting point, stated as such: there is no historical frequency for 'beating a specific analyst's forward estimate', so 50% is the deliberate uninformed prior. Bridgewater's ~150bp is itself a forward judgment call, not a historical baseline; with no reason to think it is biased high, even odds is the honest anchor.",
+        "reference_class": "outcomes relative to a credible, forward-looking expert central estimate, absent specific evidence of bias"
+      },
+      "5": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 15.0,
+            "name": "CME FedWatch cumulative market pricing",
+            "rationale": "CME FedWatch (as of 2026-07-21) prices P(0 hikes by Dec) = 12.9%, i.e. 87.1% P(>=1 hike) -- a +24.6pp gap over the HMM's unconditional 62.5%. A real, current, market-priced signal incorporating all 2026-specific information the HMM's pooled history ignores. Sized as a partial blend (~60% weight to the market, +15pp of the 24.6pp gap), NOT a full override: the market's per-meeting hazard spikes to 61.5% at September (possible overreaction to the May 2026 CPI print) and its July read (21.9%) diverges from Polymarket's 10.7%, so the historical anchor is retained. Dot-plot posture and inflation are deliberately NOT added as separate factors -- they are already priced into this CME number (no double-count)."
+          }
+        ],
+        "base_rate_pct": 62.5,
+        "base_rate_source": "This model's own unconditional historical estimate: the Fed posture HMM's Monte Carlo P(at least one hike by year-end 2026), 5,000 paths, seed 20260716 (tier1_market.py). NOT an independent number -- the HMM output IS the base rate for this layer.",
+        "reference_class": "P(>=1 rate hike in 2026) from this project's own Fed-posture HMM (an unconditional historical base rate), blended toward current market pricing -- not a separate reference-class frequency"
+      },
+      "6": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 10.0,
+            "name": "Fed's active hawkish posture",
+            "rationale": "Forecast #5's authoritative probability is now 77.5% (its HMM base rate blended with CME FedWatch market pricing), up from the 63% HMM-only figure, and the June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint (~one more hike signalled). Hiking is the Fed's direct tool for pushing inflation back toward target, so a materially higher, market-corroborated hike probability raises P(PCE -> at or below 3.5%) more than the HMM-only read did. Sized up from +6pp to +10pp accordingly, but still bounded: hikes act with long lags and do not guarantee the target is hit by the Dec print."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 12.0,
+            "name": "Recent trend momentum (wrong direction)",
+            "rationale": "PCE YoY accelerated 2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07 over the last five prints -- real, recent, and moving away from YES; the linear trend projects ~4.49% for Dec 2026. Strongest concrete evidence against resolution, hence the largest single adjustment."
+          },
+          {
+            "direction": "up",
+            "magnitude_pts": 3.0,
+            "name": "Single-print resolution dispersion",
+            "rationale": "Resolution is a single Dec 2026 YoY print, and monthly YoY has swung up to ~0.67pp in one month recently (Feb->Mar). That realized-print volatility (distinct from the SEP's dispersion of participant point views) puts real left-tail mass below 3.5% even with the central path above it. Small, and it is the same narrow-band-understates-uncertainty point that motivated the reframe."
+          }
+        ],
+        "base_rate_pct": 34.0,
+        "base_rate_source": "34% = midpoint of the 21-47% bound on the share of the 19 FOMC participants projecting 2026 PCE at or below 3.5%, derived from the June 2026 SEP (median 3.6%, central tendency 3.5-3.7%, range 2.7-4.1%; fomcprojtabl20260617.htm). This is sourced evidence from the body whose policy decisions drive the outcome -- a stronger anchor than a naive 50% or the flat historical trend fit. The exact per-participant count is not machine-readable (Figure 3.C is a chart image), so the bound's midpoint is used.",
+        "reference_class": "PCE inflation landing at or below a threshold by a horizon, benchmarked to the FOMC's own contemporaneous year-end projection distribution for the same variable"
+      },
+      "7": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 7.0,
+            "name": "Geopolitical / administration momentum",
+            "rationale": "A genuine sovereign-AI arms race (US Stargate $500B triggering EU/Gulf/Asia responses). The upside path is a cluster of large discrete new sovereign commitments -- a China-response package, new EU 'AI continent' money, fresh Gulf domestic pledges. Real and substantial per all sourcing gathered; sized to the chance that lumpiness plus momentum produces a burst that beats the trend pace."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 5.0,
+            "name": "Budget-cycle deceleration and timing",
+            "rationale": "Most 2026 public budgets were already announced earlier this year (Japan Dec 2025, Korea and UK 2026), so net-new large PUBLIC commitments tend to slow in the Aug-Dec window; and continuation of even the record pace still lands ~$110B short of the threshold."
+          }
+        ],
+        "base_rate_pct": 12.0,
+        "base_rate_source": "Pace-based, not a coin flip. Current strict-scope cumulative base is ~$85-90B as of Jul 2026 (EU InvestAI $22B, Gulf-domestic SWF portion ~$25B, Japan $15B, France $11B, Korea $8B, UK $3B, Canada $2B, India $1.25B), leaving a ~$160B gap to $250B. This category grew from ~$0 to ~$90B in ~18 months (the 2025-26 wave), a run-rate of ~$55-65B/yr; even a doubled/accelerating pace (~$120B/yr) reaches only ~$140B by year-end. Crossing $250B needs ~$160B in ~5 months = ~$385B/yr annualized, a 4-6x acceleration over an already record pace. 12% = probability of a lumpy but momentum-driven category adding ~1.8x its entire accumulated base in 5 months.",
+        "reference_class": "Growth pace of strict-scope non-US/non-China public-sector sovereign AI-infrastructure commitments -- can the cumulative total cross $250B by Dec 31, 2026 from a ~$90B base"
+      },
+      "8": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 5.0,
+            "name": "France/Mistral warm path",
+            "rationale": "The single most plausible near-term catalyst. France openly frames Mistral as its national/European champion; the ASML foreign-ownership stake fuels an active sovereignty debate; and the state is already entangled (Bpifrance stake, Jan 2026 Ministry of Armies contract). A move to a formal designation or strategic stake is the realistic YES route. Tempered because France is still at framing/procurement -- a formal, executed action in 5 months would be an escalation, not a continuation."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 6.0,
+            "name": "US disinclination and the execution bar",
+            "rationale": "7-8 of the 10 listed labs are US-based (OpenAI, Anthropic, xAI, Meta, Microsoft, Amazon, SSI; DeepMind is UK-sited but Google-owned), and the US is moving the opposite direction: the June 2, 2026 EO creates a 'covered frontier model' security-review label while explicitly banning mandatory licensing/protection, and the DoW designated Anthropic a supply-chain risk. That takes the largest slice of the list off the table. Combined with the 'executed by Dec 31, not merely proposed' requirement, it is the dominant drag -- slightly outweighing the France catalyst."
+          }
+        ],
+        "base_rate_pct": 10.0,
+        "base_rate_source": "No direct precedent exists for a strategic/control sovereign stake or a formal national-champion designation in a frontier AI LAB. But the policy tool is demonstrably live in adjacent strategic tech -- the May 2026 US-Intel strategic stake and the 2025-26 wave of government stakes in critical-tech firms show the taboo is broken -- so the rate is not ~0. Extending it to a lab AND executing (not merely proposing) within the ~5 months to Dec 31, 2026 is a high bar, hence 10%. Portfolio-style stakes by government-linked SWFs/state banks (MGX, HUMAIN, Bpifrance) are excluded by scope as financial investments, not industrial-policy interventions.",
+        "reference_class": "A government executing a strategic/control sovereign equity stake or a formal national-champion legal designation in a frontier AI model/lab company within a ~5-month window (narrow scope; portfolio-style SWF/state-bank stakes excluded)"
+      },
+      "9": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 8.0,
+            "name": "Documented fuel-cost easing (STEO gas downgrade)",
+            "rationale": "EIA's own STEO forecasts Henry Hub gas ~2% lower in 2026, and the May 2026 STEO revised the 2026 forecast down a further 4.4% -- genuine downward pressure on the fuel portion of the rate. Sized modestly: fuel is only ~a third of the commercial rate (so a ~2-6% gas move is ~1-2% on the total), and it is a forecast, not a locked certainty -- it must be large enough to overcome the base-rate hikes, which is borderline."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 13.0,
+            "name": "Regulatory-locked base-rate increases",
+            "rationale": "Dominion's SCC-approved base-rate increases are regulatory-locked through 2027 -- a fixed cost component that does NOT reverse with fuel prices and pushes the total rate up, certainly. Sized larger than the fuel tailwind because it is certain and structural while the fuel easing is a modest forecast: for YES, the uncertain fuel decline must outrun a locked increase."
+          }
+        ],
+        "base_rate_pct": 35.0,
+        "base_rate_source": "35% = the reference-class frequency of a regulated state's commercial electricity rate posting a genuine 6-month NET DECREASE. Retail prices drift upward over time (~2-3%/yr nominal), so a net decrease over a given 6-month window is a minority event -- but not rare, because natural-gas fuel pass-through and seasonality produce real declines a substantial minority of the time. Mean-reversion note: 10.33 cents/kWh (Jul 2026) is the TOP of the recent 8-month range (10.21-10.33) -- the rate was below 10.33 in 7 of the last 8 months -- so 'below 10.33 in January' sits squarely within the recent noise band, which keeps this from being a longshot. No 'global energy conflict' wildcard is included: the research surfaced nothing specific (no current conflict-driven gas shock), so no speculative geopolitical factor is invented; the fuel-cost/base-rate mechanism is the whole grounded story.",
+        "reference_class": "Frequency of a regulated state's commercial electricity rate posting a genuine 6-month net decrease, given a documented fuel-cost easing trend against regulatory-locked base-rate increases"
+      }
+    }
+  }
+}

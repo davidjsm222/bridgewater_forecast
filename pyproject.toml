@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bridgewater-forecast"
+version = "0.1.0"
+description = "Bridgewater Forecasting the Future model"
+requires-python = ">=3.10"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "rich>=15.0.0",
+    "textual>=1.0.0",
+    "textual-plotext>=1.0.0",
+]
+
+[project.scripts]
+forecast = "tui:main"
+
+[tool.setuptools]
+py-modules = [
+    "data_sources",
+    "fomc_history",
+    "forecasts",
+    "manual_research",
+    "tier1_market",
+    "tier2_trend",
+    "tier3_judgment",
+    "tui",
+]

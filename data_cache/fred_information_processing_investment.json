@@ -1,0 +1,315 @@
+{
+  "forecast_id": 4,
+  "gdp_contribution_calculation": "Sum of BEA contributions to real GDP growth from software, computers/peripherals, other information-processing equipment, and total nonresidential structures; 150 basis points equals 1.5 percentage points.",
+  "gdp_contribution_components": [
+    {
+      "frequency": "Annual",
+      "id": "B985RY2A224NBEA",
+      "seasonal_adjustment": "Not Seasonally Adjusted",
+      "title": "Contributions to percent change in real gross domestic product: Gross private domestic investment: Fixed investment: Nonresidential: Intellectual property products: Software",
+      "units": "Percentage Points at Annual Rate"
+    },
+    {
+      "frequency": "Annual",
+      "id": "B935RY2A224NBEA",
+      "seasonal_adjustment": "Not Seasonally Adjusted",
+      "title": "Contributions to percent change in real gross domestic product: Gross private domestic investment: Fixed investment: Nonresidential: Equipment: Information processing equipment: Computers and peripheral equipment",
+      "units": "Percentage Points at Annual Rate"
+    },
+    {
+      "frequency": "Annual",
+      "id": "A937RY2A224NBEA",
+      "seasonal_adjustment": "Not Seasonally Adjusted",
+      "title": "Contributions to percent change in real gross domestic product: Gross private domestic investment: Fixed investment: Nonresidential: Equipment: Information processing equipment: Other",
+      "units": "Percentage Points at Annual Rate"
+    },
+    {
+      "frequency": "Annual",
+      "id": "A009RY2A224NBEA",
+      "seasonal_adjustment": "Not Seasonally Adjusted",
+      "title": "Contributions to percent change in real gross domestic product: Gross private domestic investment: Fixed investment: Nonresidential: Structures",
+      "units": "Percentage Points at Annual Rate"
+    }
+  ],
+  "gdp_contribution_notes": "Structures uses total nonresidential structures (A009RY2A224NBEA): BEA publishes no data-center-specific or commercial-only structures contribution in the contributions-to-real-GDP framework. This total therefore includes manufacturing, power/communication, and mining structures unrelated to AI capex, so it OVERSTATES the AI/data-center physical buildout. Treat the structures component as an upper bound on the buildout contribution, not a clean data-center measure.",
+  "gdp_contribution_observations": [
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": -0.1,
+        "A937RY2A224NBEA": 0.12,
+        "B935RY2A224NBEA": 0.0,
+        "B985RY2A224NBEA": 0.2
+      },
+      "date": "2016-01-01",
+      "total_percentage_points_at_annual_rate": 0.22
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.08,
+        "A937RY2A224NBEA": 0.13,
+        "B935RY2A224NBEA": 0.03,
+        "B985RY2A224NBEA": 0.23
+      },
+      "date": "2017-01-01",
+      "total_percentage_points_at_annual_rate": 0.47
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.17,
+        "A937RY2A224NBEA": 0.08,
+        "B935RY2A224NBEA": 0.07,
+        "B985RY2A224NBEA": 0.25
+      },
+      "date": "2018-01-01",
+      "total_percentage_points_at_annual_rate": 0.57
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.07,
+        "A937RY2A224NBEA": 0.05,
+        "B935RY2A224NBEA": 0.01,
+        "B985RY2A224NBEA": 0.15
+      },
+      "date": "2019-01-01",
+      "total_percentage_points_at_annual_rate": 0.28
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": -0.29,
+        "A937RY2A224NBEA": -0.03,
+        "B935RY2A224NBEA": 0.05,
+        "B985RY2A224NBEA": 0.19
+      },
+      "date": "2020-01-01",
+      "total_percentage_points_at_annual_rate": -0.08
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": -0.08,
+        "A937RY2A224NBEA": 0.11,
+        "B935RY2A224NBEA": 0.08,
+        "B985RY2A224NBEA": 0.32
+      },
+      "date": "2021-01-01",
+      "total_percentage_points_at_annual_rate": 0.43
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.1,
+        "A937RY2A224NBEA": 0.09,
+        "B935RY2A224NBEA": 0.03,
+        "B985RY2A224NBEA": 0.32
+      },
+      "date": "2022-01-01",
+      "total_percentage_points_at_annual_rate": 0.54
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.49,
+        "A937RY2A224NBEA": -0.02,
+        "B935RY2A224NBEA": -0.04,
+        "B985RY2A224NBEA": 0.16
+      },
+      "date": "2023-01-01",
+      "total_percentage_points_at_annual_rate": 0.59
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": 0.04,
+        "A937RY2A224NBEA": -0.01,
+        "B935RY2A224NBEA": 0.1,
+        "B985RY2A224NBEA": 0.15
+      },
+      "date": "2024-01-01",
+      "total_percentage_points_at_annual_rate": 0.28
+    },
+    {
+      "component_percentage_points": {
+        "A009RY2A224NBEA": -0.17,
+        "A937RY2A224NBEA": 0.08,
+        "B935RY2A224NBEA": 0.3,
+        "B985RY2A224NBEA": 0.26
+      },
+      "date": "2025-01-01",
+      "total_percentage_points_at_annual_rate": 0.47
+    }
+  ],
+  "observations": [
+    {
+      "date": "2016-01-01",
+      "value": 676.404
+    },
+    {
+      "date": "2016-04-01",
+      "value": 686.997
+    },
+    {
+      "date": "2016-07-01",
+      "value": 703.051
+    },
+    {
+      "date": "2016-10-01",
+      "value": 719.912
+    },
+    {
+      "date": "2017-01-01",
+      "value": 735.916
+    },
+    {
+      "date": "2017-04-01",
+      "value": 759.91
+    },
+    {
+      "date": "2017-07-01",
+      "value": 777.238
+    },
+    {
+      "date": "2017-10-01",
+      "value": 802.567
+    },
+    {
+      "date": "2018-01-01",
+      "value": 827.515
+    },
+    {
+      "date": "2018-04-01",
+      "value": 843.227
+    },
+    {
+      "date": "2018-07-01",
+      "value": 860.509
+    },
+    {
+      "date": "2018-10-01",
+      "value": 871.524
+    },
+    {
+      "date": "2019-01-01",
+      "value": 877.081
+    },
+    {
+      "date": "2019-04-01",
+      "value": 894.395
+    },
+    {
+      "date": "2019-07-01",
+      "value": 898.68
+    },
+    {
+      "date": "2019-10-01",
+      "value": 911.803
+    },
+    {
+      "date": "2020-01-01",
+      "value": 909.244
+    },
+    {
+      "date": "2020-04-01",
+      "value": 919.19
+    },
+    {
+      "date": "2020-07-01",
+      "value": 956.035
+    },
+    {
+      "date": "2020-10-01",
+      "value": 988.523
+    },
+    {
+      "date": "2021-01-01",
+      "value": 1029.917
+    },
+    {
+      "date": "2021-04-01",
+      "value": 1055.459
+    },
+    {
+      "date": "2021-07-01",
+      "value": 1065.715
+    },
+    {
+      "date": "2021-10-01",
+      "value": 1111.421
+    },
+    {
+      "date": "2022-01-01",
+      "value": 1159.935
+    },
+    {
+      "date": "2022-04-01",
+      "value": 1177.82
+    },
+    {
+      "date": "2022-07-01",
+      "value": 1196.637
+    },
+    {
+      "date": "2022-10-01",
+      "value": 1199.166
+    },
+    {
+      "date": "2023-01-01",
+      "value": 1197.933
+    },
+    {
+      "date": "2023-04-01",
+      "value": 1198.919
+    },
+    {
+      "date": "2023-07-01",
+      "value": 1206.879
+    },
+    {
+      "date": "2023-10-01",
+      "value": 1239.751
+    },
+    {
+      "date": "2024-01-01",
+      "value": 1257.955
+    },
+    {
+      "date": "2024-04-01",
+      "value": 1278.27
+    },
+    {
+      "date": "2024-07-01",
+      "value": 1301.694
+    },
+    {
+      "date": "2024-10-01",
+      "value": 1307.809
+    },
+    {
+      "date": "2025-01-01",
+      "value": 1412.659
+    },
+    {
+      "date": "2025-04-01",
+      "value": 1477.602
+    },
+    {
+      "date": "2025-07-01",
+      "value": 1498.952
+    },
+    {
+      "date": "2025-10-01",
+      "value": 1563.986
+    },
+    {
+      "date": "2026-01-01",
+      "value": 1673.041
+    }
+  ],
+  "retrieved_at_utc": "2026-07-18T17:54:32.919132Z",
+  "schema_version": 1,
+  "series": {
+    "frequency": "Quarterly",
+    "id": "A679RX1Q020SBEA",
+    "seasonal_adjustment": "Seasonally Adjusted Annual Rate",
+    "title": "Real gross private domestic investment: Fixed investment: Nonresidential: Information processing equipment and software",
+    "units": "Billions of Chained 2017 Dollars"
+  },
+  "source": "U.S. Bureau of Economic Analysis via FRED API",
+  "source_missing_observation_dates": [],
+  "source_url": "https://fred.stlouisfed.org/series/A679RX1Q020SBEA"
+}

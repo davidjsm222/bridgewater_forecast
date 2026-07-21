@@ -1,0 +1,1590 @@
+{
+  "api_rule_count_before_text_filter": 159,
+  "forecast_id": 1,
+  "matched_rule_count": 136,
+  "matched_rule_counts_by_publication_year": {
+    "2022": 34,
+    "2023": 40,
+    "2024": 44,
+    "2025": 15,
+    "2026": 3
+  },
+  "methodology_note": "Counts are publication events, not a forecast probability. Review rule substance and define the reference-class denominator before turning these records into a base rate.",
+  "query": {
+    "agency": "Industry and Security Bureau",
+    "document_type": "Rule",
+    "local_text_filters": [
+      "Entity List",
+      "Export Administration Regulations"
+    ],
+    "publication_date_end": "2026-12-31",
+    "publication_date_start": "2022-01-01"
+  },
+  "retrieved_at_utc": "2026-07-17T20:26:58.121283Z",
+  "rules": [
+    {
+      "abstract": "On January 6, 2020, the Bureau of Industry and Security (BIS) amended the Export Administration Regulations (EAR) to add Software Specially Designed to Automate the Analysis of Geospatial Imagery to the 0Y521 Temporary Export Control Classification Numbers (ECCN) Series as 0D521. BIS first extended controls on this emerging technology for a second year pursuant to the 0Y521 series extension procedures on January 6, 2021, and in this action extends these controls a second time for an additional year for a total of three years of this control since it was added to the EAR on January 6, 2020.",
+      "document_number": "2021-28444",
+      "html_url": "https://www.federalregister.gov/documents/2022/01/06/2021-28444/export-control-classification-number-0y521-series-supplement-extension-of-controls-on-an-emerging",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-01-06",
+      "title": "Export Control Classification Number 0Y521 Series Supplement-Extension of Controls on an Emerging Technology (Software Specially Designed To Automate the Analysis of Geospatial Imagery Classification)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is clarifying, reorganizing, and making minor corrections to the provisions of the foreign-direct product (FDP) rules. Before this final rule, the FDP rules appeared in parts 736 and 744 of the Export Administration Regulations (EAR); now, the rules are consolidated in part 734 of the EAR. These revisions clarify the applicability of the FDP rules and make one correction applicable to the FDP rules as to the term \"U.S.- origin technology and software.\"",
+      "document_number": "2022-02302",
+      "html_url": "https://www.federalregister.gov/documents/2022/02/03/2022-02302/foreign-direct-product-rules-organization-clarification-and-correction",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-02-03",
+      "title": "Foreign-Direct Product Rules: Organization, Clarification, and Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding thirty-three (33) persons to the Unverified List (UVL). The thirty-three persons are added to the UVL on the basis that BIS was unable to verify their bona fides because an end-use check could not be completed satisfactorily for reasons outside the U.S. Government's control.",
+      "document_number": "2022-02536",
+      "html_url": "https://www.federalregister.gov/documents/2022/02/08/2022-02536/revisions-to-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-02-08",
+      "title": "Revisions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "This final rule amends the Export Administration Regulations (EAR) by adding seven entities under seven entries to the Entity List. These seven entities have been determined by the U.S. Government to be acting contrary to the foreign policy or national security interests of the United States and will be listed on the Entity List under the destinations of the People's Republic of China (China), Pakistan, and the United Arab Emirates (UAE). This final rule also modifies four existing entries on the Entity List under the destination of China.",
+      "document_number": "2022-03029",
+      "html_url": "https://www.federalregister.gov/documents/2022/02/14/2022-03029/addition-of-certain-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-02-14",
+      "title": "Addition of Certain Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine, with this final rule, the Department of Commerce is adding new Russia license requirements and licensing policies to the Export Administration Regulations (EAR) to protect U.S. national security and foreign policy interests. These new Russia measures: Impose new Commerce Control List (CCL)-based license requirements for Russia; add two new foreign \"direct product\" rules (FDP rules) specific to Russia and Russian `military end users;' specify a license review policy of denial applicable to all of the license requirements being added in this rule, with certain limited exceptions; significantly restrict the use of EAR license exceptions; expand the existing Russia `military end use' and `military end user' control scope to all items \"subject to the EAR\" other than food and medicine designated EAR99, or ECCN 5A992.c and 5D992.c unless for Russian \"government end users\" and Russian state-owned enterprises (SoEs); transfer forty-five Russian entities from the Military End-User (MEU) List to the Entity List with an expanded license requirement of all items subject to the EAR (including foreign-produced items subject to the Russia-MEU FDP rules); and add two new Russia entities and revise two Russia entities to the Entity List. Lastly, this rule imposes comprehensive export, reexport and transfer (in-country) restrictions for the so-called Donetsk People's Republic (DNR) and Luhansk People's Republics (LNR) regions of Ukraine (\"Covered Regions of Ukraine\") and makes conforming revisions to export, reexport transfer (in-country) restrictions for Crimea Region of Ukraine provisions.",
+      "document_number": "2022-04300",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/03/2022-04300/implementation-of-sanctions-against-russia-under-the-export-administration-regulations-ear",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-03",
+      "title": "Implementation of Sanctions Against Russia Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to Belarus's substantial enabling of the Russian Federation's (Russia)'s further invasion of Ukraine, this rule is adding new license requirements and review policies for Belarus to the Export Administration Regulations (EAR) to render Belarus subject to the same sanctions that were imposed on Russia under the EAR effective February 24, 2022. These new sanctions impose new Commerce Control List (CCL)-based license requirements for Belarus; revise the two foreign \"direct product\" rules (FDP rules) that are specific to Russia and Russian `military end users' to make them also applicable to Belarus and Belarusian `military end users;' specify a license review policy of denial applicable to all of the license requirements on Belarus that are being added in this rule, with certain limited exceptions; significantly restrict the use of EAR license exceptions; expand the existing `military end use' and `military end user' control scope to include Belarus for all items \"subject to the EAR\" other than food and medicine designated EAR99; and add two new Belarusian entities to the Entity List as `military end users.' This rule also imposes a license requirement for nuclear nonproliferation items for exports and reexports to Belarus and removes Belarus from Country Group A:4 under the EAR. In addition, for Belarus and Russia, this rule amends the availability of License Exceptions AVS and ENC and includes clarifying guidance on the availability of CCD.",
+      "document_number": "2022-04819",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/08/2022-04819/imposition-of-sanctions-against-belarus-under-the-export-administration-regulations-ear",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-08",
+      "title": "Imposition of Sanctions Against Belarus Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine, the Department of Commerce is expanding the existing sanctions against the Russian industry sector by adding a new prohibition under the Export Administration Regulations (EAR) that targets the oil refinery sector in Russia. These new export controls will further limit revenue that could support the military capabilities of Russia.",
+      "document_number": "2022-04912",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/08/2022-04912/expansion-of-sanctions-against-the-russian-industry-sector-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-08",
+      "title": "Expansion of Sanctions Against the Russian Industry Sector Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine on February 24, 2022, the Department of Commerce is amending the Export Administration Regulations (EAR) by adding 91 new entities to the Entity List under the destinations of Belize, Estonia, Kazakhstan, Latvia, Malta, Russia, Singapore, Slovakia, Spain, and United Kingdom with this final rule. These 91 entities have been determined by the U.S. Government to be acting contrary to the foreign policy or national security interests of the United States.",
+      "document_number": "2022-04925",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/09/2022-04925/further-imposition-of-sanctions-against-russia-with-the-addition-of-certain-entities-to-the-entity",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-09",
+      "title": "Further Imposition of Sanctions Against Russia With the Addition of Certain Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine, and to protect U.S. national security and foreign policy interests, the Department of Commerce has added new and highly restrictive license requirements and policies for certain transactions involving Russia and Belarus under the Export Administration Regulations (EAR). In order to recognize partner countries that have committed to implementing substantially similar new export controls on Russia and Belarus in their domestic laws, the Department of Commerce has published a list of countries excluded from portions of these new U.S. export controls. These exclusions apply specifically to certain requirements under the EAR related to foreign-produced items. In this rule, the Department of Commerce adds the Republic of Korea (South Korea) to the list of excluded countries.",
+      "document_number": "2022-05025",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/10/2022-05025/addition-to-the-list-of-countries-excluded-from-certain-license-requirements-under-the-export",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-10",
+      "title": "Addition to the List of Countries Excluded From Certain License Requirements Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine, and Belarus's substantial enabling of Russia's invasion, the Department of Commerce is imposing restrictions on the export, reexport, or transfer (in-country) to or within Russia or Belarus of `luxury goods' under the Export Administration Regulations (EAR) and for exports, reexports and transfers (in-country) worldwide to certain Russian or Belarusian oligarchs and other malign actors supporting the Russian or Belarusian governments. Taken together, these new export controls will significantly limit financially elite individuals' and organizations' access to luxury goods and thereby accentuate the consequences of providing such support.",
+      "document_number": "2022-05604",
+      "html_url": "https://www.federalregister.gov/documents/2022/03/16/2022-05604/imposition-of-sanctions-on-luxury-goods-destined-for-russia-and-belarus-and-for-russian-and",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-03-16",
+      "title": "Imposition of Sanctions on `Luxury Goods' Destined for Russia and Belarus and for Russian and Belarusian Oligarchs and Malign Actors Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine on February 24, 2022, the Department of Commerce is amending the Export Administration Regulations (EAR) by adding 120 entities under 120 entries to the Entity List. These 120 entities have been determined by the U.S. Government to be acting contrary to the national security interests or foreign policy of the United States and will be listed on the Entity List under the destinations of Belarus and Russia.",
+      "document_number": "2022-07284",
+      "html_url": "https://www.federalregister.gov/documents/2022/04/07/2022-07284/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-04-07",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) publishes these amendments to correct three errors contained in the revisions to the Entity List that were published in a final rule on February 14, 2022. That final rule amended the Export Administration Regulations (EAR) by revising the Entity List entry for \"Huawei Cloud Brazil\" (under Brazil) and by adding a new entry for \"Huawei Technologies Co., Ltd.\" (under China, People's Republic of). However, the references to the foreign direct product provisions in the EAR that apply to these two entities were incorrect. This rule amends the entries for the two entities to include the correct references to these EAR provisions and also corrects a typographical error in one of these entries.",
+      "document_number": "2022-07643",
+      "html_url": "https://www.federalregister.gov/documents/2022/04/11/2022-07643/addition-of-certain-entities-to-the-entity-list-correction",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-04-11",
+      "title": "Addition of Certain Entities to the Entity List; Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine and to protect U.S. national security and foreign policy interests, the Department of Commerce established highly restrictive license requirements and policies for certain transactions involving Russia and Belarus under the Export Administration Regulations (EAR). To recognize partner countries implementing substantially similar export controls on Russia and Belarus, the Department of Commerce published a list of countries excluded from certain U.S. export controls related to foreign-produced items. In this rule, the Department of Commerce adds Iceland, Liechtenstein, Norway, and Switzerland to the list of excluded countries.",
+      "document_number": "2022-07836",
+      "html_url": "https://www.federalregister.gov/documents/2022/04/12/2022-07836/additions-to-the-list-of-countries-excluded-from-certain-license-requirements-under-the-export",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-04-12",
+      "title": "Additions to the List of Countries Excluded From Certain License Requirements Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia) ongoing aggression in Ukraine following its further invasion of the country, as substantially enabled by Belarus, this rule expands license requirements for Russia and Belarus under the Export Administration Regulations (EAR) to all items on the Commerce Control List (CCL). It also removes license exception eligibility for aircraft registered in, owned or controlled by, or under charter or lease by Belarus or a national of Belarus.",
+      "document_number": "2022-07937",
+      "html_url": "https://www.federalregister.gov/documents/2022/04/14/2022-07937/expansion-of-sanctions-against-russia-and-belarus-under-the-export-administration-regulations-ear",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-04-14",
+      "title": "Expansion of Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) ongoing aggression against Ukraine, the Department of Commerce is expanding the existing sanctions against Russian industry sectors by imposing a license requirement for exports, reexports, or transfers (in-country) to and within Russia for additional items subject to the Export Administration Regulations (EAR) identified under specific Schedule B numbers or Harmonized Tariff Schedule codes. The Bureau of Industry and Security (BIS) is taking these actions to further restrict Russia's ability to withstand the economic impact of the multilateral sanctions, further limit sources of revenue that could support Russia's military capabilities, and to better align with the European Union's controls.",
+      "document_number": "2022-10099",
+      "html_url": "https://www.federalregister.gov/documents/2022/05/11/2022-10099/expansion-of-sanctions-against-russian-industry-sectors-under-the-export-administration-regulations",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-05-11",
+      "title": "Expansion of Sanctions Against Russian Industry Sectors Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "BIS is finalizing changes to License Exception ACE and corresponding changes in the definition section of the Export Administration Regulations (EAR) in response to public comments to an October 21, 2021 interim rule. That rule established a new control on certain cybersecurity items for National Security (NS) and Anti- terrorism (AT) reasons, as well as adding a new License Exception Authorized Cybersecurity Exports (ACE) that authorizes exports of these items to most destinations except in certain circumstances. These items warrant controls because these tools could be used for surveillance, espionage, or other actions that disrupt, deny or degrade the network or devices on it. This rule also corrects Export Control Classification Number (ECCN) 5D001 in the Commerce Control List.",
+      "document_number": "2022-11282",
+      "html_url": "https://www.federalregister.gov/documents/2022/05/26/2022-11282/information-security-controls-cybersecurity-items",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-05-26",
+      "title": "Information Security Controls: Cybersecurity Items",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to add a new section to the EAR to adopt a congressional notification requirement for certain license applications of semiautomatic firearms meeting certain value and destination requirements. This rule does not change the interagency license process for these firearms or how license applicants currently structure or generally apply for BIS licenses.",
+      "document_number": "2022-11761",
+      "html_url": "https://www.federalregister.gov/documents/2022/06/01/2022-11761/adoption-of-congressional-notification-requirement-for-certain-semiautomatic-firearms-exports-under",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-06-01",
+      "title": "Adoption of Congressional Notification Requirement for Certain Semiautomatic Firearms Exports Under the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "Between February and May 2022, the Bureau of Industry and Security (BIS) has published a series of amendments to the Export Administration Regulations (EAR) that have increasingly tightened export controls on the Russian Federation (Russia) and Belarus in response to Russia's further invasion of Ukraine, as substantially enabled by Belarus. This rule revises, corrects, and clarifies certain provisions of the EAR that pertain to these controls and related provisions. First, this rule makes certain revisions to the EAR's military end use and military end user controls as they apply to Russia and Belarus, as well as related modifications to the entries for entities on the Entity List that are Russian and Belarusian military end users. Second, it revises restrictions that apply to items destined for certain regions in Ukraine by clarifying the categories of license applications that BIS subjects to case-by-case review. Third, this rule clarifies and corrects provisions of the EAR that pertain to luxury goods destined for Russia and Belarus and items for use in Russia's oil refinery sector. Fourth, it makes a technical correction to an EAR provision describing items and activities subject to the EAR by adding a cross-reference to the Foreign Direct Product Rules of the EAR, which were updated shortly before the Russia and Belarus export controls were imposed. Finally, with regard to export control enforcement, including enforcement of the Russia and Belarus controls, this rule revises the EAR to allow export enforcement case charging letters to be made available to the public prior to the final administrative disposition of such cases.",
+      "document_number": "2022-11885",
+      "html_url": "https://www.federalregister.gov/documents/2022/06/06/2022-11885/export-administration-regulations-revisions-to-russia-and-belarus-sanctions-and-related-provisions",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-06-06",
+      "title": "Export Administration Regulations: Revisions to Russia and Belarus Sanctions and Related Provisions; Other Revisions, Corrections, and Clarifications",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine on February 24, 2022, the Department of Commerce is amending the Export Administration Regulations (EAR) by adding 71 entities under 71 entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security interests or foreign policy of the United States and will be listed on the Entity List under the destinations of Belarus and Russia.",
+      "document_number": "2022-12144",
+      "html_url": "https://www.federalregister.gov/documents/2022/06/06/2022-12144/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-06-06",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 36 entities under 41 entries to the Entity List. These 36 entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. These entities will be listed on the Entity List under the destinations of the People's Republic of China (China), Lithuania, Pakistan, the Russian Federation (Russia), Singapore, the United Arab Emirates (UAE), the United Kingdom, Uzbekistan, and Vietnam. Some entities are added under multiple entries, accounting for the difference in the total number of entities and entries in this rule. This rule also revises eleven existing entries under the destinations of Belarus, China, Russia, and Slovakia and corrects one existing entry on the Entity List under the destination of Pakistan. Lastly, this rule removes two entities and one address for a non-listed entity, consisting of one removal of an entity and one removal of an address under the destination of China, and one removal under the destination of Pakistan. The removals from the Entity List are made in connection with requests for removal that BIS received pursuant to the EAR and a review of the information provided in those requests.",
+      "document_number": "2022-14069",
+      "html_url": "https://www.federalregister.gov/documents/2022/06/30/2022-14069/addition-of-entities-revision-and-correction-of-entries-and-removal-of-entities-from-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-06-30",
+      "title": "Addition of Entities, Revision and Correction of Entries, and Removal of Entities From the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) maintains, as part of its Export Administration Regulations (EAR), the Commerce Control List (CCL), which identifies certain items subject to Department of Commerce (Commerce) jurisdiction. Commerce is revising the CCL, as well as corresponding parts of the EAR, to implement controls on four technologies. These changes reflect certain controls decided by governments participating in the Wassenaar Arrangement on Export Controls for Conventional Arms and Dual-Use Goods and Technologies (WA) at the December 2021 WA Plenary meeting. These four technologies meet the criteria of Section 1758 of the Export Control Reform Act (ECRA) pertaining to emerging and foundational technologies. Accordingly, BIS is accelerating their publication in this interim final rule and will publish the remaining WA-agreed controls in a later rule. These technologies are two substrates of ultra-wide bandgap semiconductors (Gallium Oxide (Ga<INF>2</INF>O<INF>3</INF>) and diamond), Electronic Computer Aided Design (ECAD) software specially designed for the development of integrated circuits with any Gate-All-Around Field-Effect Transistor (GAAFET) structure, and pressure gain combustion (PGC) technology for the production and development of gas turbine engine components or systems.",
+      "document_number": "2022-17125",
+      "html_url": "https://www.federalregister.gov/documents/2022/08/15/2022-17125/implementation-of-certain-2021-wassenaar-arrangement-decisions-on-four-section-1758-technologies",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-08-15",
+      "title": "Implementation of Certain 2021 Wassenaar Arrangement Decisions on Four Section 1758 Technologies",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding seven entities under seven entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States and will be listed on the Entity List under the destination of the People's Republic of China (China). This final rule also corrects typographical errors in two existing entries on the Entity List.",
+      "document_number": "2022-18268",
+      "html_url": "https://www.federalregister.gov/documents/2022/08/24/2022-18268/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-08-24",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to authorize the release of specified items subject to the EAR without a license when that release occurs in the context of a \"standards- related activity,\" as defined in this rule. BIS is revising the terms used in the EAR to describe the actions permissible under the authorization rather than defining the organizations to which it applies. The scope of the authorization is revised to include certain \"technology\" as well as \"software\" and applies to all entities listed on BIS's Entity List. The uncertainty of not knowing whether other entities listed on the Entity List are participants in standards organizations and whether a BIS license is required to release low- level technology for legitimate standards activities has caused U.S. companies to limit their participation in standards-related activities in areas that are critical to U.S. national security. This authorization only overcomes licensing requirements imposed as a result of an entity's inclusion on the Entity List; other EAR licensing requirements, including additional end-use or end-user based licensing requirements may continue to apply. This final rule does not change the assessment of whether \"technology\" or \"software\" is subject to the EAR. BIS is making these revisions to ensure that export controls and associated compliance concerns as they relate to the Entity List do not impede the leadership and participation of U.S. companies in national and international standards-related activities",
+      "document_number": "2022-19415",
+      "html_url": "https://www.federalregister.gov/documents/2022/09/09/2022-19415/authorization-of-certain-items-to-entities-on-the-entity-list-in-the-context-of-specific-standards",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-09-09",
+      "title": "Authorization of Certain \u201cItems\u201d to Entities on the Entity List in the Context of Specific Standards Activities",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) ongoing aggression against Ukraine, the Department of Commerce is expanding the existing sanctions against Russia and Belarus by imposing new export controls, including expanding the scope of the Russian industry sector sanctions to add lower-level items potentially useful for Russia's chemical and biological weapons production capabilities and items needed for advanced production and development capabilities to enable advanced manufacturing across a number of industries. This rule also adds Belarus to the scope of industry sector sanctions that currently apply solely to Russia. With respect to end users, this rule expands the `military end user' and `military-intelligence end user' controls and applies the Russian/Belarusian-Military End User Foreign Direct Product (FDP) rule to ten existing entries for six existing entities that have continued to supply Russian entities on the Entity List or are under sanction since Russia's further invasion of Ukraine. Labeling these six entities as Russian `military end users' and applying the Russia/Belarus-Military End User FDP rule to them will degrade Russia's war efforts in Ukraine, as these entities produce items needed by the Russian and Belarussian military and industrial sectors. Correspondingly, this rule clarifies requirements related to Burma, Cambodia, the People's Republic of China, and Venezuela). Finally, this rule refines existing controls on Russia and Belarus by adding additional dollar value exclusion thresholds for `luxury goods;' and makes twelve corrections and clarifications to existing controls on Russia and Belarus. The Department of Commerce is taking these actions to clarify and enhance the effectiveness of U.S. controls and to better align its controls on both Russia and Belarus with those implemented by U.S. allies.",
+      "document_number": "2022-19910",
+      "html_url": "https://www.federalregister.gov/documents/2022/09/16/2022-19910/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-09-16",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) further invasion of Ukraine on February 24, 2022, the illegal and unjustifiable basis of which has been furthered by its illegal purported annexation of regions of Ukraine, the Department of Commerce is amending the Export Administration Regulations (EAR) by adding 57 entities under 57 entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. Of these 57 entities, 56 will be listed on the Entity List under the destination of Russia and one will be listed under the destination of the Crimea Region of Ukraine.",
+      "document_number": "2022-21520",
+      "html_url": "https://www.federalregister.gov/documents/2022/10/04/2022-21520/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-10-04",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends a supplement to the Export Administration Regulations (EAR) that sets forth guidance regarding BIS's penalty determinations in the settlement of administrative enforcement cases involving violations of the antiboycott provisions of the EAR. This amendment clarifies and realigns such guidance with current boycott-related activity and BIS's priorities and charging practices. BIS also updates the reference to the statutory authority for the EAR's antiboycott provisions.",
+      "document_number": "2022-21713",
+      "html_url": "https://www.federalregister.gov/documents/2022/10/07/2022-21713/export-administration-regulations-guidance-on-penalty-determinations-in-the-settlement-of",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-10-07",
+      "title": "Export Administration Regulations: Guidance on Penalty Determinations in the Settlement of Administrative Enforcement Cases Involving Antiboycott Matters",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to implement necessary controls on advanced computing integrated circuits (ICs), computer commodities that contain such ICs, and certain semiconductor manufacturing items. In addition, BIS is expanding controls on transactions involving items for supercomputer and semiconductor manufacturing end uses, for example, this rule expands the scope of foreign-produced items subject to license requirements for twenty-eight existing entities on the Entity List that are located in China. BIS is also informing the public that specific activities of \"U.S. persons\" that `support' the \"development\" or \"production\" of certain ICs in the PRC require a license. Lastly, to minimize short term impact on the semiconductor supply chain from this rule, BIS is establishing a Temporary General License to permit specific, limited manufacturing activities in China related to items destined for use outside China and is identifying a model certificate that may be used in compliance programs to assist, along with other measures, in conducting due diligence. `",
+      "document_number": "2022-21658",
+      "html_url": "https://www.federalregister.gov/documents/2022/10/13/2022-21658/implementation-of-additional-export-controls-certain-advanced-computing-and-semiconductor",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-10-13",
+      "title": "Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding 31 persons to the Unverified List (UVL). The 31 persons are added to the UVL on the basis that BIS was unable to verify their bona fides because an end-use check could not be completed satisfactorily for reasons outside the U.S. Government's control. All 31 persons are being added under the destination of the People's Republic of China (China). This rule also removes nine persons, all under the destination of China, from the UVL because BIS was able to verify their bona fides. With this final rule, BIS also clarifies the activities and criteria that may lead to the addition of an entity to the Entity List, including a sustained lack of cooperation by the host government (e.g., the government of the country in which an end-use check is to be conducted) that effectively prevents BIS from determining compliance with the EAR.",
+      "document_number": "2022-21714",
+      "html_url": "https://www.federalregister.gov/documents/2022/10/13/2022-21714/revisions-to-the-unverified-list-clarifications-to-activities-and-criteria-that-may-lead-to",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-10-13",
+      "title": "Revisions to the Unverified List; Clarifications to Activities and Criteria That May Lead to Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 7, 2022, the Bureau of Industry and Security (BIS) placed on public display an interim final rule: \"Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification.\" On October 13, 2022, Under Secretary for Industry and Security Alan F. Estevez and Assistant Secretary for Export Administration Thea D. Rozman Kendler will conduct a public briefing on the rule and associated actions. This announcement provides details on the procedures for attending the public briefing.",
+      "document_number": "2022-22037",
+      "html_url": "https://www.federalregister.gov/documents/2022/10/13/2022-22037/procedures-for-access-to-the-public-briefing-on-additional-export-controls-on-certain-advanced",
+      "matched_filters": [
+        "Entity List"
+      ],
+      "publication_date": "2022-10-13",
+      "title": "Procedures for Access to the Public Briefing on Additional Export Controls on Certain Advanced Computing and Semiconductor Manufacturing Items",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 13, 2022, the Bureau of Industry and Security (BIS) published the interim final rule Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification. This document extends the deadline for written comments to January 31, 2023. This extension is being made to allow for commenters to have additional time to review the interim final rule and to benefit from the significant amount of public outreach that BIS is conducting on the rule in preparing their comments.",
+      "document_number": "2022-26662",
+      "html_url": "https://www.federalregister.gov/documents/2022/12/07/2022-26662/implementation-of-additional-export-controls-certain-advanced-computing-and-semiconductor",
+      "matched_filters": [
+        "Entity List"
+      ],
+      "publication_date": "2022-12-07",
+      "title": "Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding twenty-four entities under twenty-six entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States and will be listed on the Entity List under the destinations of Latvia, Pakistan, Russia, Singapore, Switzerland, and the United Arab Emirates (U.A.E.). In addition, this final rule removes from the Entity List one entity listed in three entries under Oman, Saudi Arabia, and the U.A.E.",
+      "document_number": "2022-26622",
+      "html_url": "https://www.federalregister.gov/documents/2022/12/08/2022-26622/additions-of-entities-to-the-entity-list-removal-of-an-entity-from-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-12-08",
+      "title": "Additions of Entities to the Entity List; Removal of an Entity From the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by removing 9 persons from the Unverified List (UVL) and adding them to the Entity List, all under the destination of Russia. BIS has been unable to verify the bona fides of all 9 persons being removed from the UVL and added to the Entity List, due to the foreign government's prevention of timely end-use checks. BIS is also amending the EAR by removing 27 persons from the UVL, one under the destination of Pakistan and 26 under the destination of China, because BIS was able to verify their bona fides.",
+      "document_number": "2022-27149",
+      "html_url": "https://www.federalregister.gov/documents/2022/12/16/2022-27149/revisions-to-the-unverified-list-and-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-12-16",
+      "title": "Revisions to the Unverified List and the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding thirty-six entities to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States and will be listed on the Entity List under the destinations of the People's Republic of China (China) and Japan. This rule also revises three entries on the Entity List under the destination of China. Lastly, as a conforming change to the addition of one entity to the Entity List under the destination of China, this rule removes this entity from the Unverified List (UVL). The entity is being added to the Entity List for reasons not related to the prevention of an end-use check and is removed from the UVL for consistency with the existing policy of not listing an entity on more than one of these lists at the same time.",
+      "document_number": "2022-27151",
+      "html_url": "https://www.federalregister.gov/documents/2022/12/19/2022-27151/additions-and-revisions-to-the-entity-list-and-conforming-removal-from-the-unverified-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-12-19",
+      "title": "Additions and Revisions to the Entity List and Conforming Removal From the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security is amending the Export Administration Regulations (EAR) by modifying one entity on the Entity List. This final rule modifies one entity on the Entity List under the destination of Russia.",
+      "document_number": "2022-28033",
+      "html_url": "https://www.federalregister.gov/documents/2022/12/23/2022-28033/modification-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2022-12-23",
+      "title": "Modification to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) publishes this final rule to amend the Export Administration Regulations (EAR) to reflect decisions made at the November 2021 and March 2022 Australia Group (AG) Virtual Implementation Meetings and the AG Plenary Meeting held in July 2022. The amendments include revisions to certain Export Control Classification Numbers to clarify the controls on genetic elements and genetically modified organisms and the scope of the exclusion that applies to medical isolators \"specially designed\" for barrier nursing or transportation of infected patients; and makes clarifications by adding four naturally occurring, dual-use marine toxins (specifically, brevetoxins, gonyautoxins, nodularins and palytoxin) and removing cholera toxin. The addition of these four toxins is consistent with Section 1758 of the Export Control Reform Act of 2018 (ECRA) regarding emerging and foundational technologies. Finally, this rule also includes amendments to reflect the AG Plenary updates to the nomenclature of certain bacteria and fungi, and the clarification of the definition of \"disinfected\" as it applies to certain biological equipment.",
+      "document_number": "2023-00397",
+      "html_url": "https://www.federalregister.gov/documents/2023/01/17/2023-00397/implementation-of-australia-group-decisions-from-2021-and-2022-virtual-meetings-controls-on-marine",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-01-17",
+      "title": "Implementation of Australia Group Decisions From 2021 and 2022 Virtual Meetings: Controls on Marine Toxins, Plant Pathogens and Biological Equipment",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 7, 2022, the Bureau of Industry and Security (BIS) updated the Export Administration Regulations (EAR) to implement necessary controls on advanced computing integrated circuits (ICs), computer commodities that contain such ICs, and certain semiconductor manufacturing items, and to make other changes to the EAR to ensure that appropriate controls are in place for these items, including specific activities of \"U.S. persons.\" This rule makes an initial update to the controls to more effectively achieve the policy objectives identified in previous regulations by adding the same controls implemented on China in that rule to Macau. The public may submit comments on the controls in the October 7 advanced computing and semiconductor manufacturing equipment rule, which BIS is extending to Macau in this rule. BIS intends to publish a subsequent rule to respond to the comments received, including making updates to the controls included in the October 7 advanced computing and semiconductor manufacturing equipment rule.",
+      "document_number": "2023-00888",
+      "html_url": "https://www.federalregister.gov/documents/2023/01/18/2023-00888/implementation-of-additional-export-controls-certain-advanced-computing-and-semiconductor",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-01-18",
+      "title": "Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification; Updates to the Controls To Add Macau",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding seven entities to the Entity List. These seven entities, listed under the destination of Iran, have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States for contributing to Russia's military and defense industrial base. They are being added to the Entity List with application of the Russia/Belarus-Military End User Foreign Direct Product rule.",
+      "document_number": "2023-02130",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/01/2023-02130/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-01",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding six entities to the Entity List, under the destination of the People's Republic of China (China). These six entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-03193",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/14/2023-03193/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-14",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) maintains, as part of its Export Administration Regulations (EAR), the Commerce Control List (CCL), which identifies certain items subject to Department of Commerce jurisdiction. During the December 2021 Wassenaar Arrangement on Export Controls for Conventional Arms and Dual-Use Goods and Technologies (WA) Plenary meeting, Participating States of the WA (Participating State) made certain decisions affecting the WA control lists, which BIS is now implementing via amendments to the CCL. On August 15, 2022, BIS published a final rule that implemented some of these decisions by adding to the CCL four technologies that met the criteria for emerging or foundational technologies under Section 1758 of the Export Control Reform Act of 2018 (ECRA). This final rule implements the remaining controls agreed to during the December 2021 WA Plenary meeting by revising the CCL, as well as certain EAR provisions, including License Exception Adjusted Peak Performance (APP). This final rule also makes corrections to align the scope of Significant Item (SI) license requirements throughout the EAR and makes a revision to License Exception Strategic Trade Authorization (STA).",
+      "document_number": "2023-03683",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/24/2023-03683/implementation-of-2021-wassenaar-arrangement-decisions",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-24",
+      "title": "Implementation of 2021 Wassenaar Arrangement Decisions",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) ongoing aggression against Ukraine, as substantially enabled by Belarus, the Department of Commerce is expanding and strengthening the existing sanctions against Russia and Belarus, including the scope of the Export Administration Regulations (EAR)'s Russian and Belarusian industry sector sanctions and `luxury goods' sanctions. This rule also refines existing export controls on Russia and Belarus. The Department of Commerce is taking these actions to enhance the effectiveness of its controls on both countries and to better align them with those implemented by U.S. allies and partners.",
+      "document_number": "2023-03927",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/27/2023-03927/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-27",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding 10 entities under 13 entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. These entities are listed on the Entity List under the destinations of Canada (2), China (5), France (1), Luxembourg (1), Netherlands (1), and Russia (3).",
+      "document_number": "2023-03929",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/27/2023-03929/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-27",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "This rule amends the Export Administrations Regulations (EAR) to impose new export control measures on Iran. These measures address the use of Iranian Unmanned Aerial Vehicles (UAVs) by the Russian Federation (Russia) in its ongoing war against Ukraine, contrary to U.S. national security and foreign policy interests. Although UAVs are also known as Unmanned Aircraft Systems (UASs), for purposes of consistency with the Missile Technology Control Regime (MTCR) they are referred to as UAVs in the EAR. These amendments to the EAR target Iran's supply of UAVs to Russia to enhance Russia's defense industrial base and its military efforts against Ukraine and build on prior EAR amendments, including the addition of Iranian entities to the Entity List as Russian `military end users.' Specifically, these controls impose license requirements for a subset of EAR99 items that are destined to Iran, regardless of whether a U.S. person is involved in the transaction. Such items are identified by Harmonized Tariff Schedule (HTS)-6 Codes in a new supplement added to the EAR, which will allow BIS and other relevant U.S. Government agencies to track and quantify these exports. This rule also identifies certain foreign- produced items as subject to the EAR by adding a new foreign direct product (FDP) rule specific to Iran that applies to items in certain categories of the Commerce Control List (CCL) and the EAR99 items identified in this new supplement. This rule similarly revises the EAR's existing Russia/Belarus FDP rule to reference these EAR99 items. Together with a separate rule published in the same issue of the Federal Register adding export controls for Russia and Belarus, these changes impose license requirements on additional exports from abroad and reexports to Iran, Russia, and Belarus, with the purpose of degrading the Iranian UAV program and Russia's use of such UAVs against Ukraine.",
+      "document_number": "2023-03930",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/27/2023-03930/export-control-measures-under-the-export-administration-regulations-ear-to-address-iranian-unmanned",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-27",
+      "title": "Export Control Measures Under the Export Administration Regulations (EAR) To Address Iranian Unmanned Aerial Vehicles (UAVs) and Their Use by the Russian Federation Against Ukraine",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding seventy-six entities to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States and are listed on the Entity List under the destination of Russia. This rule also revises four existing entries on the Entity List under the destination of Russia.",
+      "document_number": "2023-04099",
+      "html_url": "https://www.federalregister.gov/documents/2023/02/27/2023-04099/additions-of-entities-to-the-entity-list-revisions-of-entities-on-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-02-27",
+      "title": "Additions of Entities to the Entity List; Revisions of Entities on the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security is amending the Export Administration Regulations (EAR) by adding 37 entities under 38 entries to the Entity List. These entities are listed under the destinations of Belarus (1), Burma (3), the People's Republic of China (China) (28), Pakistan (4), Russia (1), and Taiwan (1). Some entities are added under multiple entries, accounting for the difference in the totals. This final rule also modifies 10 existing entries on the Entity List under the destination of China.",
+      "document_number": "2023-04558",
+      "html_url": "https://www.federalregister.gov/documents/2023/03/06/2023-04558/additions-and-revisions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-03-06",
+      "title": "Additions and Revisions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding 32 persons to the Unverified List (UVL). Of the 32 persons being added, one is under each of the following destinations: Bulgaria, Canada, Indonesia, Israel, Malaysia, Saudi Arabia, and Singapore; 14 are under the destination of China, two are under the destination of Germany, four are under the destination of Turkey, and five under the destination of the United Arab Emirates (UAE).",
+      "document_number": "2023-06171",
+      "html_url": "https://www.federalregister.gov/documents/2023/03/24/2023-06171/revisions-to-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-03-24",
+      "title": "Revisions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding eleven entities to the Entity List under the destinations of Burma, the People's Republic of China (China), Nicaragua, and Russia. These eleven entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. In this rule, BIS also amends the EAR to explicitly confirm that the foreign policy interest of protecting human rights worldwide is a basis for adding entities to the Entity List.",
+      "document_number": "2023-06663",
+      "html_url": "https://www.federalregister.gov/documents/2023/03/30/2023-06663/additions-to-the-entity-list-amendment-to-confirm-basis-for-adding-certain-entities-to-the-entity",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-03-30",
+      "title": "Additions to the Entity List; Amendment To Confirm Basis for Adding Certain Entities to the Entity List Includes Foreign Policy Interest of Protection of Human Rights Worldwide",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security is amending the Export Administration Regulations (EAR) by adding 28 entities under 32 entries to the Entity List. These entities are listed under the destinations of Armenia (1), the People's Republic of China (China) (12), Malta (1), Russia (10), Singapore (1), Spain (1), Syria (1), Turkey (1), the United Arab Emirates (UAE) (2), and Uzbekistan (2). Some entities are added under multiple entries, accounting for the difference in the totals. This final rule also modifies two existing entries on the Entity List under the destinations of China and Russia.",
+      "document_number": "2023-07840",
+      "html_url": "https://www.federalregister.gov/documents/2023/04/17/2023-07840/additions-and-revisions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-04-17",
+      "title": "Additions and Revisions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding seventy-one entities to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States and will be listed on the Entity List under the destinations of Armenia, Kyrgyzstan, and Russia.",
+      "document_number": "2023-10684",
+      "html_url": "https://www.federalregister.gov/documents/2023/05/22/2023-10684/addition-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-05-22",
+      "title": "Addition of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) ongoing aggression against Ukraine, as substantially enabled by Belarus, the Department of Commerce is strengthening its existing sanctions under the Export Administration Regulations (EAR) against Russia and Belarus, including by expanding the scope of the EAR's Russian and Belarusian Industry Sector Sanctions and by expanding the foreign direct product rule that currently applies to Russia and Belarus to apply to the temporarily occupied Crimea region of Ukraine as well. Additionally, this rule revises recent restrictions targeting Iran's supply of Unmanned Aerial Vehicles to Russia. This rule also refines existing export controls on Russia and Belarus. The Department of Commerce is taking these actions to enhance the effectiveness of its controls on these countries and to better align them with those implemented by U.S. allies and partners.",
+      "document_number": "2023-10774",
+      "html_url": "https://www.federalregister.gov/documents/2023/05/23/2023-10774/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-05-23",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding 43 entities under 50 entries to the Entity List. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. These entries are listed on the Entity List under the destinations of China (31), Kenya (1), Laos (1), Malaysia (1), Pakistan (4), Singapore (1), South Africa (3), Thailand (1), the United Arab Emirates (5), and the United Kingdom (2). This rule also removes one entity from the Entity List under the destination of Latvia.",
+      "document_number": "2023-12726",
+      "html_url": "https://www.federalregister.gov/documents/2023/06/14/2023-12726/additions-of-entities-to-the-entity-list-and-removal-of-entity-from-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-06-14",
+      "title": "Additions of Entities to the Entity List and Removal of Entity From the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Department of Commerce is amending the Export Administration Regulations (EAR) by adding an inadvertently omitted entity to the Entity List.",
+      "document_number": "2023-13196",
+      "html_url": "https://www.federalregister.gov/documents/2023/06/21/2023-13196/additions-of-entities-to-the-entity-list-and-removal-of-entity-from-the-entity-list-correction",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-06-21",
+      "title": "Additions of Entities to the Entity List and Removal of Entity From the Entity List; Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding four entities to the Entity List under the destinations of Greece, Hungary, Ireland, and North Macedonia. These four entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-15343",
+      "html_url": "https://www.federalregister.gov/documents/2023/07/19/2023-15343/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-07-19",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the People's Republic of China's (China) military modernization efforts, military-civil fusion strategy, and expansion of its nuclear forces, the Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding additional nuclear nonproliferation controls on China and Macau. This change specifically applies to items controlled for Nuclear Nonproliferation (NP) column 2 reasons for control. These controls enhance U.S. Government efforts to monitor the export of these items and to ensure they are only being used in peaceful activities such as commercial nuclear power generation, medical developments, production of or use in medicine, and non-military industries.",
+      "document_number": "2023-17243",
+      "html_url": "https://www.federalregister.gov/documents/2023/08/14/2023-17243/expansion-of-nuclear-nonproliferation-controls-on-the-peoples-republic-of-china-and-macau",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-08-14",
+      "title": "Expansion of Nuclear Nonproliferation Controls on the People's Republic of China and Macau",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) publishes this final rule to amend the Export Administration Regulations (EAR) to reflect changes reached by the Nuclear Suppliers Group (NSG) in its June 2019 plenary meeting in Nur-Sultan (now Astana), Kazakhstan and its plenary meeting of June 2022 in Warsaw, Poland. Consistent with U.S. commitments as a participating country in the NSG, this rule revises five existing Export Control Classification Numbers (ECCNs) under the Commerce Control List (CCL). These changes protect U.S. nuclear nonproliferation interests, while aligning the EAR with the control text agreed to by participating governments (PGs).",
+      "document_number": "2023-16750",
+      "html_url": "https://www.federalregister.gov/documents/2023/08/18/2023-16750/commerce-control-list-updates-based-on-the-latest-nuclear-suppliers-group-nsg-plenary-meetings",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-08-18",
+      "title": "Commerce Control List: Updates Based on the Latest Nuclear Suppliers Group (NSG) Plenary Meetings",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is correcting a final rule, Expansion of Nuclear Nonproliferation Controls on the People's Republic of China and Macau, that appeared in the Federal Register on August 14, 2023. That rule intended to amend the Export Administration Regulations (EAR) by adding additional nuclear nonproliferation controls on China and Macau. There was an inadvertent error in one of the regulatory instructions for that rule; this final rule corrects that inadvertent error.",
+      "document_number": "2023-18047",
+      "html_url": "https://www.federalregister.gov/documents/2023/08/21/2023-18047/expansion-of-nuclear-nonproliferation-controls-on-the-peoples-republic-of-china-and-macau-correction",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-08-21",
+      "title": "Expansion of Nuclear Nonproliferation Controls on the People's Republic of China and Macau; Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by removing a total of 35 persons from the Unverified List (UVL), including 27 under the destination of China, one under the destination of Indonesia, two under the destination of Pakistan, one under the destination of Singapore, one under the destination of Turkey, and one under the destination of the United Arab Emirates because BIS was able to verify their bona fides; two persons, under the destination of Russia, are also removed from the UVL after they were added to the Entity List.",
+      "document_number": "2023-18125",
+      "html_url": "https://www.federalregister.gov/documents/2023/08/22/2023-18125/revisions-to-the-unverified-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-08-22",
+      "title": "Revisions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to create an additional option for the renewal of temporary denial orders (TDOs) by allowing BIS, under certain circumstances, to request that the Assistant Secretary for Export Enforcement renew an existing TDO for a period of no more than one year, rather than the current renewal period of no more than 180 days. This final rule also makes some conforming changes to remove references to the \"EAA,\" the Export Administration Act (EAA), and add in their place references to \"ECRA,\" the Export Control Reform Act (ECRA), to reflect the EAR's current statutory authority.",
+      "document_number": "2023-18772",
+      "html_url": "https://www.federalregister.gov/documents/2023/08/30/2023-18772/revisions-of-temporary-denial-order-provisions-to-allow-for-extended-renewals-in-certain",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-08-30",
+      "title": "Revisions of Temporary Denial Order Provisions To Allow for Extended Renewals in Certain Circumstances",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to make a technical correction that also serves to clarify provisions of the EAR pertaining to the release of \"software\" as set out in the sections on release and transfer of access information. This final rule clarifies an ambiguity in the EAR by adding a cross-reference addressing transfer of access information in the section on releases of \"technology\" and \"software,\" as was originally intended. In addition, this final rule adds a clarifying note that, for purposes of transfer of access information, a release of \"software\" includes both source code and object code.",
+      "document_number": "2023-20128",
+      "html_url": "https://www.federalregister.gov/documents/2023/09/18/2023-20128/export-administration-regulations-ear-transfer-of-access-information-and-release-of-software-source",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-09-18",
+      "title": "Export Administration Regulations (EAR): Transfer of Access Information and Release of Software (Source Code and Object Code)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding twenty-eight entities to the Entity List under the destinations of the People's Republic of China (China), Finland, Germany, Oman, Pakistan, Russia and the United Arab Emirates. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This rule also revises two existing entries on the Entity List under the destinations of China and Pakistan and removes an entity from the Military-End User List under the destination of China.",
+      "document_number": "2023-21080",
+      "html_url": "https://www.federalregister.gov/documents/2023/09/27/2023-21080/addition-of-entities-and-revision-to-existing-entities-on-the-entity-list-removal-of-existing-entity",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-09-27",
+      "title": "Addition of Entities and Revision to Existing Entities on the Entity List; Removal of Existing Entity From the Military End User List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 49 entities under 52 entries to the Entity List. These entries are under the destinations of the People's Republic of China (China) (42), Estonia (1), Finland (1), Germany (1), India (3), Turkey (2), United Arab Emirates (1), and the United Kingdom (1). Some entities may have multiple entries, accounting for the difference in the total number of entities and entries. These 49 entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-22536",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/11/2023-22536/addition-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-11",
+      "title": "Addition of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to revise the existing Validated End-User (VEU) list for the People's Republic of China (PRC) by updating the list of eligible items in the EAR for Samsung China Semiconductor Co. Ltd. and SK hynix Semiconductor (China) Ltd. In addition, this rule makes corresponding changes consistent with the scope of the amended authorizations for these VEUs.",
+      "document_number": "2023-22873",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/17/2023-22873/existing-validated-end-user-authorizations-in-the-peoples-republic-of-china-samsung-china",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-17",
+      "title": "Existing Validated End-User Authorizations in the People's Republic of China: Samsung China Semiconductor Co. Ltd. and SK Hynix Semiconductor (China) Ltd.",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) maintains, as part of its Export Administration Regulations (EAR), the Commerce Control List (CCL), which identifies certain items subject to Department of Commerce jurisdiction. During the December 2022 Wassenaar Arrangement on Export Controls for Conventional Arms and Dual-Use Goods and Technologies (WA) Plenary meeting, Participating States of the WA (Participating States) made certain decisions affecting the WA dual-use and munitions control lists, which BIS is now implementing via amendments to the CCL. BIS seeks comments on restricting STA eligibility for countries in EAR Country Group A:5 of certain technology for the development of supersonic aero gas turbine engine components controlled under ECCN 9E003.k, formerly controlled under ECCN 9E001 as part of its ongoing assessment of current export control licensing policy.",
+      "document_number": "2023-22299",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/18/2023-22299/implementation-of-2022-wassenaar-arrangement-decisions-and-request-for-comments-on-license-exception",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-18",
+      "title": "Implementation of 2022 Wassenaar Arrangement Decisions and Request for Comments on License Exception Eligibility for Certain Supersonic Aero Gas Turbine Engine Component Technology",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 13 entities to the Entity List under the destination of the People's Republic of China (China). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-23048",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/19/2023-23048/entity-list-additions",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-19",
+      "title": "Entity List Additions",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 7, 2022, the Bureau of Industry and Security (BIS) released the interim final rule (IFR) \"Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use\" (October 7 IFR), which amended the Export Administration Regulations (EAR) to implement controls on advanced computing integrated circuits (ICs), computer commodities that contain such ICs, and certain semiconductor manufacturing items. The October 7 IFR also made other EAR changes to ensure appropriate related controls, including on certain \"U.S. person\" activities. This IFR addresses comments received in response to only the part of the October 7 IFR that controls semiconductor manufacturing equipment (SME) and amends the EAR to implement SME controls more effectively and to address ongoing national security concerns.",
+      "document_number": "2023-23049",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/25/2023-23049/export-controls-on-semiconductor-manufacturing-items",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-25",
+      "title": "Export Controls on Semiconductor Manufacturing Items",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 7, 2022, the Bureau of Industry and Security (BIS) released the interim final rule (IFR), \"Implementation of Additional Export Controls: Certain Advanced Computing and Semiconductor Manufacturing Items; Supercomputer and Semiconductor End Use; Entity List Modification\" (October 7 IFR), which amended the Export Administration Regulations (EAR) to implement controls on advanced computing integrated circuits (ICs), computer commodities that contain such ICs, and certain semiconductor manufacturing items, and to make other EAR changes to implement appropriate related controls, including on certain \"U.S. person\" activities. This Advanced Computing/ Supercomputing IFR (AC/S IFR) addresses comments received in response to only the part of the October 7 IFR that controls advanced computing ICs and computer commodities that contain such ICs. This rule also makes other changes to make the controls more effective and less burdensome, including by correcting and clarifying the controls to more effectively achieve the policy objectives identified in the October 7 IFR. This AC/S IFR is published concurrently with a second BIS IFR, \"Export Controls on Semiconductor Manufacturing Items,\" which addresses public comments received in response to other portions of the October 7 IFR. Together, these IFRs revise the October 7 IFR controls to more effectively achieve BIS's focused national security policy objectives. These revisions protect U.S. national security interests by further restricting China's ability to obtain critical technologies to modernize its military capabilities in ways that threaten the national security interests of the United States and its allies.",
+      "document_number": "2023-23055",
+      "html_url": "https://www.federalregister.gov/documents/2023/10/25/2023-23055/implementation-of-additional-export-controls-certain-advanced-computing-items-supercomputer-and",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-10-25",
+      "title": "Implementation of Additional Export Controls: Certain Advanced Computing Items; Supercomputer and Semiconductor End Use; Updates and Corrections",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 13 entities to the Entity List under the destinations of Russia (12), and Uzbekistan (1). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-24508",
+      "html_url": "https://www.federalregister.gov/documents/2023/11/06/2023-24508/entity-list-additions",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-11-06",
+      "title": "Entity List Additions",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) published a rule in the Federal Register on October 17, 2023, that amended the Export Administration Regulations (EAR) to revise the existing Validated End- User (VEU) list for the People's Republic of China (PRC) for Samsung China Semiconductor Co. Ltd. and SK hynix Semiconductor (China) Ltd. That rule inadvertently omitted two amendments to the list of VEUs, which resulted in failure to add a word to the description of eligible items for SK Hynix Semiconductor (China) Ltd.; as well as the failure to remove the entry for SK hynix Semiconductor (Wuxi), which was necessary because SK hynix Semiconductor (Wuxi) recently merged with SK hynix Semiconductor (China) Ltd. This rule corrects both omissions.",
+      "document_number": "2023-23312",
+      "html_url": "https://www.federalregister.gov/documents/2023/11/08/2023-23312/existing-validated-end-user-authorizations-in-the-peoples-republic-of-china-samsung-china",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-11-08",
+      "title": "Existing Validated End-User Authorizations in the People's Republic of China: Samsung China Semiconductor Co. Ltd. and SK hynix Semiconductor (China)) Ltd; Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by removing one entity under the destination of the People's Republic of China (China).",
+      "document_number": "2023-25557",
+      "html_url": "https://www.federalregister.gov/documents/2023/11/17/2023-25557/entity-list-removal",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-11-17",
+      "title": "Entity List Removal",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding four entities under nine entries to the Entity List. These entities are listed under the destinations of Costa Rica (1), Ecuador (1), India (1) Panama (2), Spain (1), Russia (1), and Venezuela (2). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. Some entities are added under multiple entries, accounting for the difference in the totals.",
+      "document_number": "2023-25684",
+      "html_url": "https://www.federalregister.gov/documents/2023/11/21/2023-25684/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-11-21",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding forty-two entities under forty-four entries to the Entity List. These entities are listed under the destinations of Armenia (3), Belarus (1), Belgium (3), China, People's Republic of (China) (1), Cyprus (4), Germany (1), Kazakhstan (1), Netherlands (1), Russia (28), and the United Arab Emirates (1). Two entities are added to the Entity List under two destinations, accounting for the difference in the totals. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2023-26935",
+      "html_url": "https://www.federalregister.gov/documents/2023/12/07/2023-26935/addition-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-12-07",
+      "title": "Addition of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by removing Proliferation of Chemical and Biological Weapons (CB) controls on specified pathogens and toxins that are destined for Australia Group (AG) member countries and by revising the Commerce Country Chart to remove Crime Control and Detection (CC) controls on certain items that are destined for Austria, Finland, Ireland, Liechtenstein, South Korea, Sweden, and Switzerland. These changes are being made as part of a broader effort announced today that will liberalize several categories of export licensing requirements and the availability of export license exceptions for key allied and partner countries, as well as for members of certain multilateral export control regimes.",
+      "document_number": "2023-26532",
+      "html_url": "https://www.federalregister.gov/documents/2023/12/08/2023-26532/allied-governments-favorable-treatment-revisions-to-certain-australia-group-controls-revisions-to",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-12-08",
+      "title": "Allied Governments Favorable Treatment: Revisions to Certain Australia Group Controls; Revisions to Certain Crime Control and Detection Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to reflect changes to the Missile Technology Control Regime (MTCR) Annex that were agreed to by MTCR member countries at the Technical Experts Meetings (TEMs) in March and November 2018, May and October 2019, and October 2021. This rule also expands the eligibility for the use of license exceptions under the EAR for MT-controlled items. These changes to license exception eligibility are also being made as part of a broader effort announced today that will liberalize several categories of export licensing requirements and the availability of export license exceptions for key allied and partner countries, as well as for members of certain multilateral export control regimes.",
+      "document_number": "2023-26682",
+      "html_url": "https://www.federalregister.gov/documents/2023/12/08/2023-26682/export-administration-regulations-for-missile-technology-items-2018-2019-and-2021-missile-technology",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-12-08",
+      "title": "Export Administration Regulations for Missile Technology Items: 2018, 2019, and 2021 Missile Technology Control Regime Plenary Agreements; and License Exception Eligibility",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by removing four persons, all under the destination of People's Republic of China (China), from the UVL because BIS was able to verify their bona fides.",
+      "document_number": "2023-27932",
+      "html_url": "https://www.federalregister.gov/documents/2023/12/19/2023-27932/removals-from-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-12-19",
+      "title": "Removals From the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding 13 persons to the Unverified List (UVL). The 13 persons are added to the UVL on the basis that BIS was unable to verify their bona fides. All 13 persons are being added under the destination of the People's Republic of China (China).",
+      "document_number": "2023-27928",
+      "html_url": "https://www.federalregister.gov/documents/2023/12/20/2023-27928/additions-to-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2023-12-20",
+      "title": "Additions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by removing three persons, including one under the destination of Canada, one under the destination of People's Republic of China (China), and one under the destination of the United Arab Emirates, from the Unverified List (UVL) because BIS was able to verify their bona fides.",
+      "document_number": "2024-01253",
+      "html_url": "https://www.federalregister.gov/documents/2024/01/23/2024-01253/removals-from-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-01-23",
+      "title": "Removals From the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In response to the Russian Federation's (Russia's) ongoing aggression against Ukraine and Belarus's complicity in the invasion, the Department of Commerce is strengthening its existing sanctions under the Export Administration Regulations (EAR) against Russia and Belarus, including by expanding the scope of the EAR's Russian and Belarusian Industry Sector Sanctions and making certain changes to the licensing requirements that apply to the occupied Crimea region of Ukraine as well. Additionally, this rule revises recent restrictions targeting Iran's supply of Unmanned Aerial Vehicles to Russia. This rule also refines certain existing export controls on Russia and Belarus. The Department of Commerce is taking these actions to enhance the effectiveness of its controls on these countries and to better align them with those implemented by U.S. allies and partners.",
+      "document_number": "2024-01408",
+      "html_url": "https://www.federalregister.gov/documents/2024/01/25/2024-01408/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-01-25",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "With this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR), which it maintains, by revising license requirements for certain cameras, systems, and related components. These revisions will better align controls with technological and commercial developments, such as the items' global commercial availability, while recognizing the cooperative strategic relationship the United States has with our closest allies. In addition to these changes, BIS is adding controls on certain cameras that are not already controlled by either export control classification number (ECCN) 6A003 or 6A203. These new controls are detailed under new ECCN 6A293, which is a classification for temporary controls for which BIS is seeking multilateral agreement.",
+      "document_number": "2024-03661",
+      "html_url": "https://www.federalregister.gov/documents/2024/02/23/2024-03661/revision-of-license-requirements-of-certain-cameras-systems-or-related-components",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-02-23",
+      "title": "Revision of License Requirements of Certain Cameras, Systems, or Related Components",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security is amending the Export Administration Regulations (EAR) by adding two entities under seven entries to the Entity List. These entities are listed under the destinations of Canada (1), the People's Republic of China (China) (1), India (1), Japan (1), Malaysia (1), Sweden (1), and the United Arab Emirates (UAE) (1). Some entities are added under multiple entries, accounting for the difference in the totals. This final rule also modifies two existing entries on the Entity List under the destination of China. This final rule removes one entity under the destination of the UAE.",
+      "document_number": "2024-03674",
+      "html_url": "https://www.federalregister.gov/documents/2024/02/27/2024-03674/additions-of-entities-revisions-of-entries-and-removal-of-an-entity-from-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-02-27",
+      "title": "Additions of Entities, Revisions of Entries, and Removal of an Entity From the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 93 entities under 95 entries to the Entity List. These entries are listed on the Entity List under the destinations of the People's Republic of China (China) (8), India (1), Kyrgyzstan (2), Russia (63), South Korea (1), Turkey (16), and the United Arab Emirates (UAE) (4). Two entities are added to the Entity List under two destinations, accounting for the difference in the totals. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2024-03969",
+      "html_url": "https://www.federalregister.gov/documents/2024/02/27/2024-03969/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-02-27",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to clarify controls on radiation hardened integrated circuits, including controls on computer and telecommunications equipment incorporating such radiation hardened integrated circuits. This rule also addresses certain scenarios that apply to certain integrated circuits acquired, tested, or otherwise used by or for the United States Government and affirms the availability of License Exception GOV for such items when pursuant to an official written request or directive from the Department of Defense or the Department of Energy. Lastly, this rule expands the availability of License Exception GOV for microelectronics items being exported, reexported, or transferred (in-country) in furtherance of a contract between the exporter, reexporter, or transferor and a department or agency of the U.S. Government when the contract provides for the export, reexport, transfer (in-country) of the item by the exporter, reexporter, or transferor in order to remove export control obstacles for official business of the U.S. Government, including the Department of Energy and the Department of Defense.",
+      "document_number": "2024-05267",
+      "html_url": "https://www.federalregister.gov/documents/2024/03/13/2024-05267/clarification-of-controls-on-radiation-hardened-integrated-circuits-and-expansion-of-license",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-03-13",
+      "title": "Clarification of Controls on Radiation Hardened Integrated Circuits and Expansion of License Exception GOV",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, BIS amends the Export Administration Regulations (EAR) to apply more restrictive treatment to exports and reexports to, and transfers (in-country) within, Nicaragua of items subject to the EAR. This action is consistent with the State Department's addition of Nicaragua to the list of countries that are subject to a U.S. arms embargo under the International Traffic in Arms Regulations (ITAR). To reflect this changed status under the ITAR, BIS adds Nicaragua to Country Group D:5. BIS's amendments also address concerns regarding the Nicaraguan Government's commission of human rights abuses against citizens and civil society groups, as well as the regime's ongoing military and security cooperation with Russia. Specifically, BIS is moving Nicaragua from Country Group B to Country Group D, a more restrictive country grouping, applying a stringent licensing policy for items controlled for national security reasons, and making the country subject to `military end use' and `military end user' restrictions. This rule advances the U.S. Government's efforts to restrict the availability of items subject to the EAR to Nicaragua's military and security services. Additionally, consistent with BIS's authorities under the Export Control Reform Act of 2018, this rule demonstrates a commitment to using export controls to protect human rights and promote democracy.",
+      "document_number": "2024-05696",
+      "html_url": "https://www.federalregister.gov/documents/2024/03/15/2024-05696/revisions-to-export-reexport-and-transfer-in-country-controls-for-nicaragua-under-the-export",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-03-15",
+      "title": "Revisions To Export, Reexport, and Transfer (In-Country) Controls for Nicaragua Under the Export Administration Regulations",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the end-user controls of the Export Administration Regulations (EAR) to add end-user controls, and in certain cases expand existing end-user controls, on certain persons identified on the List of Specially Designated Nationals and Blocked Persons (SDN List) maintained by the Department of the Treasury's Office of Foreign Assets Control (OFAC).",
+      "document_number": "2024-06067",
+      "html_url": "https://www.federalregister.gov/documents/2024/03/21/2024-06067/export-administration-regulations-end-user-controls-imposition-of-restrictions-on-certain-persons",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-03-21",
+      "title": "Export Administration Regulations End-User Controls: Imposition of Restrictions on Certain Persons Identified on the List of Specially Designated Nationals and Blocked Persons (SDN List)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 11 entries to the Entity List, under the destinations of the Peoples Republic of China (China) (6), the Russian Federation (Russia) (3), and the United Arab Emirates (UAE) (2). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This rule also modifies one existing entity on the Entity List under the destination of China.",
+      "document_number": "2024-07760",
+      "html_url": "https://www.federalregister.gov/documents/2024/04/11/2024-07760/addition-of-entities-to-and-revision-of-entry-on-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-04-11",
+      "title": "Addition of Entities to and Revision of Entry on the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "With this interim final rule (IFR), the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to remove license requirements, expand the availability of license exceptions, and reduce the scope of end-use and end-user-based license requirements for exports, reexports, and transfers (in-country) to or within Australia and the United Kingdom (UK) to enhance technological innovation among the three countries and support the goals of the AUKUS Trilateral Security Partnership.",
+      "document_number": "2024-08446",
+      "html_url": "https://www.federalregister.gov/documents/2024/04/19/2024-08446/export-control-revisions-for-australia-united-kingdom-united-states-aukus-enhanced-trilateral",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-04-19",
+      "title": "Export Control Revisions for Australia, United Kingdom, United States (AUKUS) Enhanced Trilateral Security Partnership",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the Export Administration Regulations (EAR) to expand the scope of items that require a license for export and reexport to Iran; this rule also expands the scope of the Russia/Belarus/ Temporarily occupied Crimea region of Ukraine Foreign Direct Product (FDP) rule and the Iran FDP rule. Certain foreign-made items located outside of the United States are subject to the EAR because they meet criteria specified under one of the FDP rules under the EAR. This final rule expands the product scope of two of the FDP rules to make additional items subject to the EAR and imposes a license requirement when they are reexported or exported from abroad to Iran, Russia, Belarus, or the Temporarily occupied Crimea region of Ukraine. Prior to this rule, BIS had not controlled all foreign transactions involving items covered by this rule, but in light of recent events and the need to fully leverage EAR controls to address U.S. national security and foreign policy interests, these additional controls are now warranted under the EAR.",
+      "document_number": "2024-08622",
+      "html_url": "https://www.federalregister.gov/documents/2024/04/22/2024-08622/export-control-measures-under-the-export-administration-regulations-ear-to-address-iranian",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-04-22",
+      "title": "Export Control Measures Under the Export Administration Regulations (EAR) To Address Iranian Aggression Against Israel and Military Support for Russia",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the Russia and Belarus sanctions under the Export Administration Regulations (EAR) to add a new license exception for EAR99 medical devices and related parts, components, accessories, and attachments for use in or with medical devices that are destined for both countries and the temporarily occupied Crimea region of Ukraine, or the covered regions of Ukraine. The purpose of this final rule is to authorize under a license exception certain exports, reexports, and transfers (in-country) of \"medical devices\" that are being regularly approved and that advance U.S. national security and foreign policy interests. In addition, this final rule makes two corrections to the EAR related to Russia-related rules published in January, and March, 2024 by correcting an end-user control and adding a cross-reference correction.",
+      "document_number": "2024-09076",
+      "html_url": "https://www.federalregister.gov/documents/2024/04/29/2024-09076/amendment-to-existing-controls-on-russia-and-belarus-under-the-export-administration-regulations-ear",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-04-29",
+      "title": "Amendment to Existing Controls on Russia and Belarus Under the Export Administration Regulations (EAR) Adding New License Exception Medical Devices (MED); Corrections",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule (IFR), the Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to enhance the control structure for firearms and related items. These changes will better protect U.S. national security and foreign policy interests, which include countering the diversion and misuse of firearms and related items and advancing human rights. This rule identifies semi-automatic firearms under new Export Control Classification Numbers (ECCNs); adds additional license requirements for Crime Control and Detection (CC) items, thereby resulting in additional restrictions on the availability of license exceptions for most destinations; amends license review policies so that they are more explicit as to the nature of review that will accompany different types of transactions and license exception availability (including adding a new list of high-risk destinations); updates and expands requirements for support documentation submitted with license applications; and better accounts for the import documentation requirements of other countries (such as an import certificate or other permit prior to importation) when firearms and related items are authorized under a BIS license exception. BIS is publishing this rule as an IFR to solicit comments from the public on additional changes to export controls on firearms and related items that would better protect U.S. national security and foreign policy interests.",
+      "document_number": "2024-08813",
+      "html_url": "https://www.federalregister.gov/documents/2024/04/30/2024-08813/revision-of-firearms-license-requirements",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-04-30",
+      "title": "Revision of Firearms License Requirements",
+      "type": "Rule"
+    },
+    {
+      "abstract": "This final rule makes conforming and clarifying changes to the Export Administration Regulations (EAR). These changes include making conforming changes to the EAR to ensure that destination names reflect the current destination names that are recognized by the United States Government, clarifying the removal of certain license requirements for exports, reexports, and transfers (in-country) to and within Australia and the United Kingdom, making a conforming change to reflect that Cyprus is no longer a Country Group D:5 country, and clarifying how Russia and the Russian Federation are referenced for consistency with the designation of Russia as a U.S. Arms Embargoed destinations.",
+      "document_number": "2024-10280",
+      "html_url": "https://www.federalregister.gov/documents/2024/05/10/2024-10280/conforming-and-clarifying-changes-to-the-export-administration-regulations-ear",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-05-10",
+      "title": "Conforming and Clarifying Changes to the Export Administration Regulations (EAR)",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 37 entities under 37 entries to the Entity List. These entries are listed on the Entity List under the destinations of the People's Republic of China (China) and have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2024-10485",
+      "html_url": "https://www.federalregister.gov/documents/2024/05/14/2024-10485/additions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-05-14",
+      "title": "Additions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the Russia and Belarus sanctions under the Export Administration Regulations (EAR). This final rule imposes additional export control measures against Russia and Belarus by expanding the scope of items identified under two EAR supplements that are subject to the EAR's Russian and Belarusian industry sector sanctions; imposing a \"software\" license requirement for certain EAR99-designated \"software\" when destined to or within Russia or Belarus; and narrowing the scope of commodities and software that may be authorized for export, reexport, or transfer (in-country) to or within Russia or Belarus under License Exception Consumer Communications Devices (CCD). To promote clarity and facilitate compliance, this final rule also consolidates the EAR's Russian and Belarus sanctions into a single section, while maintaining the existing related regulatory supplements identifying items that are subject to certain of those sanctions. This final rule also amends the EAR by adding five entities and eight addresses to the Entity List and making changes to the Entity List structure. These entries are listed on the Entity List under the destinations of the People's Republic of China (China) and Russia and have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. Lastly, this final rule makes two additional revisions to the EAR: one to confirm the criteria used when revising, suspending, or revoking EAR license exceptions and one revision to clarify the control status of fasteners for purposes of the EAR's Russian and Belarusian industry sector sanctions.",
+      "document_number": "2024-13148",
+      "html_url": "https://www.federalregister.gov/documents/2024/06/18/2024-13148/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-06-18",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 3 entries to the Entity List, under the destinations of Russia (2), and the United Kingdom (1). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2024-13695",
+      "html_url": "https://www.federalregister.gov/documents/2024/06/24/2024-13695/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-06-24",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding six entries to the Entity List, under the destinations of the People's Republic of China (China) (2), South Africa (1), the United Arab Emirates (UAE) (2), and the United Kingdom (1). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This rule also modifies two existing entities on the Entity List, one under the destination of China and one under the destination of Russia.",
+      "document_number": "2024-14635",
+      "html_url": "https://www.federalregister.gov/documents/2024/07/03/2024-14635/addition-of-entities-and-revision-of-entries-on-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-07-03",
+      "title": "Addition of Entities and Revision of Entries on the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding 13 persons to the Unverified List (UVL). The 13 persons being added are added under the following destinations: China, Peoples' Republic of (China) (8), Cyprus (1), Kyrgyzstan (1), T[uuml]rkiye (2), and the United Arab Emirates (UAE) (1). BIS is also amending the EAR by removing eight persons from the UVL. Of the eight persons being removed, one is under the destination of the UAE, one is under the destination of Russia, and six are under the destination of China. This final rule also removes the country name Russia from the UVL. Lastly, this final rule replaces the country name Turkey with T[uuml]rkiye in the UVL. This is a conforming change to the U.S. State Department's recognition on January 9, 2023, of T[uuml]rkiye's official name.",
+      "document_number": "2024-14642",
+      "html_url": "https://www.federalregister.gov/documents/2024/07/03/2024-14642/the-unverified-list-additions-and-removals",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-07-03",
+      "title": "The Unverified List; Additions and Removals",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to revise the scope and the terms used in the EAR to describe \"standards- related activities\" that are subject to the EAR. BIS is making these revisions to ensure that export controls and associated compliance concerns do not impede the participation and leadership of U.S. companies in legitimate standards- related activities.",
+      "document_number": "2024-15810",
+      "html_url": "https://www.federalregister.gov/documents/2024/07/18/2024-15810/standards-related-activities-and-the-export-administration-regulations",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-07-18",
+      "title": "Standards-Related Activities and the Export Administration Regulations",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On July 18, 2024, the Bureau of Industry and Security published an interim final rule that revised the Export Administration Regulations (EAR). That rule inadvertently revised language related to recent changes to the Entity List. This document corrects the inadvertent revisions introduced in the July 18, 2024, rule.",
+      "document_number": "2024-16379",
+      "html_url": "https://www.federalregister.gov/documents/2024/07/25/2024-16379/standards-related-activities-and-the-export-administration-regulations-corrections",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-07-25",
+      "title": "Standards-Related Activities and the Export Administration Regulations; Corrections",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On April 24, 2024, President Biden signed \"Making emergency supplemental appropriations for the fiscal year ending September 30, 2024, and for other purposes,\" into law. The law requires the United States to regulate the export of certain foreign-produced items destined for Iran. This rule implements the law's requirements by expanding the scope of the Export Administration Regulations' (EAR) Foreign Direct Product rule for Iran and applicable license requirements, thereby increasing restrictions under the EAR.",
+      "document_number": "2024-16566",
+      "html_url": "https://www.federalregister.gov/documents/2024/07/26/2024-16566/iran-foreign-direct-product-rule",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-07-26",
+      "title": "Iran Foreign Direct Product Rule",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 123 entities under 131 entries to the Entity List. These entries are listed on the Entity List under the destinations of Canada (1), the People's Republic of China (China) (42), the Crimea Region of Ukraine (1), Cyprus (1), Iran (11), Kazakhstan (1), Kyrgyzstan (1), Russia (63), Turkey (8), Ukraine (1), and the United Arab Emirates (UAE) (1). Three entities are added to the Entity List under two destinations and two entities are added to the Entity List under three destinations, which accounts for the difference in the totals. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2024-19130",
+      "html_url": "https://www.federalregister.gov/documents/2024/08/27/2024-19130/revisions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-08-27",
+      "title": "Revisions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the Russian and Belarusian sanctions under the Export Administration Regulations (EAR). This final rule expands the scope of the Russia/Belarus-Military End User (MEU) Foreign-Direct Product (FDP) rule, and renames it accordingly, so that the rule will also apply to transactions involving entities on the Entity List that pose a significant risk of involvement in the supply or diversion of items subject to the EAR to procurement networks for Russia's and Belarus's defense industry or intelligence services. This final rule also adds controls on the export, reexport, or transfer (in-country) to or within Russia or Belarus of \"software\" for the operation of computer numerical control (CNC) machine tools. In addition, this final rule makes corrections and clarifications to certain aspects of the EAR's Russia and Belarus sanctions.",
+      "document_number": "2024-19132",
+      "html_url": "https://www.federalregister.gov/documents/2024/08/27/2024-19132/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-08-27",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR); and Corrections",
+      "type": "Rule"
+    },
+    {
+      "abstract": null,
+      "document_number": "C1-2024-13148",
+      "html_url": "https://www.federalregister.gov/documents/2024/09/04/C1-2024-13148/implementation-of-additional-sanctions-against-russia-and-belarus-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-09-04",
+      "title": "Implementation of Additional Sanctions Against Russia and Belarus Under the Export Administration Regulations (EAR) and Refinements to Existing Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is implementing export controls on several semiconductor, quantum, and additive manufacturing items for national security and foreign policy reasons. This rule adds new Export Control Classification Numbers (ECCNs) to the Commerce Control List, revises existing ECCNs, adds a new license exception to authorize exports and reexports to and by countries that have implemented equivalent technical controls for these newly added items, and adds two new worldwide license requirements to the national security and regional stability controls in the Export Administration Regulations (EAR). These controls are the product of extensive discussions with international partners.",
+      "document_number": "2024-19633",
+      "html_url": "https://www.federalregister.gov/documents/2024/09/06/2024-19633/commerce-control-list-additions-and-revisions-implementation-of-controls-on-advanced-technologies",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-09-06",
+      "title": "Commerce Control List Additions and Revisions; Implementation of Controls on Advanced Technologies Consistent With Controls Implemented by International Partners",
+      "type": "Rule"
+    },
+    {
+      "abstract": "With this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by making certain revisions and clarifications. This final rule revises provisions related to the voluntary self-disclosure process for exporters who believe that they may have violated the EAR, or any order, license or authorization issued thereunder. This final rule also provides clarified guidance on charging and penalty determinations in settlement of administrative enforcement cases.",
+      "document_number": "2024-21013",
+      "html_url": "https://www.federalregister.gov/documents/2024/09/16/2024-21013/administrative-and-enforcement-provisions",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-09-16",
+      "title": "Administrative and Enforcement Provisions",
+      "type": "Rule"
+    },
+    {
+      "abstract": null,
+      "document_number": "2024-21109",
+      "html_url": "https://www.federalregister.gov/documents/2024/09/16/2024-21109/addition-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List"
+      ],
+      "publication_date": "2024-09-16",
+      "title": "Addition of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Department of Commerce, Bureau of Industry and Security (BIS), amends the Export Administration Regulations (EAR) to expand the Validated End User Authorization (VEU) program to include VEU Authorization for data centers located in specified destinations (\"Data Center VEU\" or \"Data Center VEU Authorization\"). This expansion of the VEU program to include Data Center VEU is intended to facilitate quick and reliable export or reexport of items on the Commerce Control List necessary for a data center, including advanced computing items, to preapproved trusted end users. Data Center VEU adopts much of the framework of the existing VEU program, with additional requirements. This expansion of eligibility is intended to update the VEU program to recognize the advancement and benefits of artificial intelligence. As under the original VEU Authorization Program, the U.S. government will rigorously review Data Center VEU candidates' applications subject to detailed and verifiable criteria.",
+      "document_number": "2024-22587",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/02/2024-22587/expansion-of-validated-end-user-authorization-data-center-validated-end-user-authorization",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-02",
+      "title": "Expansion of Validated End User Authorization: Data Center Validated End User Authorization",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding eight persons to the Unverified List (UVL). Of the eight persons being added, three are under the destination of China, People's Republic of (China); two are under the destination of Germany; one is under the destination of Pakistan; and two are under the destination of T[uuml]rkiye. BIS is also amending the EAR by removing two persons from the UVL. Of the two persons being removed, one is under the destination of Saudi Arabia, and the other is under the destination of China.",
+      "document_number": "2024-23638",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/16/2024-23638/revisions-to-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-16",
+      "title": "Revisions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On September 16, 2024, the Bureau of Industry and Security (BIS) published a final rule amending administrative and enforcement provisions in the Export Administration Regulations (EAR). The rule contained an error in an amendatory instruction. This document corrects that error.",
+      "document_number": "2024-23887",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/17/2024-23887/administrative-and-enforcement-provisions-correction",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-17",
+      "title": "Administrative and Enforcement Provisions; Correction",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by removing controls for certain spacecraft and related items for exports and reexports to Australia, Canada, and the United Kingdom. These spacecraft and related items involve remote sensing or space-based logistics, assembly, or servicing. Taking into account the close relations with these three allied countries, including in space collaboration, as well as their inclusion in the National Technology and Industrial Base (NTIB), this final rule removes the license requirement for these countries for these spacecraft and related items.",
+      "document_number": "2024-23932",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/23/2024-23932/export-administration-regulations-removal-of-license-requirements-for-certain-spacecraft-and-related",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-23",
+      "title": "Export Administration Regulations: Removal of License Requirements for Certain Spacecraft and Related Items for Australia, Canada, and the United Kingdom",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule (IFR), the Bureau of Industry and Security (BIS) makes changes to controls for spacecraft and related items under the Export Administration Regulations (EAR). This IFR reduces license requirements on less sensitive items to reflect the close relations with certain countries to better facilitate space collaboration; and makes refinements and clarifications to existing controls. These changes will better enable a globally competitive U.S. space industrial base while continuing to protect U.S. national security and foreign policy interests.",
+      "document_number": "2024-23958",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/23/2024-23958/export-administration-regulations-revisions-to-space-related-export-controls",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-23",
+      "title": "Export Administration Regulations: Revisions to Space-Related Export Controls",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 26 entries to the Entity List, under the destinations of the People's Republic of China (China), Egypt, Pakistan, and the United Arab Emirates (UAE) and modifies one existing entry under the destination of China. This rule also removes two entities from the entity list: one entity listed under the destination of China, and a second entity listed under the destinations of Canada, India, Japan, Malaysia, Sweden and the UAE.",
+      "document_number": "2024-24562",
+      "html_url": "https://www.federalregister.gov/documents/2024/10/23/2024-24562/addition-of-entities-revision-of-an-entry-and-removal-of-entries-on-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-10-23",
+      "title": "Addition of Entities, Revision of an Entry, and Removal of Entries on the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 40 entities under 42 entries and four addresses under four entries to the Entity List. These entries are listed on the Entity List under the destinations of China, People's Republic of (China) (11), India (5), Malaysia (2), Russia (13), Singapore (1), and Turkey (14). Two entities are added to the Entity List under two destinations, which accounts for the difference in the totals. This final rule also modifies 52 existing entries on the Entity List under the destinations of China, Estonia, Finland, India, Turkey, the United Arab Emirates (UAE), and the United Kingdom. These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This final rule is being published concurrently with a BIS final rule, \"Implementation of Additional Export Controls Against Russia and Belarus Under the Export Administration Regulations (EAR); and Clarifications\" (RIN 0694-AJ93), which includes additional changes related to export controls related to Russia and Belarus.",
+      "document_number": "2024-25411",
+      "html_url": "https://www.federalregister.gov/documents/2024/11/01/2024-25411/additions-and-revisions-of-entities-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-11-01",
+      "title": "Additions and Revisions of Entities to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the export controls against Russia and Belarus under the Export Administration Regulations (EAR). This final rule expands the scope of the Russian and Belarusian Industry Sector Sanctions by imposing controls on nine key precursors for riot control agents and a chemical weapon that Russia has deployed against Ukraine in violation of the Chemical Weapons Convention (CWC). This final rule also makes adjustments to exclusions, exceptions, and licensing policy for exports, reexports, or transfers (in-country) to certain components of the governments of Country Group A:5 and A:6 destinations that are in Russia and Belarus. Lastly, this final rule clarifies that the Russia/ Belarus-Military End User and Procurement Foreign-Direct Product (FDP) rule and the EAR's other Entity List FDP rules' license requirements extend to or within any destination or to any end user or party that otherwise meets the criteria. This final rule is being published concurrently with a BIS final rule, \"Additions and Revisions of Entities to the Entity List\" (RIN 0694-AJ94), which includes additional changes related to export controls related to Russia and Belarus.",
+      "document_number": "2024-25445",
+      "html_url": "https://www.federalregister.gov/documents/2024/11/01/2024-25445/implementation-of-additional-export-controls-against-russia-and-belarus-under-the-export",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-11-01",
+      "title": "Implementation of Additional Export Controls Against Russia and Belarus Under the Export Administration Regulations (EAR); and Clarifications",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 23, 2024, the Bureau of Industry and Security (BIS) published in the Federal Register related rules: a final rule, \"Export Administration Regulations: Removal of License Requirements for Certain Spacecraft and Related Items for Australia, Canada, and the United Kingdom,\" and an interim final rule, \"Export Administration Regulations: Revisions to Space-Related Export Controls.\" This document announces that, on November 6, 2024, BIS will host a public briefing on these rules. This document also provides details on the procedures for participating in the public briefing. Elsewhere in this issue of the Federal Register, BIS is publishing notification of the public briefing on related proposed rulemaking.",
+      "document_number": "2024-25663",
+      "html_url": "https://www.federalregister.gov/documents/2024/11/05/2024-25663/public-briefing-on-revisions-to-space-related-export-controls-under-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-11-05",
+      "title": "Public Briefing on Revisions to Space-Related Export Controls Under Export Administration Regulations and International Traffic in Arms Regulations",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On October 23, 2024, the Bureau of Industry and Security (BIS) published in the Federal Register the interim final rule, \"Export Administration Regulations: Revisions to Space-Related Export Controls\" with comments originally due November 22, 2024. This notification extends the deadline for written comments to December 23, 2024. This extension is being made to allow for commenters to have additional time to review the interim final rule and to be informed by the public outreach that BIS is conducting on the rule in preparing their comments. Extending the public comment period will not in any way undermine the rule or national security of the United States.",
+      "document_number": "2024-26886",
+      "html_url": "https://www.federalregister.gov/documents/2024/11/19/2024-26886/export-administration-regulations-revisions-to-space-related-export-controls-extension-of-comment",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-11-19",
+      "title": "Export Administration Regulations: Revisions to Space-Related Export Controls; Extension of Comment Period",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by imposing new licensing requirements on exports, reexports, and transfers (in-country) to and within Pakistan of certain items identified on the Commerce Control List (CCL) that are not currently subject to a license requirement when destined for Pakistan. This change is being made to ensure that such transactions receive U.S. government review to reduce the risk of diversion to an end use or end user of concern.",
+      "document_number": "2024-27648",
+      "html_url": "https://www.federalregister.gov/documents/2024/11/26/2024-27648/implementation-of-additional-controls-on-pakistan",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-11-26",
+      "title": "Implementation of Additional Controls on Pakistan",
+      "type": "Rule"
+    },
+    {
+      "abstract": "On December 2, 2024, the Office of the Federal Register posted for public inspection two related Bureau of Industry and Security (BIS) rules: an interim final rule, \"Foreign-Produced Direct Product Rule Additions, and Refinements to Controls for Advanced Computing and Semiconductor Manufacturing Items,\" (RIN 0694-AJ74) and a final rule, \"Additions and Modifications to the Entity List; Removals from the Validated End-User (VEU) Program\" (RIN 0694-AJ77). This document announces that, on December 5, 2024, BIS will host a virtual public briefing on these rules. This document also provides details on the procedures for participating in the virtual public briefing.",
+      "document_number": "2024-28423",
+      "html_url": "https://www.federalregister.gov/documents/2024/12/04/2024-28423/public-briefing-on-changes-to-advanced-computing-and-semiconductor-manufacturing-items",
+      "matched_filters": [
+        "Entity List"
+      ],
+      "publication_date": "2024-12-04",
+      "title": "Public Briefing on Changes to Advanced Computing and Semiconductor Manufacturing Items",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 140 entities to the Entity List. These entries are listed on the Entity List under the destinations of China, People's Republic of (China), Japan, South Korea, and Singapore and have been determined by the U.S. Government to be acting contrary to the national security and foreign policy interests of the United States. This final rule also modifies 14 existing entries on the Entity List, consisting of revisions to 14 entries under China. This final rule publishes concurrently with BIS's interim final rule, \"Foreign-Produced Direct Product Rule Additions, and Refinements to Controls for Advanced Computing and Semiconductor Manufacturing Items\" (0694-AJ74), which makes additional changes to the EAR controls on advanced computing items and semiconductor manufacturing items. This final rule is part of this larger effort to ensure that appropriate EAR controls are in place on these items, including in connection with transactions destined to or otherwise involving the entities being added to the Entity List, as well as for existing entries on the Entity List that are being modified. All of these entities (those newly added and those being modified) are involved with the development and production of \"advanced-node integrated circuits\" (\"advanced-node ICs\") and/or semiconductor manufacturing items, and/or have supported the Chinese government's Military-Civil Fusion (MCF) Development Strategy. Additionally, this final rule designates nine of these entities being added and seven of the entries being modified as entities for which entity-specific restrictions involving foreign-produced items apply. This final rule also amends the EAR by removing three entities from the Validated End- User (VEU) Program.",
+      "document_number": "2024-28267",
+      "html_url": "https://www.federalregister.gov/documents/2024/12/05/2024-28267/additions-and-modifications-to-the-entity-list-removals-from-the-validated-end-user-veu-program",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-12-05",
+      "title": "Additions and Modifications to the Entity List; Removals From the Validated End-User (VEU) Program",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule (IFR), the Bureau of Industry and Security (BIS) makes changes to the Export Administration Regulations (EAR) controls for certain advanced computing items, supercomputers, and semiconductor manufacturing equipment, which includes adding new controls for certain semiconductor manufacturing equipment and related items, creating new Foreign Direct Product (FDP) rules for certain commodities to impair the capability to produce \"advanced-node integrated circuits\" (\"advanced-node ICs\") by certain destinations or entities of concern, adding new controls for certain high bandwidth memory important for advanced computing, and clarifying controls on certain software keys that allow for the use of items such as software tools. This IFR publishes concurrently with another BIS final rule entitled, \"Additions and Modifications to the Entity List; and Removals from the Validated End-User (VEU) Program\" (Entity List rule) that adds to and modifies the Entity List to ensure appropriate EAR controls are in place for certain critical technologies and to minimize the risk of diversion to entities of concern.",
+      "document_number": "2024-28270",
+      "html_url": "https://www.federalregister.gov/documents/2024/12/05/2024-28270/foreign-produced-direct-product-rule-additions-and-refinements-to-controls-for-advanced-computing",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-12-05",
+      "title": "Foreign-Produced Direct Product Rule Additions, and Refinements to Controls for Advanced Computing and Semiconductor Manufacturing Items",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 8 entities to the Entity List, under the destinations of Burma (2), China, People's Republic of (China) (2), and Russia (4). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2024-29136",
+      "html_url": "https://www.federalregister.gov/documents/2024/12/11/2024-29136/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-12-11",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) to implement changes agreed to by Australia Group (AG) member countries at recent meetings. These include controlling: instruments for the automated chemical synthesis of peptides (automated peptide synthesizers), dipropylamine, and neosaxitoxin; and revising the controls for botulinum toxins, toxic gas monitors, and centrifugal separators. This rule also makes minor conforming changes for the new controls and revisions to existing controls.",
+      "document_number": "2024-30425",
+      "html_url": "https://www.federalregister.gov/documents/2024/12/23/2024-30425/implementation-of-certain-australia-group-decisions",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2024-12-23",
+      "title": "Implementation of Certain Australia Group Decisions",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 13 entities under 13 entries to the Entity List. These entries are listed on the Entity List under the destinations of Burma (1), China, People's Republic of (China) (11), and Pakistan (1). These entities have been determined by the U.S. Government to be acting contrary to the national security and/ or foreign policy interests of the United States. This rule also amends the EAR by making certain editorial corrections and clarifications. BIS is making the corrections and clarifications in order to minimize confusion and not impede the free flow of commerce.",
+      "document_number": "2024-31468",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/06/2024-31468/revisions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-06",
+      "title": "Revisions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "With this interim final rule, the Commerce Department's Bureau of Industry and Security (BIS) revises the Export Administration Regulations' (EAR) controls on advanced computing integrated circuits (ICs) and adds a new control on artificial intelligence (AI) model weights for certain advanced closed-weight dual-use AI models. In conjunction with the expansion of these controls, which BIS has determined are necessary to protect U.S. national security and foreign policy interests, BIS is adding new license exceptions and updating the Data Center Validated End User authorization to facilitate the export, reexport, and transfer (in-country) of advanced computing (ICs) to end users in destinations that do not raise national security or foreign policy concerns. Together, these changes will cultivate secure ecosystems for the responsible diffusion and use of AI and advanced computing ICs.",
+      "document_number": "2025-00636",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/15/2025-00636/framework-for-artificial-intelligence-diffusion",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-15",
+      "title": "Framework for Artificial Intelligence Diffusion",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 16 entities to the Entity List, under the destinations of China, People's Republic of (China) (14) and Singapore (2). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2025-00480",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/16/2025-00480/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-16",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 11 entities under 11 entries to the Entity List. These entries are listed on the Entity List under the destination of China, People's Republic of (China) (11). These entities have been determined by the U.S. Government to be acting contrary to the national security and/or foreign policy interests of the United States. This rule also revises one existing entry on the Entity List under the destination of India.",
+      "document_number": "2025-00704",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/16/2025-00704/addition-of-entities-to-and-revision-of-entry-on-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-16",
+      "title": "Addition of Entities to and Revision of Entry on the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "BIS is revising the Export Administration Regulations (EAR) in response to requests from the public to provide additional due diligence procedures regarding advanced computing integrated circuits (ICs). This interim final rule (IFR) will protect the national security of the United States and assist foundries and Outsourced Semiconductor Assembly and Test (\"OSATs\") companies in complying with provisions of the EAR pertaining to advanced computing ICs in the supply chain. This IFR also revises the EAR to make amendments and clarifications to the EAR for changes made to the EAR in an IFR released by BIS on December 2, 2024, \"Foreign-Produced Direct Product Rule Additions, and Refinements to Controls for Advanced Computing and Semiconductor Manufacturing Items,\" (FDP IFR), including extending the deadline for written comments for the FDP IFR to March 14, 2025.",
+      "document_number": "2025-00711",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/16/2025-00711/implementation-of-additional-due-diligence-measures-for-advanced-computing-integrated-circuits",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-16",
+      "title": "Implementation of Additional Due Diligence Measures for Advanced Computing Integrated Circuits; Amendments and Clarifications; and Extension of Comment Period",
+      "type": "Rule"
+    },
+    {
+      "abstract": "With this interim final rule (IFR), the Bureau of Industry and Security (BIS) is revising the Export Administration Regulations (EAR) to address the accelerating development and deployment of advanced biotechnology tools contrary to U.S. national security and foreign policy interests. This rule institutes new controls on certain biotechnology equipment and related technology. It further solicits public comments on the changes it implements.",
+      "document_number": "2025-00723",
+      "html_url": "https://www.federalregister.gov/documents/2025/01/16/2025-00723/controls-on-certain-laboratory-equipment-and-related-technology-to-address-dual-use-concerns-about",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-01-16",
+      "title": "Controls on Certain Laboratory Equipment and Related Technology To Address Dual Use Concerns About Biotechnology",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 70 entities to the Entity List, under the destinations of China, People's Republic of (China) (42); Iran (2); Pakistan (19); South Africa (3); and the United Arab Emirates (UAE) (4). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This final rule also modifies four existing entries on the Entity List, consisting of revisions to one entry under France, one entry under Iran, one entry under Senegal, and one entry under the United Kingdom.",
+      "document_number": "2025-05426",
+      "html_url": "https://www.federalregister.gov/documents/2025/03/28/2025-05426/additions-and-modifications-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-03-28",
+      "title": "Additions and Modifications to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 12 entities to the Entity List, under the destinations of China, People's Republic of (China) (11) and Taiwan (1). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2025-05427",
+      "html_url": "https://www.federalregister.gov/documents/2025/03/28/2025-05427/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-03-28",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is amending the Export Administration Regulations (EAR) by adding 18 persons to the Unverified List (UVL). Of the 18 persons being added: five are under the destination of China, People's Republic of (China); six are under the destination of Finland; three are under the destination of T[uuml]rkiye; two are under the destination of Kazakhstan; one is under the destination of Italy; and one is under the destination of the United Kingdom. BIS is also amending the EAR by removing five persons from the UVL. Of the five persons being removed, three are under the destination of China and two are under the destination of the United Arab Emirates.",
+      "document_number": "2025-07185",
+      "html_url": "https://www.federalregister.gov/documents/2025/04/25/2025-07185/revisions-to-the-unverified-list",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-04-25",
+      "title": "Revisions to the Unverified List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes changes to the Syria export control measures under the Export Administration Regulations (EAR), consistent with Executive Order (E.O.) 14312, Providing for the Revocation of Syria Sanctions, which directed the removal of sanctions on Syria. This final rule relaxes the EAR's existing restrictions on exports and reexports to Syria of items subject to the EAR by making the following changes: revising certain restrictive license application review policies that had applied to most items subject to the EAR to be more favorable; expanding existing license exceptions to apply to Syria; and adding new license exceptions for Syria, including for EAR99 items.",
+      "document_number": "2025-16724",
+      "html_url": "https://www.federalregister.gov/documents/2025/09/02/2025-16724/relaxing-export-controls-for-syria",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-09-02",
+      "title": "Relaxing Export Controls for Syria",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to revise the existing Validated End-User (VEU) Authorizations list for the People's Republic of China (PRC) by removing Intel Semiconductor (Dalian) Ltd; Samsung China Semiconductor Co. Ltd; and SK hynix Semiconductor (China) Ltd.",
+      "document_number": "2025-16735",
+      "html_url": "https://www.federalregister.gov/documents/2025/09/02/2025-16735/revocation-of-validated-end-user-authorizations-in-the-peoples-republic-of-china",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-09-02",
+      "title": "Revocation of Validated End-User Authorizations in the People's Republic of China",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 32 entities to the Entity List. These entries are listed on the Entity List under the destination of China, People's Republic of (China) (23), India, (1), Iran (1), Singapore (1), Taiwan (1), Turkey (3), and the United Arab Emirates (UAE) (2). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States. This final rule revises an entry by removing two addresses from one entity under the destination of Russia. Finally, this rule amends 27 existing entries on the Entity List to correct typographical errors under the following destinations: Belarus (3), China (11), Iran (1), Pakistan (1), Russia (9), and Turkey (2).",
+      "document_number": "2025-17893",
+      "html_url": "https://www.federalregister.gov/documents/2025/09/16/2025-17893/additions-and-revisions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-09-16",
+      "title": "Additions and Revisions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this interim final rule (IFR), the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to address diversion concerns involving entities on the Entity List and certain other restricted end users. Under this IFR, any entity that is at least 50 percent owned by one or more entities on the Entity List will itself automatically be subject to Entity List restrictions. This is a marked improvement over the current standard, which excludes all entities that are not specifically included on the Entity List, regardless of affiliation with Entity List entities. This IFR similarly applies restrictions to entities at least 50 percent owned by listed `military end users' and certain sanctioned parties. The 50 percent ownership standard in this IFR is designed to be consistent with longstanding Department of the Treasury practice, so as to limit the additional burden on the business community.",
+      "document_number": "2025-19001",
+      "html_url": "https://www.federalregister.gov/documents/2025/09/30/2025-19001/expansion-of-end-user-controls-to-cover-affiliates-of-certain-listed-entities",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-09-30",
+      "title": "Expansion of End-User Controls To Cover Affiliates of Certain Listed Entities",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) by adding 29 entries (26 entities and 3 addresses) to the Entity List under the destinations of People's Republic of China (China) (19), Turkey (9), and the United Arab Emirates (UAE) (1). These entities have been determined by the U.S. Government to be acting contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2025-19508",
+      "html_url": "https://www.federalregister.gov/documents/2025/10/09/2025-19508/additions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List",
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2025-10-09",
+      "title": "Additions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is removing one entity from the Entity List under the destination of China, People's Republic of (China). BIS is also removing six aliases associated with a different entity on the Entity List under the destination of China. BIS has determined, based on the review of additional information, that the entities do not pose a significant risk of being or becoming involved in activities that are contrary to the national security or foreign policy interests of the United States.",
+      "document_number": "2025-19858",
+      "html_url": "https://www.federalregister.gov/documents/2025/11/12/2025-19858/revisions-to-the-entity-list",
+      "matched_filters": [
+        "Entity List"
+      ],
+      "publication_date": "2025-11-12",
+      "title": "Revisions to the Entity List",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) makes a conforming change to the Export Administration Regulations (EAR) to reflect that Cambodia is no longer a Country Group D:5 country. On November 7, 2025, the Department of State published a final rule, \"International Traffic in Arms Regulations: Changes to Section 126.1,\" that removed Cambodia as an arms embargoed destination under the International Traffic in Arms Regulations (ITAR), pursuant to a determination made by the Secretary of State.",
+      "document_number": "2026-02262",
+      "html_url": "https://www.federalregister.gov/documents/2026/02/04/2026-02262/conforming-change-to-the-export-administration-regulations-for-cambodia",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2026-02-04",
+      "title": "Conforming Change to the Export Administration Regulations for Cambodia",
+      "type": "Rule"
+    },
+    {
+      "abstract": "The Bureau of Industry and Security (BIS) is revising the Export Administration Regulations (EAR) by extending by about eight months the triggering date for authorized integrated circuit designer status and submission date for applications to become an approved integrated circuit (IC) designer. The new date is December 31, 2026.",
+      "document_number": "2026-06851",
+      "html_url": "https://www.federalregister.gov/documents/2026/04/09/2026-06851/extension-of-authorized-integrated-circuit-ic-designer-status-and-application-deadline-to-become-an",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2026-04-09",
+      "title": "Extension of Authorized Integrated Circuit (IC) Designer Status and Application Deadline To Become an Approved IC Designer",
+      "type": "Rule"
+    },
+    {
+      "abstract": "In this final rule, the Bureau of Industry and Security (BIS) amends the Export Administration Regulations (EAR) to provide enhanced favorable treatment for the United Arab Emirates (UAE). Specifically, BIS is removing the UAE from Country Groups D:3 and D:4 and adding the UAE to Country Group A:5. More license exceptions will now be available, including Strategic Trade Authorization (STA) for the UAE Government and approved commercial entities in the UAE. STA will authorize the export, reexport, or transfer (in-country) of military items; certain commercial satellites and spacecraft; and dual-use items useful in, inter alia, oil and gas production, desalination, and civil nuclear power generation. The UAE Government and approved commercial entities will also have license-free access to advanced computing items, consistent with the May 2025 U.S.-UAE Artificial Intelligence Cooperation framework, without compromising U.S. digital infrastructure buildout.",
+      "document_number": "2026-14132",
+      "html_url": "https://www.federalregister.gov/documents/2026/07/14/2026-14132/enhanced-favorable-treatment-for-the-united-arab-emirates-under-the-export-administration",
+      "matched_filters": [
+        "Export Administration Regulations"
+      ],
+      "publication_date": "2026-07-14",
+      "title": "Enhanced Favorable Treatment for the United Arab Emirates Under the Export Administration Regulations",
+      "type": "Rule"
+    }
+  ],
+  "schema_version": 1,
+  "source": "Federal Register API",
+  "source_url": "https://www.federalregister.gov/api/v1/documents.json"
+}

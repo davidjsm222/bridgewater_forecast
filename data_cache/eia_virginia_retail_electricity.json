@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "forecast_id": 9,
+  "retrieved_at_utc": "2026-07-21T15:00:00.000000Z",
+  "source": "U.S. Energy Information Administration Open Data API",
+  "source_url": "https://api.eia.gov/v2/electricity/retail-sales/data/",
+  "region_choice": {
+    "state_id": "VA",
+    "state": "Virginia",
+    "sector_id": "COM",
+    "rationale": "Virginia is a data-center-heavy state; the COMMERCIAL-sector retail price is the analytically honest signal for whether AI/data-center demand is raising prices (data centers are commercial/industrial customers), versus residential rates that move for different, more insulated reasons."
+  },
+  "series_description": "Electricity sales to ultimate customer by state and sector -- COMMERCIAL sector, Virginia (average price, cents/kWh). Sources: Forms EIA-826, EIA-861, EIA-861M.",
+  "sector_divergence_note": "Commercial ~flat (+1-2%) Dec 2025-Jul 2026 while residential is ~+14.5% YoY. Virginia recently created a dedicated data-center-specific rate class (SCC/Dominion filings), which appears to insulate the general commercial class from data-center cost pass-through; residential absorbs base-rate hikes and PJM capacity-auction increases.",
+  "baseline_period": "2026-07",
+  "baseline": {
+    "period": "2026-07",
+    "price_cents_per_kwh": 10.33,
+    "state": "Virginia",
+    "sector": "commercial"
+  },
+  "baseline_status": "most recent actual EIA commercial-sector observation",
+  "observations": [
+    {
+      "period": "2025-12",
+      "price_cents_per_kwh": 10.21,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-01",
+      "price_cents_per_kwh": 10.25,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-02",
+      "price_cents_per_kwh": 10.28,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-03",
+      "price_cents_per_kwh": 10.24,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-04",
+      "price_cents_per_kwh": 10.3,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-05",
+      "price_cents_per_kwh": 10.31,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-06",
+      "price_cents_per_kwh": 10.32,
+      "state": "Virginia",
+      "sector": "commercial"
+    },
+    {
+      "period": "2026-07",
+      "price_cents_per_kwh": 10.33,
+      "state": "Virginia",
+      "sector": "commercial"
+    }
+  ]
+}
