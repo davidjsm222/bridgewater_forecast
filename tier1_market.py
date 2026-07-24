@@ -1,12 +1,20 @@
 """
-Tier 1: Market-derived forecasts.
-These have a real, live market pricing the underlying event (Fed funds futures,
-EIA regional price data, PCE trend data). The job here isn't prediction from
-scratch, it's correctly translating market-implied probabilities into the
-specific yes/no threshold the forecast asks about.
+Tier 1: quantitative models grounded in a real data-generating process.
+Originally market-derived signals only (Fed funds futures, EIA price data);
+the tier now also covers the fitted process models added in the quantitative
+upgrade -- the Poisson point process (export_controls_poisson.py), competing
+risks (nuclear_competing_risks.py), compound Poisson (sovereign_ai_jumps.py),
+OU simulation (electricity_simulation.py), and backlog model
+(datacenter_backlog.py) -- each living in its own module. This module holds
+the Fed posture HMM (forecast #5) and the legacy market helpers. The job here
+isn't prediction from scratch, it's correctly translating a fitted or
+market-implied process into the specific yes/no threshold the forecast asks
+about.
 """
 
+import json
 import random
+import sys
 from dataclasses import dataclass
 
 from rich import box
@@ -14,7 +22,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from forecasts import set_forecast_probability
+from forecasts import FORECAST_STATE_PATH, set_forecast_probability
 from fomc_history import (
     ACTIONS,
     CURRENT_ANNUALIZED_CHANGE_BPS,
@@ -307,6 +315,43 @@ def electricity_price_check(baseline: float, current: float, threshold_pct: floa
     }
 
 
+def forecast5_blended_probability_pct(hmm_probability_pct: float) -> float | None:
+    """Forecast #5's authoritative number: the HMM output blended toward market
+    pricing via the tier-3 adjustment layer stored in forecast_state.json
+    (_model_state.tier3["5"] -- the same config tui.py's blend layer edits).
+
+    The raw HMM Monte Carlo figure is NOT the authoritative probability; a
+    previous revision of this __main__ persisted it directly and silently
+    clobbered the blended value. Returns None when the stored blend config is
+    unavailable, in which case nothing should be persisted from here.
+    """
+    if not FORECAST_STATE_PATH.exists():
+        return None
+    state = json.loads(FORECAST_STATE_PATH.read_text(encoding="utf-8"))
+    config = state.get("_model_state", {}).get("tier3", {}).get("5")
+    if not isinstance(config, dict) or "adjustments" not in config:
+        return None
+    blended = hmm_probability_pct
+    for factor in config["adjustments"]:
+        magnitude = float(factor["magnitude_pts"])
+        blended += magnitude if factor["direction"] == "up" else -magnitude
+    return max(0.0, min(100.0, blended))
+
+
+def _persist_forecast5_blend(hmm_probability_pct: float, blended_pct: float) -> None:
+    """Persist the blended #5 probability and refresh the stored blend layer's
+    base rate to the HMM output just computed -- the same two writes
+    tui.Tier1ModelScreen.rerun_simulation performs, so the standalone script
+    and the TUI stay consistent."""
+    set_forecast_probability(5, round(blended_pct, 1))
+    state = json.loads(FORECAST_STATE_PATH.read_text(encoding="utf-8"))
+    state["_model_state"]["tier3"]["5"]["base_rate_pct"] = round(hmm_probability_pct, 1)
+    FORECAST_STATE_PATH.write_text(
+        json.dumps(state, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
 if __name__ == "__main__":
     # The legacy comparison retains placeholder per-meeting market inputs. It is
     # printed for methodological contrast, but it is not persisted.
@@ -319,5 +364,28 @@ if __name__ == "__main__":
     hmm = estimate_fed_posture_hmm()
     simulation = p_at_least_one_hike_hmm(hmm)
     hmm_probability_pct = round(simulation.probability_at_least_one_hike * 100, 1)
-    set_forecast_probability(5, hmm_probability_pct)
     print_hmm_report(hmm, simulation, flat_probability)
+
+    console = Console()
+    blended = forecast5_blended_probability_pct(hmm_probability_pct)
+    if blended is not None:
+        console.print(
+            f"Tier-3 blend layer: HMM {hmm_probability_pct:.1f}% -> authoritative "
+            f"[bold]{blended:.1f}%[/bold] (market-pricing adjustment from "
+            "forecast_state.json _model_state.tier3['5'])"
+        )
+    # A plain run only prints (repo convention shared with the other model
+    # modules). Persisting the raw HMM number here used to clobber the blended
+    # authoritative value -- persistence is now explicit and blend-aware.
+    if "--persist" in sys.argv[1:]:
+        if blended is None:
+            console.print(
+                "[red]Refusing to persist: the tier-3 blend config for forecast #5 "
+                "(_model_state.tier3['5']) is missing from forecast_state.json, so "
+                "only the raw HMM number could be written -- which is not the "
+                "authoritative quantity. Restore the blend config (or set the "
+                "probability from the TUI) instead.[/red]"
+            )
+        else:
+            _persist_forecast5_blend(hmm_probability_pct, blended)
+            console.print(f"[bold]Persisted blended {blended:.1f}% to forecast #5.[/bold]")

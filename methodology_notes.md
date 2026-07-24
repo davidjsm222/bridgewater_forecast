@@ -6,9 +6,12 @@ outputs in `forecast_state.json`.
 
 ## Forecast #1 — Does the US tighten export controls on next-gen AI chips to China?
 
-**Authoritative probability: 90% (YES = BIS tightens China advanced-chip
-restrictions at some point in the window; NO = relaxed/unchanged), from a tier 3
-reference-class / base-rate-plus-adjustments estimate.** The earlier 55%
+**Authoritative probability: 87.1% (YES = BIS tightens China advanced-chip
+restrictions at some point in the window; NO = relaxed/unchanged), from the
+Poisson point-process model described in the quantitative-upgrade subsection
+below (`export_controls_poisson.py`).** The tier 3 reference-class /
+base-rate-plus-adjustments estimate documented next (90%) is retained as the
+judgment cross-check — the two agree within three points. The earlier 55%
 placeholder base rate (and the 60% it produced) is retired.
 
 ### Base rate: 93% — from a full audit, not a guess
@@ -69,6 +72,51 @@ acknowledges the near-ceiling and two genuine countervailing signals, while
 staying consistent with an audited posture that has tightened every year without
 pause.
 
+### Quantitative upgrade — Poisson point process, now the primary method (2026-07-22)
+
+**Authoritative probability: 87.1%**, from a homogeneous Poisson point-process
+model (`export_controls_poisson.py`, runnable standalone) fit to the audited
+tightening history; the reference-class estimate above (90%) is retained as the
+documented judgment cross-check, the same primary/cross-check pattern #5 uses
+for its HMM vs FedWatch.
+
+The resolution criterion is an *arrival* question — does at least one
+tightening action land in the remaining 162 days — so the right tool is a point
+process, not a share-of-actions rate. The model:
+
+- **Events**: the same 26 audited tightening rules (the full 35-rule audited
+  subset is embedded in the module with per-rule provenance). BIS ships
+  same-day rule packages (five zero-day inter-arrival gaps), and P(≥1 rule) =
+  P(≥1 publication *episode*), so the resolution-relevant arrival unit is the
+  **episode** (unique publication day, n=21); the per-rule fit is reported as
+  an explicit upper bound.
+- **Fit**: episode MLE λ = 21 / 4.553 yr = **4.61 episodes/yr** (full window
+  2022-01-01 → 2026-07-22); trailing-24-month rate 4.50/yr — nearly identical.
+- **Rate stability**: exact conditional binomial split test at the window
+  midpoint: 11 vs 10 episodes, p = 1.00 — homogeneity is *not* rejected, so
+  the full-window rate is primary (the decision rule is coded, not asserted).
+- **Goodness of fit**: KS of episode inter-arrivals vs Exponential(λ):
+  D = 0.209 over 20 gaps, asymptotic p ≈ 0.35 (Lilliefors-type caveat: λ is
+  estimated from the same data, so the p-value is approximate). The per-rule
+  process fits worse (D = 0.237, p ≈ 0.12, driven by the package ties) — which
+  is exactly why episodes carry the headline.
+- **Result**: P(≥1 episode in 162 days) = 1 − exp(−4.61 × 0.4435) = **87.1%**
+  (per-rule upper bound: 92.1%). A 10,000-path Monte Carlo cross-check
+  reproduces the closed form.
+- **Drought diagnostic**: 286 days have passed since the last tightening
+  episode (2025-10-09); under the fitted rate a gap this long has probability
+  ≈ 2.7%. This is a selection-biased statistic (we test it because it is
+  long), reported as context for the 2025 H20/transactional-posture slowdown
+  story rather than fed into the decision rule — the formal tests do not
+  reject homogeneity.
+
+**Comparison**: 87.1% (Poisson) vs 90% (reference class), a −2.9pp difference.
+The two methods price different things — a tightening *share* with judgment
+adjustments vs an arrival *rate* against a dated window — and their agreement
+within three points is mutual corroboration. The Poisson number is persisted as
+authoritative because it prices the actual resolution event (an arrival before
+a date) with a fitted, testable process.
+
 ## Forecast #2 — Will Project Vault's committed capacity expand beyond $12B by year-end 2026?
 
 **Authoritative probability: 61% (YES = Project Vault's committed capacity is
@@ -119,13 +167,34 @@ specific, on-record push modestly outweighs generic political/budget risk, but
 real first-year timing constraints keep the estimate anchored near the structural
 base rate.
 
+### Deliberately judgment-anchored — no quantitative model, and why (2026-07-22)
+
+When the other forecasts were upgraded to explicit quantitative models (Poisson
+process for #1, competing risks for #10, compound Poisson for #7, OU simulation
+for #9, backlog model for #3, Bayesian recombination for #4/#6), **#2 was
+deliberately left as a judgment-anchored reference-class estimate.** This is a
+methodological choice, not a gap: Project Vault is a **single, five-month-old,
+first-of-its-kind program**, and the question is a **single unprecedented
+institutional event** (a formal capacity expansion in its first calendar year).
+There is no event history to fit a rate to, no market pricing it, no ensemble of
+comparable programs dense enough to define a frequency — the reference class
+itself is explicitly "sparse and heterogeneous" (see base-rate source above).
+Fitting a stochastic process to a class of one would manufacture parameters out
+of assumptions and dress a judgment call in false rigor. The honest quantitative
+form for this evidence is exactly what the tier 3 estimate already is: a stated
+structural prior plus named, sized, arguable adjustments.
+
 ## Forecast #3 — Does the US 2027 data-center capacity shortfall close to <30%?
 
-**Authoritative probability: 4% (YES = independent tracking shows the 2027
+**Authoritative probability: 5.5% (YES = independent tracking shows the 2027
 not-yet-under-construction gap below 30%; NO if the flagged 60%+ persists/widens),
-from a tier 3 reference-class / base-rate-plus-adjustments estimate — a qualitative
-call.** Reframed from a tier-2 trend fit (same move as #4 and #6) because the real
-data cannot support a trustworthy fit.
+from the backlog/throughput model plus explicit modeled tail-risk channels
+(`datacenter_backlog.py`) — adopted 2026-07-23, replacing the earlier 4%
+qualitative floor with a fully modeled quantity (see the tail-risk subsection
+below).** The section below documents the qualitative reasoning that preceded the
+model; it remains the narrative backbone but is no longer the persisted number's
+source. Originally reframed from a tier-2 trend fit (same move as #4 and #6)
+because the real data cannot support a trustworthy fit.
 
 ### The real data (replacing the placeholder 68→65→63→61)
 
@@ -164,6 +233,61 @@ only non-fanciful path is a large downward revision of the *planned* pipeline (a
 AI-capex pullback shrinking the denominator). No named adjustments are applied: the
 qualitative direction is the whole estimate. **Net: 4%** — a strong NO, matching the
 resolution criterion's "NO if the flagged 60%+ persists/widens."
+
+### Quantitative upgrade — backlog/throughput model, corroborating the 4% (2026-07-22)
+
+A queueing/backlog model (`datacenter_backlog.py`, runnable standalone) replaces
+the abandoned trend fit with the tool that actually matches the physics: the
+announced-2027 pipeline grows by a stochastic **inflow** (2–6 GW/quarter,
+triangular; new-cohort announcements plus 2026-cohort slippage — CTVC/Sightline,
+Network World), the under-construction stock grows by a **throughput-constrained
+conversion flow** (1–3 GW/quarter, triangular; Sightline tracker-of-record net
+starts vs the BNEF cross-tracker upper bound), capped at the remaining backlog and
+held non-accelerating through 2027 by cited physical constraints (LBNL *Queued Up
+2026*: >5-year median interconnection request-to-operation; transformer lead
+times ~128–160 weeks; gas turbines largely sold out through 2029; up to ~499k
+construction-worker shortfall). Anchor: Apr 2026, 25.0 GW announced / 6.3 GW
+under construction (gap 74.8%; published readings bracket 70.7–80%).
+
+Results (10,000 paths over parameter uncertainty): **P(gap < 30% by 2027-12-31)
+= 0.0% — structural, not sampling**: even the most YES-favorable corner of the
+researched flow box (slowest inflow, fastest conversion, held for all 20 months)
+ends 2027 at a 31.4% gap. The deterministic midpoint projection ends 2027 at
+**62.0%** (p10–p90 band 52.7–70.1%) — the gap narrows, but nowhere near halving.
+A labeled stress case models the one non-fanciful YES path (AI-capex pullback:
+cancellations at 12 GW/q shrinking the denominator) and resolves YES within ~4
+months — confirming that channel, not construction pace, is where any YES lives.
+
+**Comparison**: flow model 0.0% vs the old persisted 4.0%. The model
+*corroborates* the strong NO; the residual YES probability lives in two non-flow
+channels, which as of 2026-07-23 are no longer an unmodeled judgment floor:
+
+### Explicit tail-risk channels — the 4% floor replaced by modeled terms (2026-07-23)
+
+The two non-flow YES channels are now discrete-scenario terms with named,
+inspectable components (`tail_risk_terms()` in the module):
+
+- **Capex-pullback denominator collapse: 2.6%.** P(AI capex disappoints) is not
+  assumed — it is pulled live from **forecast #4's own Bayesian posterior**
+  (P(#4 NO) = 1 − 56.5% = 43.5%), times an ASSUMED 0.12 share of disappointment
+  scenarios that take the form of *large cancellations of already-announced
+  2027-cohort capacity* (rather than slower new announcements, which the flow
+  model's inflow range already spans; announced-project cancellations
+  historically required financing stress — 2001 telecom, 2022 crypto-DC — not
+  mere growth slowdown), times an ASSUMED 0.5 conditional P(gap < 30% |
+  cancellations), bracketed by the stress case (a full-scale pullback resolves
+  YES within ~4 months) and partial-pullback paths that stall above the bar.
+- **Tracker/methodology shift: 3.0%.** SemiAnalysis publicly argues Sightline's
+  under-construction numerator undercounts by multiples, and resolution accepts
+  DC Byte/CBRE/JLL. ASSUMED 0.10 P(the resolution-relevant tracker's counting
+  shifts materially by end-2027) × ASSUMED 0.3 P(reported gap < 30% | shift) —
+  even a 2–3× numerator restatement of the Apr 2026 anchor lands at ~25–50%,
+  straddling the bar.
+
+**Combined (independence across channels, documented): 1 − (1−0.000)(1−0.026)(1−0.030)
+= 5.5%, now persisted as authoritative.** Close to the old 4% — the judgment
+floor was roughly right — but every component is now named, sourced or
+explicitly ASSUMED, and adjustable.
 
 ## Forecast #4 — AI capex contribution to 2027 real GDP growth vs. Bridgewater's ~150bp
 
@@ -214,6 +338,37 @@ Handled with the same machinery as the other tier 3 forecasts
 
 **Net: 50 + 6 + 6 − 5 = 57%.** A modest lean above a coin flip: real momentum in
 the data, tempered by an honest measurement caveat.
+
+### Bayesian reframing — the same factors as an explicit likelihood-ratio update (2026-07-22)
+
+The additive arithmetic above is now formally reframed as a Bayesian update
+(`bayesian_update.py`, runnable standalone): the 50% base rate is the prior, and
+each named factor is expressed as a likelihood ratio
+LR = P(observed evidence | YES) / P(observed evidence | NO), combined in odds
+form. The named factors and their rationale text are unchanged — only the
+combining arithmetic is upgraded.
+
+| Factor | LR (range) | Additive step | Implied LR of that step |
+|---|---|---|---|
+| Q1 2026 real investment acceleration | 1.30 (1.10–1.60) | +6pp | 1.27 |
+| Structures / physical-buildout boom | 1.25 (1.00–1.55) | +6pp | 1.28 |
+| Resolution metric narrower than scope | 0.80 (0.65–0.95) | −5pp | 0.81 |
+
+**Posterior: odds 1.00 × 1.30 × 1.25 × 0.80 = 1.30 → 56.5%** (sensitivity band
+42–70% with all LRs at their extremes). The Bayesian recombination **confirms
+the additive 57%** to within half a point — the additive steps were implicitly
+well-calibrated LRs (compare the implied-LR column). The authoritative persisted
+number stays **57%**; the Bayesian formulation is the primary statement of the
+math, shown in the TUI's tier 3 view for this forecast.
+
+LR grounding (see `bayesian_update.py` for full derivations): the Q1 print's
+evidential value is capped by real Q1 seasonality computed from the same cached
+FRED series — mean Q1 QoQ is 3.06% vs 2.30% overall (2016–2026), so a hot Q1 is
+partially expected even under NO, though the latest 6.97% QoQ is well above even
+the Q1 norm. The structures factor's LR low end is 1.00 because the contaminated
+BEA series could look identical with non-AI construction doing the work. The
+narrow-metric factor is a hypothesis-scope correction (an ASSUMED mapping onto
+odds), not observational evidence, and is flagged as such in the module.
 
 ### Archived: the old tier 2 trend fit (2.4%)
 
@@ -295,6 +450,50 @@ momentum dominates — but an order of magnitude above the old trend model's 3.8
 because the estimate now carries real macro uncertainty instead of a purely
 statistical band.
 
+### Bayesian reframing — and a flagged divergence (2026-07-22)
+
+The additive factors are now formally reframed as a Bayesian likelihood-ratio
+update (`bayesian_update.py`): prior = the 34% SEP-anchored base rate, each
+factor an LR, combined in odds form. Factors and rationales unchanged.
+
+| Factor | LR (range) | Additive step | Implied LR of that step |
+|---|---|---|---|
+| Fed's active hawkish posture | 1.40 (1.15–1.70) | +10pp | 1.52 |
+| Recent trend momentum (wrong direction) | 0.45 (0.30–0.60) | −12pp | 0.60 |
+| Single-print resolution dispersion | 1.25 (1.10–1.45) | +3pp | 1.14 |
+
+**Posterior: odds 0.515 × 1.40 × 0.45 × 1.25 = 0.406 → 28.9%** (sensitivity band
+16–43%). **This diverges from the additive 35% by −6.1pp — flagged, not silently
+adopted.** The persisted number **remains 35%** pending a deliberate decision.
+
+Where the divergence comes from (visible factor-by-factor in the implied-LR
+column): almost entirely the momentum factor. The additive −12pp step implied an
+LR of only ~0.60, but the estimate used in the update is ~0.45 (range
+0.30–0.60), originally corroborated by a real-data cross-check: of 14 historical
+months matching today's run-up shape (YoY ≥ 3.5%, rising, up ≥ 0.4pp over four
+prints), only **2 of 14** saw YoY fall the required ≥ 0.57pp within 7 months.
+
+### Verification of the run-up sample — Bayesian posterior NOT adopted (2026-07-23)
+
+The 14-month sample was inspected before any adoption decision
+(`pce_momentum_crosscheck()` now reports the run structure). Verdict: **the
+reference class does not hold up as an independent sample.** The 14 qualifying
+months collapse to a *single* 2021–22 inflation surge — one consecutive run
+2021-04 → 2022-03 plus 2022-05 → 2022-06, split only by one noise month
+(2022-04) — and the 2 "successes" are simply the two sampled months adjacent to
+that surge's mid-2022 peak. Effective n = **1 episode**. A month-level 2/14
+frequency drawn from one autocorrelated event cannot arbitrate between the
+0.45 point estimate and the additive-implied 0.60 (which sits inside the stated
+0.30–0.60 range); it supports "LR below 1" directionally and nothing sharper.
+
+**Decision — same small-n discipline applied elsewhere in this project (e.g.
+the rejected n=4 trend fit in #3): the additive 35% remains the persisted
+authoritative number.** The Bayesian formulation stays displayed in the TUI and
+this file as the formal recombination and sensitivity (posterior 28.9%, band
+16–43%), but its harsher momentum LR is a reasoned judgment with weak empirical
+corroboration, not a calibrated estimate, so it does not override the additive
+arithmetic it was meant to check.
+
 ### Archived: the old tier 2 trend fit (3.8%)
 
 Preserved, not deleted — simply no longer authoritative:
@@ -314,10 +513,14 @@ Preserved, not deleted — simply no longer authoritative:
 
 ## Forecast #7 — Does non-US/non-China sovereign AI compute funding cross $250B by year-end 2026?
 
-**Authoritative probability: 14% (YES = strict-scope cumulative public-sector
+**Authoritative probability: 1.9% (YES = strict-scope cumulative public-sector
 commitment to non-US/non-China sovereign AI compute/chip infrastructure reaches
-$250B by Dec 31, 2026), from a tier 3 reference-class / base-rate-plus-adjustments
-estimate.** A **reframe** from the old open-ended "does any non-US/non-China
+$250B by Dec 31, 2026), from the regime-switching compound Poisson model
+(`sovereign_ai_jumps.py`, variant d) — adopted 2026-07-23 (see the
+regime-switching subsection below). The tier 3 pace-based estimate documented
+next (14%) is ARCHIVED for comparison: its step-change intuition was real, but
+it asserted a regime shift without modeling one; the regime-switching model
+prices that same shift explicitly and lands far lower.** A **reframe** from the old open-ended "does any non-US/non-China
 government commit >$10B?" (resolution 2027-12-31) to a specific cumulative-dollar
 threshold with a fixed resolution date of **2026-12-31**.
 
@@ -398,6 +601,76 @@ needs a 4–6× acceleration in five months. The 14% is the real-but-small chanc
 arms-race momentum produces a burst of mega-commitments; it sits below a coin flip
 because the pace math, not pessimism, puts it there.
 
+### Quantitative upgrade — compound Poisson Monte Carlo, divergence flagged (2026-07-22)
+
+A compound Poisson jump model (`sovereign_ai_jumps.py`, runnable standalone) now
+formalizes the pace argument. The dated commitment history was re-verified
+line-by-line with primary sources (EC IP/25/467 for InvestAI, PIB for IndiaAI,
+ISED for Canada, Nikkei/Japan Times for Japan's two tranches, etc.): **10 dated
+arrivals, 2024-03-07 → 2026-04-16**, itemized sum ~$81B (verified tally ~$84B —
+the documented ~$85–90B band holds; the Gulf $20–30B attribution dominates the
+residual). Model:
+
+- **Arrival rate**: λ = 10 / 2.374 yr = **4.21 commitments/yr** → expected
+  jumps in the 162-day horizon: **1.87**.
+- **Jump sizes**: lognormal MLE μ = 1.56, σ = 1.14 (median $4.8B, mean $9.1B).
+  Fit checked, not assumed: KS on log-sizes passes (0.203 < ~0.28 Lilliefors
+  5%); AIC ranks exponential ahead by 2.2 points — pure parameter-count penalty
+  on a near-tied likelihood, below the "clearly beaten" bar, and the thinner
+  exponential/gamma tails would push P(cross) *lower*, so lognormal is the
+  conservative-for-the-conclusion choice.
+- **Three variants, none blended**: (a) stationary fit → **P(cross $250B) =
+  0.3%** (mean year-end total ~$107B); (b) rate-uncertainty (λ drawn per path
+  from its Gamma(10.5, 2.37y) Jeffreys posterior) → **0.5%**; (c) an ASSUMED
+  acceleration stress case (λ×2, sizes×1.5 — the arms-race step-change world
+  the +7pp factor argued for) → **3.4%**.
+
+The stationary model's divergence from the old 14% was structural: crossing
+needs ~$160B of new strict-scope commitments in 162 days (~18× the mean jump),
+while the fitted process supplies ~1.9 jumps — so the 14% was almost entirely a
+**regime-change belief** that a stationary process cannot represent.
+
+### Regime-switching extension — the step-change modeled explicitly, ADOPTED (2026-07-23)
+
+Rather than choosing between the stationary 0.3% and the judgment 14%, the
+model now has a **two-state regime switch** (variant d, the headline — the same
+structural move as forecast #5's posture-switching HMM), with every parameter
+grounded in the observed record or explicitly ASSUMED with named anchors:
+
+- **Regime A (organic pace)**: the fitted λ = 4.21/yr and lognormal sizes.
+- **Trigger into Regime B**: Stargate-class escalations — events that provably
+  set off coordinated sovereign responses — arrived exactly **once** in the
+  2.374-yr observation window (Stargate, 2025-01-21; MLE 0.42/yr). The n=1
+  estimation uncertainty is propagated by drawing the trigger rate per path
+  from its Jeffreys posterior Gamma(1.5, T). Response latency: **21 days**, the
+  observed Stargate → InvestAI lag (Bpifrance responded in 17). Named live
+  catalysts consistent with a future trigger: a China-response package, EU "AI
+  continent" money, fresh Gulf domestic pledges.
+- **Regime B (arms-race burst)**: arrival rate **12/yr = the maximum ~90-day
+  pace actually observed** in this category (Japan + Korea + Japan,
+  Nov 22 – Dec 26, 2025); jump sizes scaled by U(1.0, 3.5) — floor 1.0 because
+  the observed Feb-2025 post-Stargate burst drew ordinary-scale sizes (the two
+  largest historical jumps, $21B and $10.5B); ceiling 3.5 ASSUMED, anchored to
+  the largest concrete packages in live reporting (the EU gigafactory
+  member-state co-funding obligation under Council Regulation (EU) 2026/150 —
+  member states must at least match the 17% Union share of the €37B
+  ten-facility program, ≈ $16–18B if finalized — and the ~$30B top of the Gulf
+  domestic band). At 3.5× the single-jump p95 is ~$100B, already beyond
+  anything any government has floated.
+- Once triggered, the burst runs to the resolution date (no reversion — a
+  simplification conservative *toward* YES).
+
+**Result: P(cross $250B) = 1.9%** — decomposed as P(burst regime active before
+resolution) = **20.5%** × P(cross | burst) ≈ **7%**, plus ~0.3% organic. It
+lands between the stationary 0.3–0.5% and the old 14% exactly as the structure
+dictates: the transition probability is real but the *observed and
+plausibly-reported* burst magnitudes still usually fall short of +$160B in the
+remaining window. The old 14% implicitly required a burst regime far outside
+anything in the observed record or live reporting. **Adopted and persisted as
+1.9%**; the archived 14% remains above for comparison, and variants (a)–(c)
+stay in the module as the stationary fit, rate-uncertainty check, and cruder
+stress case.
+
 ## Forecast #8 — Does a government take a strategic stake in, or grant champion status to, a frontier AI lab by year-end 2026?
 
 **Authoritative probability: 9% (YES = a government finalizes/executes a
@@ -459,11 +732,34 @@ stake/designation, and the US bloc — most of the list — is actively hands-of
 is the real-but-small chance France (or a longshot such as Canada/Cohere) formalizes a
 champion intervention before year-end.
 
+### Deliberately judgment-anchored — no quantitative model, and why (2026-07-22)
+
+When the other forecasts were upgraded to explicit quantitative models, **#8 was
+deliberately left as a judgment-anchored reference-class estimate.** This is a
+methodological choice, not a gap. The question asks about a **literally
+unprecedented event** — no government has ever taken a strategic/control stake
+in, or granted formal champion designation to, a frontier AI *lab* — within a
+five-month window, over an enumerated list of ten companies, under a narrow scope
+that excludes every executed government-linked stake that does exist (MGX,
+HUMAIN, Bpifrance — portfolio investments, out of scope by design). There is no
+historical frequency to fit, no arrival process to estimate a rate from (the
+adjacent-precedent set is a handful of 2025–26 events in a *different* asset
+class), and no market pricing the narrow resolution event. Any stochastic model
+here would run on invented parameters — false rigor. The honest quantitative
+form for this evidence is the stated structural prior (10%, anchored to the
+demonstrated-but-adjacent policy tool) plus the two named, opposing adjustments.
+
 ## Forecast #9 — Does Virginia's commercial electricity rate decrease within 6 months (by 2027-01-21)?
 
-**Authoritative probability: 30% (YES = the EIA commercial-sector VA rate is below
+**Authoritative probability: 2.3% (YES = the EIA commercial-sector VA rate is below
 the current 10.33 ¢/kWh baseline at the 2027-01-21 resolution date; NO if flat or
-higher), from a tier 3 reference-class / base-rate-plus-adjustments estimate.**
+higher), from the deterministic + OU decomposition model
+(`electricity_simulation.py`) — adopted 2026-07-23 after the fuel-year mechanism
+was independently verified (see the quantitative-upgrade subsection below). The
+tier 3 reference-class estimate documented next (30%) is ARCHIVED for comparison,
+the same pattern as #4/#6's archived trend fits: its arithmetic is preserved, but
+its +8pp fuel-easing factor is now known to lack a transmission channel in this
+specific window.**
 Twice-reframed: first the data source was corrected from all-sector to **commercial**
 (data centers are commercial/industrial customers, so the commercial rate is the
 honest signal — residential is up ~14.5% YoY for different, more insulated reasons,
@@ -516,12 +812,70 @@ Most sensitive to how fast the locked base-rate hikes phase in *within* this spe
 6-month window; if they're back-loaded past January, fuel easing could dominate and
 this rises toward ~35–38%.
 
+### Quantitative upgrade — deterministic + OU decomposition, ADOPTED as authoritative (2026-07-23)
+
+The hand-blend above is now decomposed properly (`electricity_simulation.py`,
+runnable standalone): rate at Jan 2027 = 10.33 + locked base-rate delta +
+regulatory contingencies + fuel delta + winter-spike risk + noise, with the fuel
+component modeled as an Ornstein–Uhlenbeck Henry Hub simulation calibrated to
+real data (`data_cache/henry_hub_daily.json`, 1,255 daily FRED DHHNGSP
+observations 2021–2026; trailing-3yr AR(1) fit κ ≈ 20/yr, σ ≈ 2.1 annualized —
+daily-noise-dominated, shown beside the Schwartz one-factor literature anchor
+κ = 1.77, σ = 0.74) around the July 2026 STEO quarterly path.
+
+The research that matters most is **regulatory mechanics, not gas prices**:
+
+- **The fuel channel is closed in-window.** Dominion's fuel factor is an annual
+  tariff: the rate applying on 2027-01-21 was fixed 2026-07-01 (3.7648 ¢/kWh
+  interim, case PUR-2026-00058) and holds through 2027-06-30; interim gas moves
+  accrue to a deferral surfacing at the 2027-07-01 reset. The OU simulation
+  therefore enters the January rate with **pass-through weight zero** — and the
+  counterfactual live-channel fuel delta would be two-sided anyway
+  (p10/p50/p90 ≈ −0.9/+0.5/+2.5 ¢), not one-way easing.
+- **The STEO leg of the +8pp adjustment is stale**: the July 2026 STEO *raised*
+  Henry Hub forecasts ($3.67 for 2026), reversing the May downgrade the
+  adjustment cited, and its Q1-2027 forecast ($3.83) is the seasonal *peak*.
+- **The locked step is precisely timed**: the biennial-review second step
+  (+$209.9M, ~+0.15–0.30 ¢ on Dominion bills, diluted by an ASSUMED 0.65
+  Dominion share of VA commercial sales) lands 2027-01-01 — 20 days before
+  resolution. Securitization risk (PUR-2026-00078, order due 2026-09-29) is
+  one-sided *up* (+~1.4 ¢ if denied, P ASSUMED 0.25). Winter cold-spike risk
+  (Jan 2026 printed 11.43 in EIA-861M) is also up.
+
+Result (10,000 paths): median Jan 2027 rate ≈ 10.63 ¢, and **P(below 10.33) =
+2.3%** vs the persisted 30%. An empirical cross-check explains the gap cleanly:
+January printed below the prior July in 4 of 11 years (36%) of the EIA-861M VA
+commercial history — matching the tier-3 35% base rate — but all four came from
+the flat-to-declining-rate era; conditioning on the locked Jan-1-2027 step and
+the closed fuel channel is what pulls the number to single digits. A flagged
+data caveat: the repo's cached smooth series and the preliminary EIA-861M series
+disagree about winter 2026 (10.25/10.28 vs 11.43/13.01) — under either reading
+the effect on YES is downward or neutral.
+
+**Adoption (2026-07-23)**: the decisive mechanism was independently verified —
+Dominion's fuel factor is set on an annual July 1 → June 30 fuel-year cycle via
+formal SCC proceeding, not floating with spot gas; the fuel year covering the
+resolution window is already locked and does not reset until July 2027, *after*
+the January 2027 resolution date. That confirms the model's core finding: the
+archived tier-3 estimate's +8pp fuel-easing factor had no real transmission
+channel in this window, and its 35% base rate is an unconditional frequency the
+locked schedule conditions away. **The model's 2.3% is now the persisted
+authoritative probability** (honest band 2–8% allowing for the ASSUMED
+parameter bands: the 0.25 securitization-denial probability, the 0.65 Dominion
+share, and the winter-spike calibration). The 30% judgment estimate is archived
+above for comparison.
+
 ## Forecast #10 — Does NRC/DOE finalize an expedited nuclear/SMR licensing or permitting action by year-end 2027?
 
-**Authoritative probability: 79% (YES = at least one of three specified
+**Authoritative probability: 94.0%, the central point of an explicitly reported
+88–97% gate-sensitivity band (YES = at least one of three specified
 EO-accelerated federal nuclear-licensing/permitting actions is formally *finalized*
-— not merely proposed — by Dec 31, 2027), from a tier 3 reference-class /
-base-rate-plus-adjustments estimate.** The resolution criteria were made explicit
+— not merely proposed — by Dec 31, 2027), from the competing-risks reliability
+model (`nuclear_competing_risks.py`) — adopted 2026-07-23 after the EO-era
+execution record was itemized and verified (see the reconciliation subsection
+below), with the band treatment added the same day after the common-mode gate's
+provenance was audited (see the gate-provenance subsection). The tier 3
+reference-class estimate documented next (79%) is ARCHIVED for comparison.** The resolution criteria were made explicit
 around **three independent paths** (any one satisfies YES): **(a)** the NRC's Part 57
 rule (expedited microreactor/SMR licensing, <1-year reviews, fleet approvals);
 **(b)** DOE's fast-tracked permitting for its four solicited AI-data-center-plus-nuclear
@@ -567,3 +921,125 @@ statutory/EO deadlines and the strict "finalized-not-proposed" bar.
 EO-accelerated nuclear-licensing actions finalizing within an 18-month runway that
 already contains a mandated Nov-2026 final-rule deadline. The estimate would fall to
 ~45% if the window were compressed to 2026-12-31.
+
+### Quantitative upgrade — competing-risks reliability model, divergence flagged (2026-07-22)
+
+The three pathways are a textbook parallel system, now modeled as one
+(`nuclear_competing_risks.py`, runnable standalone): P(YES) = (1 − p_systemic) ×
+(1 − Π(1 − p_i)), a series-parallel decomposition with an explicit common-mode
+gate (one White House push, one strained NRC staff pool, one litigation
+environment — pure independence would be false). Per-pathway completion-time
+distributions are deadline-anchored mixtures, calibrated to a researched record
+(all sources cited in the module):
+
+- **Part 57** (path a): proposed 2026-05-01, comments closed 2026-06-15; NRC's
+  *published* final-rule target is 2026-12-01 — 8 days past the EO 14300
+  deadline, 13 months before resolution (NIA tracker, 2026-07-06). Curve: mass
+  at the Nov-2026 EO window (P(hit deadline) = 0.20 — NRC's own target already
+  slips it), a Dec/Jan target+OIRA-jitter window, then a truncated-geometric
+  slip tail fitted by bisection to the researched mid-2027 waypoint.
+  **P(final by end-2027) = 0.90** — the EO-era NRC is 7-for-7 finalizing rules
+  on schedule, and Part 53 (proposed Nov 2024) went final 2026-03-30, more than
+  a year ahead of its statutory deadline; the old 3–6-year proposed-to-final
+  reference class no longer describes this regime.
+- **DOE sites** (path b): diffuse ramp; first selection landed 2026-07-20
+  (Amentum, Savannah River phased-lease negotiation), DOE holds a NEPA
+  categorical exclusion for advanced reactors (eff. 2026-02-02) and proved
+  sub-year formal authorizations (four pilot test reactors critical by
+  2026-07-04). **P = 0.75** — no lease is final yet and "finalized" needs a
+  signed formal action.
+- **DOE/DOW data-bridge rule** (path c): proposed 2026-04-02, comments closed
+  2026-05-04, NRC target 2026-11-23 — the shortest-fuse rule. **P = 0.92**.
+- **Common-mode gate**: 6% (program-wide injunction, agenda-freezing accident,
+  fiscal/leadership crisis compounding 14–15% attrition and an 8.1% budget-cut
+  request) — capped low by the researched record: no pending litigation, a
+  fee-funded agency that kept EO work going through the Oct–Nov 2025 shutdown,
+  a full commission.
+
+Result: **P(YES) = 94.0%** (Monte Carlo cross-check agrees; pure independence
+would say 99.8% — the common-mode gate *is* essentially the entire NO side).
+Timing diagnostics: median first finalization Nov 2026; P(resolved by end-Dec
+2026) ≈ 78% (Monte Carlo, seed 20260722; analytic combined curve 78.1%),
+≈ 93% by Jun 2027.
+
+### Reconciliation — the "7-for-7" claim audited, Part 53 as the substantive calibration, ADOPTED (2026-07-23)
+
+Before adoption, the execution-record evidence was itemized from the primary
+source (NIA EO 14300 tracker, updated 2026-07-06, populated from NRC's own
+Planned Rulemaking Activities site) rather than taken as a slogan:
+
+- **"7-for-7 on schedule" verifies as a count** of genuinely *finalized* rules
+  (Practice & Procedure 11/26/25; Sunset Rule 1/8/26 — a direct final with
+  partial withdrawal; Aircraft Impact 4/1/26; FOIA 3/6/26; Mandatory Hearing
+  Flexibility 4/15/26; FOCD Exceptions 4/23/26; FY2026 Fees 6/22/26 — the full
+  list with dates is embedded in the module as `EO14300_FINALIZED_RECORD`). It
+  does **not** mix in proposed/in-progress actions. But **all seven are
+  procedural, administrative, or narrowly deregulatory** — none is an
+  affirmative novel licensing framework — so this record's evidential weight
+  for Part 57's pace was *downgraded*. The same tracker also shows NRC itself
+  scheduling roughly half of the ~27 EO rulemakings *past* the Nov 23 2026 EO
+  deadline (five at 3/31/2027, one at 10/1/2027), confirming the deadline is a
+  directive, not a binding constraint.
+- **Part 53 is the substantive calibration** (it is NOT one of the three
+  resolution pathways and is not counted as satisfying them): proposed
+  2024-11-22, final 2026-03-30 = **16.3 months proposed-to-final** for a much
+  larger novel framework, *with* a 60-day comment extension and 158 comments,
+  still beating its NEIMA statutory deadline by over a year. Part 57 (proposed
+  2026-05-01, narrower scope, 45-day comment period closed on schedule with no
+  extension) run at even the full Part 53 pace lands ~Sep 2027 — inside the
+  window with margin. Missing end-2027 requires running >25% slower than Part
+  53 on a much narrower rule, or a rework/litigation event.
+
+Recalibration outcome: P(Part 57 final by end-2027) nudged 0.90 → 0.91 (the
+Part 53 calibration slightly outweighs the 7-for-7 downgrade at this horizon),
+while the *near-term timing* mass was cut (cumulative by end-Jan 2027: 0.55 →
+0.45 — the administrative record says little about a novel framework hitting a
+7-month target). The combined P(YES) is **essentially insensitive to this**
+(93.99 vs 93.98 before): with three semi-independent shots, the endpoint is
+dominated by the common-mode gate, not by Part 57's exact month. The archived
+tier-3 79% priced "slippage and litigation" as one large subtraction from a
+single blended timeline; holding it requires believing common-mode risk is
+~3–4× the evidence-backed level.
+
+### Provenance of the common-mode gate — and why the result is a band (2026-07-23)
+
+Because P(all three pathways fail idiosyncratically) is ~0.01%, **P(YES) ≈
+1 − S**: the 6% gate is essentially the entire answer, which makes its
+provenance the decisive question. Audited answer: **the 6% is a reasoned
+judgment calibration from the 2026-07-22 research pass, informed by real
+cited evidence but NOT a counted base rate** — no historical frequency of
+"EO-priority multi-pathway regulatory programs derailed program-wide within 18
+months" exists to count, and the parameter was carried into the reconciliation
+unrevised. What real data *does* anchor its components (full citations in the
+module source):
+
+- **Shutdown stall ≲1%**: 21 appropriations funding gaps since 1977 but only
+  three shutdowns ≥3 weeks in ~50 years; the NRC is ~90% fee-funded and
+  demonstrably kept EO work going through the Oct–Nov 2025 shutdown on
+  carryover — stalling all pathways past end-2027 needs an unprecedented
+  multi-month, carryover-exhausting lapse.
+- **Program-wide pre-finalization injunction ~1–3%**: no suit pending against
+  EO 14300 / Part 53 / Part 57 / the pilot program (searched 2026-07-22,
+  re-verified 2026-07-23); post-finalization APA challenges do not undo
+  "formally finalized"; three separate finalization vehicles would all need
+  freezing.
+- **Priority reversal / commission incapacity ~1–2%**: no presidential
+  transition inside the window; the Jun 2025 Hanson firing was absorbed with a
+  full commission reconstituted by Jan 2026.
+- **Agenda-freezing test-reactor accident <0.5%**: worldwide core-damage
+  frequency scaled to a handful of micro test reactors over 17 months.
+
+Component sum ≈ 3–6.5%; the 6% central sits at its top (conservative). Since
+the components are order-of-magnitude anchors rather than counted frequencies,
+the model now reports a **gate-sensitivity band as its primary output**:
+
+| Gate S | P(YES) |
+|---|---|
+| 0.03 (optimistic component sum) | **97.0%** |
+| 0.06 (central calibration) | **94.0%** — persisted value |
+| 0.12 (doubled, for common-mode correlation beyond a single gate — e.g. the two NRC rules sharing staffing/OIRA/rework risk) | **88.0%** |
+
+**The honest statement of forecast #10 is 88–97%, central 94.0%** (the state
+file stores the central point; the module, TUI, and this file always present
+the band with it). Note the band's floor still sits 9pp above the archived
+79%: the adoption decision survives the most conservative defensible gate.

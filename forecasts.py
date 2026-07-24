@@ -31,7 +31,10 @@ FORECASTS = [
         question="Does the US tighten export controls on next-gen AI chips to China (vs. relax/unchanged)?",
         resolution_date="2026-12-31",
         resolution_criteria="YES if BIS tightens restrictions (new licensing, lowered thresholds, entity list additions) in window; NO if relaxed/unchanged.",
-        tiers=[3],
+        # Tier 1 = Poisson point process over the audited China-chip tightening
+        # episodes (export_controls_poisson.py, the primary quantitative method);
+        # tier 3 = the reference-class estimate, kept as a documented cross-check.
+        tiers=[1, 3],
     ),
     Forecast(
         id=2,
@@ -63,8 +66,11 @@ FORECASTS = [
         # resolution metric) and methodologically mixed to support a trustworthy
         # trend fit -- the fit perversely returned 9-13% for a gap racing away from
         # the target. The authoritative number is now a qualitative call. See
-        # methodology_notes.md #3.
-        tiers=[3],
+        # methodology_notes.md #3. Tier 1 = backlog/throughput model plus
+        # explicit modeled tail-risk channels (datacenter_backlog.py) --
+        # ADOPTED as authoritative 2026-07-23, replacing the 4% judgment floor
+        # with a fully modeled 5.5%.
+        tiers=[1, 3],
     ),
     Forecast(
         id=4,
@@ -120,7 +126,11 @@ FORECASTS = [
             "KRW 150T fund does not). YES if the strict-scope cumulative total reaches $250B by "
             "year-end 2026; NO otherwise. Current strict base ~ $85-90B as of Jul 2026."
         ),
-        tiers=[3],
+        # Tier 1 = regime-switching compound Poisson over the dated commitment
+        # history (sovereign_ai_jumps.py, variant d) -- ADOPTED as authoritative
+        # 2026-07-23; the tier-3 pace estimate (14%) is archived in
+        # methodology_notes.md #7.
+        tiers=[1, 3],
     ),
     Forecast(
         id=8,
@@ -169,7 +179,11 @@ FORECASTS = [
             "fuel-cost easing (EIA STEO gas downgrade) to outweigh Dominion's SCC-approved base-rate "
             "increases, which are regulatory-locked through 2027."
         ),
-        tiers=[3],
+        # Tier 1 = deterministic Dominion schedule + OU Henry Hub simulation
+        # (electricity_simulation.py) -- ADOPTED as authoritative 2026-07-23
+        # after the annual fuel-year lock was independently verified; the
+        # tier-3 30% judgment estimate is archived in methodology_notes.md #9.
+        tiers=[1, 3],
     ),
     Forecast(
         id=10,
@@ -186,7 +200,11 @@ FORECASTS = [
             "Any one of these being finalized satisfies YES. NO if all three remain "
             "proposals/in-progress without finalization by the resolution date."
         ),
-        tiers=[3],
+        # Tier 1 = competing-risks reliability model over the three pathways
+        # (nuclear_competing_risks.py) -- ADOPTED as authoritative 2026-07-23
+        # after the EO 14300 execution record was itemized (see
+        # methodology_notes.md #10); the tier-3 79% estimate is archived.
+        tiers=[1, 3],
     ),
 ]
 

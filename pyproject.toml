@@ -19,10 +19,16 @@ forecast = "tui:main"
 
 [tool.setuptools]
 py-modules = [
+    "bayesian_update",
     "data_sources",
+    "datacenter_backlog",
+    "electricity_simulation",
+    "export_controls_poisson",
     "fomc_history",
     "forecasts",
     "manual_research",
+    "nuclear_competing_risks",
+    "sovereign_ai_jumps",
     "tier1_market",
     "tier2_trend",
     "tier3_judgment",

@@ -15,7 +15,13 @@ from textual.theme import Theme
 from textual.widgets import Button, DataTable, Footer, Header, Input, Label, Static
 from textual_plotext import PlotextPlot
 
+from bayesian_update import BAYES_UPDATES, bayesian_report
+from datacenter_backlog import datacenter_backlog_report
+from electricity_simulation import electricity_report
+from export_controls_poisson import export_controls_poisson_report
 from forecasts import FORECASTS, FORECAST_STATE_PATH, get, set_forecast_probability
+from nuclear_competing_risks import nuclear_pathways_report
+from sovereign_ai_jumps import sovereign_ai_report
 from tier1_market import (
     CME_FEDWATCH_JULY_29_AS_OF,
     CME_FEDWATCH_JULY_29_HIKE_PROBABILITY,
@@ -73,11 +79,26 @@ ADJUSTMENT_UP_COLOR = "#3fb950"    # muted green — factor pushes probability u
 ADJUSTMENT_DOWN_COLOR = "#e5484d"  # muted red — factor pushes probability down
 
 
-def format_model_type(tiers: list[int]) -> str:
-    """Render a forecast's model type from its tier tags: anything including the tier-1
-    Fed-posture HMM (i.e. #5's [1, 3]) is 'HMM'; a pure reference-class estimate ([3])
-    is 'Layered'."""
-    return "HMM" if 1 in tiers else "Layered"
+# Per-forecast model-type labels for the list view. Forecasts with a tier-1
+# quantitative process model show that model's name; #4/#6 are Bayesian
+# likelihood-ratio updates; #2/#8 are deliberately judgment-anchored layered
+# estimates (see JUDGMENT_ANCHORED_NOTES).
+MODEL_TYPE_LABELS = {
+    1: "Poisson",
+    3: "Backlog",
+    4: "Bayesian",
+    5: "HMM",
+    6: "Bayesian",
+    7: "Jump MC",
+    9: "OU sim",
+    10: "Comp risks",
+}
+
+
+def format_model_type(forecast) -> str:
+    """Render a forecast's model type from its id (see MODEL_TYPE_LABELS);
+    anything without a dedicated quantitative model is 'Layered'."""
+    return MODEL_TYPE_LABELS.get(forecast.id, "Layered")
 
 
 MODEL_STATE_KEY = "_model_state"
@@ -762,7 +783,7 @@ def detail_markup(forecast_id: int) -> str:
         f"[bold]Question[/bold]\n{escape(forecast.question)}\n\n"
         f"[bold]Resolution date[/bold]\n{escape(forecast.resolution_date)}\n\n"
         f"[bold]Resolution criteria[/bold]\n{escape(forecast.resolution_criteria)}\n\n"
-        f"[bold]Model type[/bold]\n{escape(format_model_type(forecast.tiers))}\n\n"
+        f"[bold]Model type[/bold]\n{escape(format_model_type(forecast))}\n\n"
         f"[bold]Probability[/bold]\n{escape(probability_text(forecast.probability))}\n\n"
         f"[bold]Notes[/bold]\n{escape(notes)}"
     )
@@ -1257,6 +1278,33 @@ class FactorEditScreen(ModalScreen[dict | None]):
         self.dismiss(None)
 
 
+# Forecasts #2 and #8 deliberately carry NO quantitative model. The note is a
+# first-class part of the model view: the absence of a stochastic model is a
+# documented methodological choice, not a gap. See methodology_notes.md #2/#8.
+JUDGMENT_ANCHORED_NOTES = {
+    2: (
+        "[bold]Deliberately judgment-anchored — no stochastic model, by design.[/bold]\n"
+        "Project Vault is a single, five-month-old, first-of-its-kind program and the "
+        "question is a single unprecedented institutional event. There is no event history "
+        "to fit a rate to, no market pricing it, and the reference class is explicitly "
+        "sparse and heterogeneous. Fitting a stochastic process to a class of one would "
+        "manufacture parameters out of assumptions — false rigor, not real rigor. The "
+        "honest quantitative form for this evidence is exactly this estimate: a stated "
+        "structural prior plus named, sized, arguable adjustments."
+    ),
+    8: (
+        "[bold]Deliberately judgment-anchored — no stochastic model, by design.[/bold]\n"
+        "The question asks about a literally unprecedented event (no government has ever "
+        "taken a strategic/control stake in, or granted formal champion designation to, a "
+        "frontier AI lab) over an enumerated 10-company list in a five-month window, under "
+        "a scope that excludes every executed government-linked stake that does exist. "
+        "There is no historical frequency to fit and no arrival process to estimate — a "
+        "stochastic model here would run on invented parameters. The honest quantitative "
+        "form is this stated structural prior plus the two named, opposing adjustments."
+    ),
+}
+
+
 class Tier3ModelScreen(ModalScreen[bool]):
     BINDINGS = [
         Binding("a", "add_factor", "Add"),
@@ -1306,8 +1354,16 @@ class Tier3ModelScreen(ModalScreen[bool]):
             # evidence right here alongside the number it justifies.
             if self.forecast_id == 6:
                 yield Static("", id="sep-crosscheck")
+            # #2/#8: the documented absence-of-a-model note is part of the view.
+            if self.forecast_id in JUDGMENT_ANCHORED_NOTES:
+                yield Static(JUDGMENT_ANCHORED_NOTES[self.forecast_id], id="judgment-note")
             yield Label("Reasoning build-up", classes="section-label")
             yield Static("", id="waterfall")
+            # #4/#6: the same factors recombined as an explicit Bayesian update
+            # (prior odds x likelihood ratios). The additive waterfall above
+            # remains the editable store; this panel is the formal math.
+            if self.forecast_id in BAYES_UPDATES:
+                yield Static("", id="bayes-panel")
             yield Label("Adjustment factors (editable)", classes="section-label")
             yield DataTable(id="adjustment-table", zebra_stripes=True)
             yield Static("", id="final-probability")
@@ -1427,8 +1483,54 @@ class Tier3ModelScreen(ModalScreen[bool]):
         rows.append(f"{'Final probability':<{label_width}}│{solid(final)}│  [bold]{final:.0f}%[/bold]")
         return "\n".join(rows)
 
+    def _render_bayes_panel(self) -> None:
+        """Prior odds x per-factor likelihood ratios -> posterior, next to the
+        LR each additive step implied — so agreement or divergence between the
+        two formulations is visible factor by factor. LRs are the documented
+        estimates in bayesian_update.py; editing the additive factors in this
+        screen does not re-derive them."""
+        report = bayesian_report(self.forecast_id)
+        low, high = report["posterior_range_pct"]
+        lines = [
+            f"[bold]Bayesian formulation[/bold] — prior {report['prior_pct']:.0f}% "
+            f"(odds {report['prior_odds']:.3f})",
+            f"{'Factor':<42}{'LR (range)':>18}{'step':>8}{'implied LR':>12}",
+        ]
+        for factor in report["factors"]:
+            colour = ADJUSTMENT_UP_COLOR if factor["lr"] >= 1 else ADJUSTMENT_DOWN_COLOR
+            lr_text = (
+                f"{factor['lr']:.2f} "
+                f"({factor['lr_range'][0]:.2f}-{factor['lr_range'][1]:.2f})"
+            )
+            step_text = f"{factor['additive_step_pts']:+.0f}pp"
+            lines.append(
+                f"[{colour}]{factor['name'][:41]:<42}{lr_text:>18}"
+                f"{step_text:>8}{factor['implied_additive_lr']:>12.2f}[/]"
+            )
+        lines.append(
+            f"LR product [bold]{report['lr_product']:.3f}[/bold] → posterior odds "
+            f"{report['posterior_odds']:.3f} → posterior [bold]{report['posterior_pct']:.1f}%[/bold] "
+            f"(band {low:.0f}–{high:.0f}%)"
+        )
+        divergence = report["divergence_pts"]
+        if abs(divergence) > 3:
+            lines.append(
+                f"[yellow]Diverges from the additive {report['additive_result_pct']:.1f}% by "
+                f"{divergence:+.1f}pp — the additive number remains persisted: the momentum LR's "
+                "empirical corroboration collapses to a single 2021–22 surge (n=1), too thin to "
+                "adopt (decision documented in methodology_notes.md).[/yellow]"
+            )
+        else:
+            lines.append(
+                f"[dim]Confirms the additive {report['additive_result_pct']:.1f}% "
+                f"({divergence:+.1f}pp). Full LR derivations: python3 bayesian_update.py[/dim]"
+            )
+        self.query_one("#bayes-panel", Static).update("\n".join(lines))
+
     def update_widgets(self) -> None:
         self.query_one("#waterfall", Static).update(self._waterfall_markup())
+        if self.forecast_id in BAYES_UPDATES:
+            self._render_bayes_panel()
         table = self.query_one("#adjustment-table", DataTable)
         table.clear()
         for index, factor in enumerate(self.configuration["adjustments"]):
@@ -1576,6 +1678,427 @@ class Tier1ThresholdScreen(ModalScreen[bool]):
         self.dismiss(self.changed)
 
 
+def _text_bar(fraction: float, width: int = 30) -> str:
+    return "█" * max(0, min(width, round(fraction * width)))
+
+
+class QuantModelScreen(ModalScreen[bool]):
+    """Shared base for the read-only quantitative model views. Each subclass
+    computes its module's report dict in __init__ (fast, deterministic seeds)
+    and renders it; the authoritative probability is persisted by running the
+    module with --persist (or deliberately via the p key on the list), never
+    as a side effect of opening a view."""
+
+    BINDINGS = [Binding("escape", "close", "Close"), Binding("q", "close", "Close")]
+
+    def action_close(self) -> None:
+        self.dismiss(False)
+
+
+class PoissonModelScreen(QuantModelScreen):
+    """Forecast #1: Poisson point process over audited BIS tightening episodes."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.report = export_controls_poisson_report()
+
+    def compose(self) -> ComposeResult:
+        with Container(id="model-panel"):
+            yield Label("Quant model — Forecast #1 (Poisson point process)", classes="model-title")
+            yield Static("", id="poisson-headline")
+            yield PlotextPlot(id="poisson-chart", classes="quant-chart")
+            yield Static("", id="poisson-fits")
+            yield Static("", id="poisson-diagnostics")
+            yield Label("Esc to close · python3 export_controls_poisson.py for the full report", classes="model-hint")
+
+    def on_mount(self) -> None:
+        report = self.report
+        fit = report["fit_full"] if report["primary"] == "full" else report["fit_recent"]
+        self.query_one("#poisson-headline", Static).update(
+            f"P(≥1 tightening episode by {report['resolution_date']}) = 1 − exp(−λt) = "
+            f"[bold]{report['primary_p_pct']:.1f}%[/bold] · λ = {fit.lambda_per_year:.2f} episodes/yr "
+            f"({report['primary']} window) · t = {report['horizon_days']} days\n"
+            f"[dim]Tier-3 reference-class cross-check: {report['reference_class_pct']:.1f}% · "
+            f"persisted: {probability_text(report['persisted_pct'])}[/dim]"
+        )
+        self._plot_timeline()
+        fits_lines = [
+            f"{'Arrival unit / window':<30}{'events':>7}{'λ/yr':>8}{'P(≥1)':>9}",
+            f"{'episodes, full 2022–':<30}{report['fit_full'].n_events:>7}"
+            f"{report['fit_full'].lambda_per_year:>8.2f}{report['p_full_pct']:>8.1f}%"
+            + ("  [bold cyan]← primary[/bold cyan]" if report["primary"] == "full" else ""),
+            f"{'episodes, recent 24mo':<30}{report['fit_recent'].n_events:>7}"
+            f"{report['fit_recent'].lambda_per_year:>8.2f}{report['p_recent_pct']:>8.1f}%"
+            + ("  [bold cyan]← primary[/bold cyan]" if report["primary"] == "recent" else ""),
+            f"{'per-rule, full (upper bound)':<30}{report['fit_full_rules'].n_events:>7}"
+            f"{report['fit_full_rules'].lambda_per_year:>8.2f}{report['p_full_rules_pct']:>8.1f}%",
+        ]
+        self.query_one("#poisson-fits", Static).update("\n".join(fits_lines))
+        stability = report["stability"]
+        ks = report["ks"]
+        verdict = (
+            "[green]homogeneity NOT rejected → full-window rate primary[/green]"
+            if stability.homogeneous
+            else "[yellow]homogeneity REJECTED → recent-window rate primary[/yellow]"
+        )
+        self.query_one("#poisson-diagnostics", Static).update(
+            f"Stability: split {stability.first_half_events} vs {stability.second_half_events} "
+            f"episodes, exact binomial p = {stability.p_value:.3f} → {verdict}\n"
+            f"GOF: KS D = {ks.d_statistic:.3f} over {ks.n_gaps} episode gaps, asymptotic "
+            f"p ≈ {ks.p_value_asymptotic:.3f} (Lilliefors-type, conservative) · drought "
+            f"{report['drought_days']}d since last episode "
+            f"(P(gap this long) ≈ {report['drought_survival_pct']:.1f}%)\n"
+            f"[dim]{escape(report['publication_date_caveat'])}[/dim]"
+        )
+
+    def _plot_timeline(self) -> None:
+        """Cumulative tightening episodes vs the fitted constant-rate line —
+        the visual argument that one homogeneous λ describes the cadence."""
+        chart = self.query_one("#poisson-chart", PlotextPlot)
+        plt = chart.plt
+        plt.clear_figure()
+        report = self.report
+        from datetime import date as _date
+        start = _date(2022, 1, 1)
+        episodes = sorted({
+            rule.publication_date for rule in report["timeline"] if rule.category == "tightening"
+        })
+        xs = [( _date.fromisoformat(d) - start).days / 365.2425 for d in episodes]
+        ys = list(range(1, len(xs) + 1))
+        plt.scatter(xs, ys, marker="dot", color="red")
+        lam = report["fit_full"].lambda_per_year
+        end_x = ( _date.fromisoformat(report["resolution_date"]) - start).days / 365.2425
+        plt.plot([0, end_x], [0, lam * end_x], color="yellow")
+        as_of_x = ( _date.fromisoformat(report["as_of_date"]) - start).days / 365.2425
+        plt.vertical_line(as_of_x, color="cyan")
+        plt.xticks([0, 1, 2, 3, 4, 5], ["2022", "2023", "2024", "2025", "2026", "2027"])
+        plt.title("red dots = cumulative tightening episodes · yellow = fitted λt · cyan = as-of")
+        chart.refresh()
+
+
+class NuclearPathwaysScreen(QuantModelScreen):
+    """Forecast #10: competing-risks model over three finalization pathways."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.report = nuclear_pathways_report()
+
+    def compose(self) -> ComposeResult:
+        with Container(id="model-panel"):
+            yield Label("Quant model — Forecast #10 (competing risks)", classes="model-title")
+            yield Static("", id="nuclear-headline")
+            yield PlotextPlot(id="nuclear-chart", classes="quant-chart")
+            yield Static("", id="nuclear-pathways")
+            yield Static("", id="nuclear-notes")
+            yield Label("Esc to close · python3 nuclear_competing_risks.py for the full report", classes="model-hint")
+
+    def on_mount(self) -> None:
+        report = self.report
+        divergence = report["divergence_pts"]
+        flag = (
+            f"\n[yellow]Diverges {divergence:+.1f}pp from the persisted "
+            f"{report['persisted_pct']}% — flagged, not auto-persisted (see methodology_notes.md #10).[/yellow]"
+            if divergence is not None and abs(divergence) > 3 else ""
+        )
+        band = report["combined_band"]
+        self.query_one("#nuclear-headline", Static).update(
+            f"{escape(report['formula'])}\n"
+            f"Combined P(≥1 pathway finalized by {report['resolution_date']}) = "
+            f"[bold]{band['low_pct']:.0f}–{band['high_pct']:.0f}%[/bold] "
+            f"(central [bold]{report['combined_pct']:.1f}%[/bold], persisted) · pure independence "
+            f"would give {report['independence_pct']:.1f}%\n"
+            f"[dim]The band is the gate sensitivity S = {band['gate_high']:.2f}/"
+            f"{band['gate_central']:.2f}/{band['gate_low']:.2f}: the common-mode gate is a "
+            "reasoned calibration, not a counted base rate, and with three semi-independent "
+            "pathways it is essentially the entire answer (see methodology_notes.md #10).[/dim]"
+            f"{flag}"
+        )
+        self._plot_curves()
+        lines = [f"{'Pathway':<34}{'p_i | no sys':>13}   P(finalized by resolution)"]
+        for pathway in report["pathways"]:
+            p = pathway["p_by_resolution"]
+            lines.append(
+                f"{pathway['name'][:33]:<34}{p:>12.1%}   [{ADJUSTMENT_UP_COLOR}]{_text_bar(p)}[/]"
+            )
+        mc = report["monte_carlo"]
+        lines.append(
+            f"\nMonte Carlo ({mc['paths']:,} paths): P(YES) {mc['p_yes_pct']:.1f}% · "
+            f"by Dec 2026 {mc['p_yes_by_2026_12_pct']:.1f}% · median first finalization "
+            f"{mc['median_first_finalization']} · first-finalizer shares "
+            + " / ".join(f"{k} {v:.0%}" for k, v in mc["first_finalizer_shares"].items())
+        )
+        self.query_one("#nuclear-pathways", Static).update("\n".join(lines))
+        self.query_one("#nuclear-notes", Static).update(
+            f"[bold]Common-mode gate[/bold]: {escape(report['p_systemic_rationale'])}\n"
+            f"[dim]{escape(report['independence_note'])}[/dim]"
+        )
+
+    def _plot_curves(self) -> None:
+        chart = self.query_one("#nuclear-chart", PlotextPlot)
+        plt = chart.plt
+        plt.clear_figure()
+        report = self.report
+        months = [month for month, _ in report["combined_curve"]]
+        xs = list(range(len(months)))
+        colors = {"part57": "red", "doe_sites": "green", "dow_rule": "magenta"}
+        for pathway in report["pathways"]:
+            plt.plot(xs, [p for _, p in pathway["curve"]], color=colors[pathway["key"]])
+        plt.plot(xs, [p for _, p in report["combined_curve"]], color="yellow")
+        tick_positions = xs[::3]
+        plt.xticks(tick_positions, [months[i] for i in tick_positions])
+        plt.title("cumulative P(finalized by month): yellow = combined · red = Part 57 · green = DOE sites · magenta = DOW rule")
+        chart.refresh()
+
+
+class SovereignJumpsScreen(QuantModelScreen):
+    """Forecast #7: compound Poisson Monte Carlo over sovereign AI commitments."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.report = sovereign_ai_report()
+
+    def compose(self) -> ComposeResult:
+        with Container(id="model-panel"):
+            yield Label("Quant model — Forecast #7 (compound Poisson Monte Carlo)", classes="model-title")
+            yield Static("", id="sovereign-headline")
+            yield PlotextPlot(id="sovereign-chart", classes="quant-chart")
+            yield Static("", id="sovereign-variants")
+            yield Static("", id="sovereign-notes")
+            yield Label("Esc to close · python3 sovereign_ai_jumps.py for the full report", classes="model-hint")
+
+    def on_mount(self) -> None:
+        report = self.report
+        rate = report["arrival_rate"]
+        fit = report["jump_size_fit"]
+        divergence = report["divergence_pts"]
+        if divergence is None:
+            divergence_tail = "[dim](no persisted probability on file to compare against)[/dim]"
+        elif abs(divergence) > 3:
+            divergence_tail = (
+                f"vs persisted {report['persisted_probability_pct']}% "
+                f"[yellow]— diverges {divergence:+.1f}pp; flagged, not auto-persisted "
+                "(see methodology_notes.md #7)[/yellow]"
+            )
+        else:
+            divergence_tail = (
+                f"[dim]— persisted authoritative value ({report['persisted_probability_pct']}%; "
+                "adopted, see methodology_notes.md #7)[/dim]"
+            )
+        regime = report["regime_diagnostics"]
+        self.query_one("#sovereign-headline", Static).update(
+            f"Base ${report['base_usd_billions']:.0f}B → ${report['threshold_usd_billions']:.0f}B in "
+            f"{report['horizon_days']} days · λ = {rate['lambda_per_year']:.2f} commitments/yr "
+            f"({rate['n_commitments']} arrivals over {rate['window_years']:.2f}y) · jump sizes "
+            f"lognormal(μ={fit['mu']:.2f}, σ={fit['sigma']:.2f}), median ${fit['implied_median_usd_billions']:.1f}B\n"
+            f"Headline (regime-switching): [bold]{report['headline_probability_pct']:.2f}%[/bold] "
+            f"{divergence_tail}\n"
+            f"[dim]P(burst regime active) {regime['p_shift_active_pct']:.1f}% (1 observed "
+            f"Stargate-class trigger, {regime['response_latency_days']}d latency) × "
+            f"P(cross | burst) {regime['p_cross_given_shift_pct']:.1f}% (burst "
+            f"{regime['regime_b_rate_per_year']:.0f}/yr, sizes ×U{regime['regime_b_size_multiplier']})[/dim]"
+        )
+        self._plot_histogram()
+        lines = [f"{'Variant':<28}{'P(≥ $250B)':>12}{'mean total':>12}{'p95':>9}{'p99':>9}"]
+        for variant in report["variants"]:
+            pct = variant["percentiles_usd_billions"]
+            lines.append(
+                f"{variant['label'][:27]:<28}{variant['p_cross_pct']:>11.2f}%"
+                f"{variant['mean_total_usd_billions']:>11.1f}B{pct['p95']:>8.0f}B{pct['p99']:>8.0f}B"
+            )
+        self.query_one("#sovereign-variants", Static).update("\n".join(lines))
+        self.query_one("#sovereign-notes", Static).update(
+            f"[dim]{escape(report['divergence_note'])}[/dim]"
+        )
+
+    def _plot_histogram(self) -> None:
+        chart = self.query_one("#sovereign-chart", PlotextPlot)
+        plt = chart.plt
+        plt.clear_figure()
+        stationary = self.report["variants"][0]
+        labels = [label for label, _ in stationary["histogram"]]
+        values = [fraction * 100 for _, fraction in stationary["histogram"]]
+        plt.bar(labels, values, color="cyan")
+        plt.title("Stationary variant: simulated year-end totals ($B); YES region = the ≥250 bars")
+        chart.refresh()
+
+
+class ElectricitySimulationScreen(QuantModelScreen):
+    """Forecast #9: deterministic base-rate schedule + OU gas simulation."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.report = electricity_report()
+
+    def compose(self) -> ComposeResult:
+        with Container(id="model-panel"):
+            yield Label("Quant model — Forecast #9 (deterministic + OU simulation)", classes="model-title")
+            yield Static("", id="electricity-headline")
+            yield PlotextPlot(id="electricity-chart", classes="quant-chart")
+            yield Static("", id="electricity-components")
+            yield Static("", id="electricity-distribution")
+            yield Label("Esc to close · python3 electricity_simulation.py for the full report", classes="model-hint")
+
+    def on_mount(self) -> None:
+        report = self.report
+        ou = report["ou_fit"]
+        ou_text = (
+            f"OU fit (3y daily HH): κ={ou.kappa_per_year:.1f}/yr, σ={ou.sigma_annualized:.2f} ann."
+            if ou is not None else "[red]OU cache missing — literature fallback[/red]"
+        )
+        divergence = report["divergence_pts"]
+        if divergence is None:
+            divergence_tail = "[dim](no persisted probability on file to compare against)[/dim]"
+        elif abs(divergence) > 3:
+            divergence_tail = (
+                f"vs persisted {report['persisted_pct']}% "
+                f"[yellow]— diverges {divergence:+.1f}pp; flagged, not auto-persisted "
+                "(see methodology_notes.md #9)[/yellow]"
+            )
+        else:
+            divergence_tail = (
+                f"[dim]— persisted authoritative value ({report['persisted_pct']}%; "
+                "adopted, see methodology_notes.md #9)[/dim]"
+            )
+        self.query_one("#electricity-headline", Static).update(
+            f"P(Jan 2027 commercial rate < {report['baseline_cents']} ¢/kWh) = "
+            f"[bold]{report['p_below_baseline_pct']:.1f}%[/bold] {divergence_tail}\n"
+            f"[dim]{ou_text} · STEO anchor {report['steo_anchor']} · in-window gas pass-through = "
+            f"{report['in_window_pass_through']:.0f} (fuel factor locked 2026-07-01 → 2027-06-30)[/dim]"
+        )
+        self._plot_gas_paths()
+        component_notes = {
+            "base_step": "locked 2027-01-01 biennial step ($209.9M)",
+            "securitization": "PUR-2026-00078 decision risk (one-sided up)",
+            "winter_spike": "861M cold-event Januaries",
+            "gs5_noise": "GS-5 class composition change (zero-mean)",
+            "idiosyncratic": "6-month series noise",
+            "fuel_in_window": "OU gas × fuel share × pass-through 0",
+        }
+        lines = [f"{'Component (mean ¢/kWh at Jan 2027)':<40}{'mean':>8}"]
+        for key, value in report["component_means_cents"].items():
+            colour = ADJUSTMENT_DOWN_COLOR if value > 0.001 else "dim"
+            lines.append(f"[{colour}]{component_notes[key][:39]:<40}{value:>+8.3f}[/]")
+        counterfactual = report["counterfactual_fuel_delta_cents"]
+        lines.append(
+            f"[dim]Counterfactual live-pass-through fuel delta p10/p50/p90: "
+            f"{counterfactual['p10']:+.2f} / {counterfactual['p50']:+.2f} / "
+            f"{counterfactual['p90']:+.2f} ¢ — two-sided, not one-way easing[/dim]"
+        )
+        self.query_one("#electricity-components", Static).update("\n".join(lines))
+        histogram_lines = []
+        for label, fraction, yes_side in report["rate_histogram"]:
+            marker = " ← YES side" if yes_side else ""
+            histogram_lines.append(f"{label:>13} {fraction * 100:5.1f}% {_text_bar(fraction, 40)}{marker}")
+        empirical = report["empirical_jan_below_jul"]
+        histogram_lines.append(
+            f"\nEmpirical cross-check: Jan below prior Jul in {empirical[0]}/{empirical[1]} years "
+            f"({report['empirical_jan_below_jul_pct']:.0f}%) — the unconditional base the tier-3 35% matched; "
+            "the model conditions on the locked Jan-2027 step and the closed fuel channel."
+        )
+        self.query_one("#electricity-distribution", Static).update("\n".join(histogram_lines))
+
+    def _plot_gas_paths(self) -> None:
+        chart = self.query_one("#electricity-chart", PlotextPlot)
+        plt = chart.plt
+        plt.clear_figure()
+        report = self.report
+        months = list(report["simulation_months"])
+        xs = list(range(len(months)))
+        for path in report["sample_gas_paths"]:
+            plt.plot(xs, path, color="cyan")
+        anchors = [report["steo_anchor"][q] for q in ("2026Q3", "2026Q3", "2026Q4", "2026Q4", "2026Q4", "2027Q1")]
+        plt.plot(xs, anchors, color="yellow")
+        plt.xticks(xs, months)
+        plt.title("cyan = simulated Henry Hub paths ($/MMBtu) · yellow = STEO anchor — pass-through to the Jan 2027 rate is ZERO (locked fuel factor)")
+        chart.refresh()
+
+
+class DatacenterBacklogScreen(QuantModelScreen):
+    """Forecast #3: announced-vs-under-construction backlog throughput model."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.report = datacenter_backlog_report()
+
+    def compose(self) -> ComposeResult:
+        with Container(id="model-panel"):
+            yield Label("Quant model — Forecast #3 (backlog / throughput)", classes="model-title")
+            yield Static("", id="backlog-headline")
+            yield PlotextPlot(id="backlog-chart", classes="quant-chart")
+            yield Static("", id="backlog-parameters")
+            yield Static("", id="backlog-notes")
+            yield Label("Esc to close · python3 datacenter_backlog.py for the full report", classes="model-hint")
+
+    def on_mount(self) -> None:
+        report = self.report
+        anchor = report["anchor"]
+        tail = report["tail_risk"]
+        self.query_one("#backlog-headline", Static).update(
+            f"Anchor {anchor['date']}: {anchor['announced_gw']:.1f} GW announced / "
+            f"{anchor['under_construction_gw']:.1f} GW under construction (gap {anchor['gap_pct']:.1f}%) · "
+            f"resolution: gap < 30% by 2027-12-31\n"
+            f"P(YES) = flow {report['p_below_30_pct']:.1f}% + capex-pullback "
+            f"{tail['p_pullback_yes'] * 100:.1f}% (from #4's posterior × ASSUMED shares) + "
+            f"tracker-shift {tail['p_tracker_yes'] * 100:.1f}% (ASSUMED) = "
+            f"[bold]{report['combined_p_yes_pct']:.1f}%[/bold] · deterministic midpoint "
+            f"end-2027 gap [bold]{report['midpoint_end_2027_gap_pct']:.1f}%[/bold] · "
+            f"persisted {report['persisted_pct']}%"
+        )
+        self._plot_trajectory()
+        inflow = report["inflow_gw_per_quarter"]
+        conversion = report["conversion_gw_per_quarter"]
+        constraints = report["conversion_cap_constraints"]
+        self.query_one("#backlog-parameters", Static).update(
+            f"Inflow {inflow['low']}–{inflow['high']} GW/q (mode {inflow['mode']}) · conversion "
+            f"{conversion['low']}–{conversion['high']} GW/q (mode {conversion['mode']}), capped at remaining backlog\n"
+            f"[dim]Cap held by: {escape(constraints['interconnection'])}; "
+            f"{escape(constraints['transformers'])}; {escape(constraints['gas_turbines'])}; "
+            f"{escape(constraints['labor'])}[/dim]"
+        )
+        stress = report["stress_case"]
+        self.query_one("#backlog-notes", Static).update(
+            f"Best researched flow corner ends 2027 at {report['best_flow_corner_end_2027_gap_pct']:.1f}% — "
+            "still above 30%, so the Monte Carlo zero is structural.\n"
+            f"[bold]Stress case[/bold] ({escape(stress['label'])}): cancellations "
+            f"{stress['cancellation_gw_per_quarter']:.0f} GW/q → gap first below 30% in "
+            f"{stress['first_month_below_30']}, end-2027 gap {stress['end_2027_gap_pct']:.1f}%."
+        )
+
+    def _plot_trajectory(self) -> None:
+        chart = self.query_one("#backlog-chart", PlotextPlot)
+        plt = chart.plt
+        plt.clear_figure()
+        trajectory = self.report["trajectory"]
+        months = [point["month"] for point in trajectory]
+        xs = list(range(len(months)))
+        plt.plot(xs, [point["mc_gap_p10_pct"] for point in trajectory], color="green")
+        plt.plot(xs, [point["mc_gap_median_pct"] for point in trajectory], color="yellow")
+        plt.plot(xs, [point["mc_gap_p90_pct"] for point in trajectory], color="magenta")
+        plt.plot(xs, [point["stress_gap_pct"] for point in trajectory], color="cyan")
+        plt.horizontal_line(30.0, color="red")
+        tick_positions = xs[::3]
+        plt.xticks(tick_positions, [months[i] for i in tick_positions])
+        plt.title("gap %: yellow = median · green/magenta = p10/p90 · cyan = capex-pullback stress · red = 30% bar")
+        chart.refresh()
+
+
+QUANT_SCREEN_BUILDERS = {
+    1: PoissonModelScreen,
+    3: DatacenterBacklogScreen,
+    7: SovereignJumpsScreen,
+    9: ElectricitySimulationScreen,
+    10: NuclearPathwaysScreen,
+}
+
+QUANT_VIEW_LABELS = {
+    1: "1 · Poisson process",
+    3: "1 · Backlog model",
+    7: "1 · Compound Poisson MC",
+    9: "1 · OU rate simulation",
+    10: "1 · Competing risks",
+}
+
+
 def build_model_screen(forecast_id: int, tier: int) -> ModalScreen[bool] | None:
     """Construct the model view for one (forecast, tier) pair.
 
@@ -1583,9 +2106,13 @@ def build_model_screen(forecast_id: int, tier: int) -> ModalScreen[bool] | None:
     reference-class forecast and routes through the tier == 3 branch.)
     """
     if tier == 1:
-        # #5 has a wired HMM model; #9 has no model, so it gets a threshold check.
+        # Per-forecast tier-1 quantitative models: #5's HMM plus the process
+        # models added in the quantitative upgrade (QUANT_SCREEN_BUILDERS).
+        # Anything else routed to tier 1 falls back to the threshold check.
         if forecast_id == 5:
             return Tier1ModelScreen()
+        if forecast_id in QUANT_SCREEN_BUILDERS:
+            return QUANT_SCREEN_BUILDERS[forecast_id]()
         return Tier1ThresholdScreen(forecast_id)
     if tier == 2:
         return Tier2ModelScreen(forecast_id)
@@ -1597,7 +2124,9 @@ def build_model_screen(forecast_id: int, tier: int) -> ModalScreen[bool] | None:
 def model_view_label(forecast_id: int, tier: int) -> str:
     """Short, number-first label for a tier's model view (shown in the picker)."""
     if tier == 1:
-        return "1 · HMM Monte Carlo" if forecast_id == 5 else "1 · Threshold check"
+        if forecast_id == 5:
+            return "1 · HMM Monte Carlo"
+        return QUANT_VIEW_LABELS.get(forecast_id, "1 · Threshold check")
     if tier == 2:
         return "2 · Trend model"
     if tier == 3:
@@ -1631,7 +2160,7 @@ class TierViewPickerScreen(ModalScreen[int | None]):
         forecast = get(self.forecast_id)
         with Vertical(id="tier-picker-dialog"):
             yield Label(
-                f"Forecast #{forecast.id} — {format_model_type(forecast.tiers)} "
+                f"Forecast #{forecast.id} — {format_model_type(forecast)} "
                 f"({len(self.views)} model views)",
                 id="tier-picker-title",
             )
@@ -1702,11 +2231,13 @@ class ForecastApp(App[None]):
     .button-row { height: 3; align: center middle; }
     .button-row Button { margin: 0 1; }
 
-    #current-state, #fedwatch-crosscheck, #final-probability, #trend-statistics, #trend-nowcast, #sep-crosscheck, #threshold-info, #threshold-result { height: auto; padding: 1; }
-    #state-diagram, #waterfall { height: auto; width: auto; padding: 1; }
+    #current-state, #fedwatch-crosscheck, #final-probability, #trend-statistics, #trend-nowcast, #sep-crosscheck, #threshold-info, #threshold-result, #judgment-note { height: auto; padding: 1; }
+    #state-diagram, #waterfall, #bayes-panel { height: auto; width: auto; padding: 1; }
     #outcome-table { height: 6; }
     #outcome-histogram { height: 5; padding: 0 1; }
     #trend-chart { height: 18; margin: 1 0; }
+    .quant-chart { height: 16; margin: 1 0; }
+    #poisson-headline, #poisson-fits, #poisson-diagnostics, #nuclear-headline, #nuclear-pathways, #nuclear-notes, #sovereign-headline, #sovereign-variants, #sovereign-notes, #electricity-headline, #electricity-components, #electricity-distribution, #backlog-headline, #backlog-parameters, #backlog-notes { height: auto; padding: 0 1; }
     #trend-points { height: 9; }
     #adjustment-table { height: 1fr; min-height: 8; }
     """
@@ -1729,7 +2260,7 @@ class ForecastApp(App[None]):
         table.add_column("Probability", key="probability", width=13)
         for forecast in FORECASTS:
             table.add_row(
-                str(forecast.id), forecast.title, format_model_type(forecast.tiers),
+                str(forecast.id), forecast.title, format_model_type(forecast),
                 forecast.resolution_date, probability_text(forecast.probability), key=str(forecast.id),
             )
         table.focus()

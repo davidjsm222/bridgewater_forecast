@@ -15,17 +15,38 @@ Controls: arrow keys navigate, Enter opens detail, `p` edits probability, and `q
 - `data_sources.py` -- cache-first FRED, EIA, and Federal Register API pulls
 - `manual_research.py` -- empty, structured research templates for forecasts without clean APIs
 - `forecasts.py` -- the 10 forecasts, resolution dates/criteria, tier tags
-- `tier1_market.py` -- Fed hike-probability chaining, PCE trend threshold check, electricity price check (forecasts #5, #6, #9)
-- `tier2_trend.py` -- linear trend fit + sigma-distance-to-threshold (forecasts #3, #4)
-- `tier3_judgment.py` -- reference-class base rate + named adjustment factors (forecasts #1, #2, #7, #8, #10)
+- `tier1_market.py` -- Fed posture HMM + Monte Carlo (forecast #5), legacy chaining/threshold helpers
+- `tier2_trend.py` -- linear trend fit + sigma-distance-to-threshold (archived fits for #3, #4, #6)
+- `tier3_judgment.py` -- reference-class base rate + named adjustment factors (all layered forecasts)
 
-## Before using for real numbers
-All three tier modules currently run on **placeholder data** in their
-`if __name__ == "__main__":` blocks. Before generating the actual submission
-numbers, replace those placeholders with:
-- Tier 1: live CME FedWatch probabilities per remaining 2026 meeting, current PCE trend, EIA regional price series
-- Tier 2: real DC Byte/CBRE/JLL data center capacity reports, BEA nonresidential investment data
-- Tier 3: actual historical base rates for each reference class (export control actions, strategic reserve announcements, sovereign AI programs, etc.)
+Quantitative process models (each runnable standalone, `python3 <module>.py`;
+persistence only with an explicit `--persist` flag):
+- `export_controls_poisson.py` -- forecast #1: Poisson point process fit to the audited
+  China-chip tightening actions in the cached Federal Register docket
+- `nuclear_competing_risks.py` -- forecast #10: three-pathway competing-risks model with a
+  common-mode derailment factor
+- `sovereign_ai_jumps.py` -- forecast #7: compound Poisson Monte Carlo over sovereign AI
+  commitment arrivals and lognormal jump sizes
+- `electricity_simulation.py` -- forecast #9: deterministic Dominion base-rate schedule +
+  Ornstein-Uhlenbeck Henry Hub simulation mapped through fuel-factor pass-through
+- `datacenter_backlog.py` -- forecast #3: announced-vs-under-construction backlog/throughput
+  projection under interconnection and equipment constraints
+- `bayesian_update.py` -- forecasts #4/#6: the tier 3 adjustment factors recombined as an
+  explicit likelihood-ratio Bayesian update (forecasts #2/#8 stay judgment-anchored by
+  design; see methodology_notes.md)
+
+## Persistence conventions
+`forecast_state.json` holds every forecast's authoritative probability plus the
+`_model_state` model configs the TUI edits. The newer quantitative modules
+(`export_controls_poisson.py`, `nuclear_competing_risks.py`,
+`sovereign_ai_jumps.py`, `electricity_simulation.py`, `datacenter_backlog.py`,
+`bayesian_update.py`) only PRINT on a plain run; they write the state file only
+with an explicit `--persist` flag, because several of them intentionally
+disagree with the persisted judgment number (each prints a divergence note; see
+methodology_notes.md for which divergences are flagged-but-not-adopted).
+`tier1_market.py` follows the same convention: a plain run only prints, and
+`--persist` writes the market-BLENDED forecast #5 value (raw HMM output plus
+the stored tier-3 adjustment layer), refusing if the blend config is missing.
 
 The `ReferenceClassEstimate.print_table()` output in `tier3_judgment.py` is
 close to what should land in the appendix's methodology table -- base rate,
@@ -53,9 +74,10 @@ export FRED_API_KEY="your-key"
 export EIA_API_KEY="your-key"
 ```
 
-The EIA source defines the forecast #9 baseline as the exact Virginia April
-2026 monthly observation (12.11 cents/kWh), the latest observation published
-before the submission deadline.
+The EIA source defines the forecast #9 baseline as the most recent Virginia
+COMMERCIAL-sector monthly observation (July 2026, 10.33 cents/kWh), the latest
+actual published before the submission deadline (see
+`data_cache/eia_virginia_retail_electricity.json`, `baseline_period` 2026-07).
 
 ## Trend uncertainty correction
 
