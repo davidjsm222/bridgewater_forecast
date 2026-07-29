@@ -386,6 +386,381 @@ The trend work is preserved, not deleted — it is simply no longer authoritativ
   quarterly frequency. Those findings now inform the adjustment factors above
   rather than a standalone extrapolation.
 
+## Forecast #5 — Does the Fed raise rates at least once by year-end 2026?
+
+**Authoritative probability: 62.6% (was 77.5%) — a tier 1 hidden Markov model of
+FOMC posture, Monte-Carlo'd over the remaining 2026 meetings. Nothing else.**
+Resolution: YES if the fed funds target range is raised at any 2026 meeting; NO
+if held or cut all year. Code: `fomc_history.py` (data + labeling) and
+`tier1_market.py` (model).
+
+The tier 3 market-blend layer that used to sit on top of this model was
+**retired on 2026-07-29**, and #5's tier list dropped from `[1, 3]` to `[1]`.
+Forecast #5 is now a pure HMM: the Monte Carlo output *is* the answer, and the
+two market reads below it are cross-checks that enter the number nowhere. See
+"The blend layer, retired" and the named finding that follows it.
+
+### The latent-state formulation
+
+The observable at each meeting is the action — `hike`, `hold`, `cut`. The thing
+that actually drives the action is the Committee's *policy posture*, which is
+not directly observable and which persists across meetings. That is exactly the
+shape of a hidden Markov model, so posture is modeled as a latent chain over
+three states:
+
+| State | Meaning |
+| --- | --- |
+| `hawkish_bias` | dot plot implies materially higher rates ahead |
+| `neutral_hold` | dot plot implies roughly the current rate |
+| `dovish_bias` | dot plot implies materially lower rates ahead |
+
+**Labeling.** The 84 regular meetings from 2016-01-27 through 2026-07-29 are
+labeled off each meeting's *implied 12-month rate change*: take the median
+year-end dot from the SEP in force, subtract the post-decision target midpoint,
+and annualize by the months remaining to that calendar year-end
+(`annualized_dot_change_bps`). A meeting is `hawkish_bias` above +25bps,
+`dovish_bias` below −25bps, `neutral_hold` in between
+(`ROUGHLY_FLAT_THRESHOLD_BPS`). The labels are therefore derived from published
+Fed projections, not assigned by hand.
+
+**Non-SEP meetings carry forward the most recent SEP.** Only four of the eight
+annual meetings publish a dot plot. Rather than interpolate or drop the other
+four, `build_history` labels every meeting off the last SEP at or before its own
+date. Note this is not a copy: the target midpoint and the months-to-year-end
+denominator both keep moving, so a carried-forward meeting can and does change
+posture as the year progresses. Nine unscheduled events (notation votes, the
+canceled March 2020 meeting) are excluded outright and enumerated in
+`EXCLUDED_NON_REGULAR_EVENTS`; the run reports zero data gaps across the 84.
+
+Posture counts: 45 `hawkish_bias`, 21 `dovish_bias`, 18 `neutral_hold`.
+
+**Estimated transition matrix, P(next posture | posture):**
+
+| from \ to | hawkish | neutral | dovish |
+| --- | --- | --- | --- |
+| `hawkish_bias` | **0.818** | 0.091 | 0.091 |
+| `neutral_hold` | 0.222 | 0.611 | 0.167 |
+| `dovish_bias` | 0.190 | 0.143 | 0.667 |
+
+**Estimated emission matrix, P(action | posture):**
+
+| posture | hike | hold | cut |
+| --- | --- | --- | --- |
+| `hawkish_bias` | 0.378 | 0.556 | 0.067 |
+| `neutral_hold` | 0.056 | 0.889 | 0.056 |
+| `dovish_bias` | 0.048 | 0.714 | 0.238 |
+
+The number that does the work is the **hawkish self-persistence of 0.818**: once
+the Fed is leaning hawkish it stays leaning hawkish at the next meeting more
+than four times in five. That is what makes a three-meeting horizon materially
+riskier than three independent draws at the unconditional 37.8% hike emission.
+
+**Known limitation, flagged not hidden:** 2016–2026 pools several distinct rate
+regimes (near-zero 2016–19, the 2022–23 hiking cycle, the current one) into one
+transition/emission estimate. A regime-switching extension was not attempted;
+the pooled estimate is treated as an unconditional historical anchor. This was
+once the stated reason for blending it against market pricing; with the blend
+retired the limitation stands on its own, unmitigated, and is the main reason to
+keep reading the direct market as a check on this number.
+
+### The Monte Carlo procedure
+
+`p_at_least_one_hike_hmm` initializes the chain at the current posture with
+probability 1 (`CURRENT_POSTURE`, currently `hawkish_bias` at +41.2 bps
+annualized as of 2026-07-29), then for each path advances the posture one step
+per remaining meeting and draws an action from that step's emission row.
+P(≥1 hike) = 1 − P(zero hikes across all paths). Seed `20260716`, and
+**10,000 paths everywhere** — `DEFAULT_MONTE_CARLO_PATHS`, the persisted
+`_model_state.tier1["5"].simulations`, and the TUI's paths field all agree, so
+the module and the screen report the identical 62.6%. They previously disagreed
+(the stored path count was 5,000, giving 62.8% in the TUI against 62.6%
+standalone) — a ±0.7pp Monte Carlo artefact of nothing, and exactly the kind of
+two-numbers-for-one-quantity ambiguity worth removing rather than annotating.
+
+**The July pin, as originally used — now archived.** For the 2026-07-29 meeting
+the emission draw was overridden and P(hike) pinned to a live single-meeting
+market read of **10.7%** (Polymarket, ~$78M market, as of 2026-07-21; the
+`MEETING_HIKE_PROBABILITY_OVERRIDES` mechanism). The justification was that for
+an imminent, precisely-priced meeting a live quote beats an unconditional
+historical base rate, while the posture chain still advanced through the
+overridden meeting so later meetings stayed state-dependent. The pin was worth
+−8.1pp: the four-meeting base was 62.5% with it and 70.6% without.
+
+That pin is now archived in `tier1_market.py` as `ARCHIVED_JULY_29_*`. Two things
+are worth recording about how it performed. It was **directionally right** — the
+Fed held. It was also **materially too low by the time the meeting arrived**: an
+eight-day-old quote missed the July repricing, and CME FedWatch had roughly a
+1-in-3 chance of a July hike on the morning of the decision (CNBC, 2026-07-29).
+The lesson carried forward is that single-meeting pins decay fast, which is part
+of why no meeting is pinned now.
+
+### The calibration impossibility
+
+An attempt was made to calibrate the HMM so that its per-meeting hike hazard
+reproduced the market's meeting-by-meeting term structure. **It cannot be done
+without breaking the model**, and the reason is structural rather than a
+tuning failure.
+
+The chain is stationary and its transition matrix is strongly diagonal. Starting
+from a `hawkish_bias` point mass, the posture distribution can only relax
+monotonically toward the chain's stationary distribution, so the implied hike
+hazard can only drift monotonically across successive meetings. The current fit
+makes this concrete — marginal P(hike) by meeting, 200,000 paths:
+
+| | Sep 16 | Oct 28 | Dec 9 |
+| --- | --- | --- | --- |
+| HMM marginal hazard | 31.8% | 28.3% | 26.0% |
+| Live market (2026-07-29) | 52.5% | 26.3% | 31.7% |
+
+The market hazard falls then rises — it is **non-monotonic**, because the market
+is pricing a specific September decision and a specific December fallback around
+an October meeting nobody expects to act at. A stationary diagonal chain has no
+degree of freedom that produces that shape. The only ways to force it are to
+invert the states' meanings (make `hawkish_bias` the *low*-hike state, which
+destroys the labeling's link to the dot plots) or to collapse the three states
+into one (which discards the state-dependence that is the model's entire point).
+
+The conclusion adopted: **do not calibrate.** The HMM is kept as an honest
+unconditional historical anchor with a shape it can actually represent, and the
+meeting-specific, non-monotonic market information is kept outside the model
+entirely, as a displayed cross-check. (This was originally "applied once,
+separately, in the tier 3 blend"; with the blend retired the market information is
+not applied at all, only reported.) This is a real limitation of the model,
+documented rather than papered over.
+
+### Structural limitation: dissent blindness
+
+A second named limitation, in the same shape as the calibration impossibility.
+
+**The HMM measures posture through projections and is blind to voting-record
+dispersion.** Every posture label in the training set is derived from a dot-plot
+median. Dissent counts are not an input to the labeling, the transition matrix,
+the emission matrix, or the simulation — they appear nowhere in the model. But
+the dot plot and the voting record are *distinct, contemporaneous* signals about
+the same Committee: a median dot summarizes where participants say rates are
+headed, while a dissent count measures how much of the Committee is willing to
+act *now*. They can diverge, and on 2026-07-29 they did — the June median dot
+implied one more 2026 hike (unchanged information), while three officials voted
+to deliver it immediately (new information).
+
+Because the label is a median, the model is structurally insensitive to
+*dispersion around* that median. A 12-0 hold and a 9-3 hold with three hawkish
+dissents produce an identical training row if the SEP in force is the same. The
+June 17 and July 29 2026 meetings are exactly that pair.
+
+Dissents were deliberately **not** forced into the posture labeling: the
+labeling's virtue is that it is mechanically derived from published projections,
+and grafting a second, differently-sourced signal onto it would make the state
+definitions incoherent across the 2016–2026 training set (dissent direction is
+not even consistently recoverable as "tighter/easier" for guidance-language
+dissents). The limitation is instead recorded here, and the dissent signal was
+evaluated separately as a candidate adjustment — see "The dissent adjustment was
+evaluated and declined" below, where it was **declined as a sized factor** and
+retained as qualitative context. (It was evaluated as a tier 3 factor while that
+layer existed; the layer is now retired, so there is no longer even a place to put
+one.)
+
+### The July 29, 2026 update
+
+The July 29, 2026 FOMC meeting held the target range at 3.50–3.75% on a 9–3 vote,
+with Hammack, Kashkari and Logan each preferring +25bp
+([FOMC statement](https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm)).
+Forecast #5 did not resolve; three meetings remain. What changed:
+
+1. **July 29 entered the training set** as a completed `hold`
+   (`fomc_history._RAW_MEETINGS`), taking it from 83 to 84 meetings. As a
+   non-SEP meeting it carries forward the 2026-06-17 SEP (2026 median 3.8%)
+   under the documented rule above: +41.2 bps annualized → `hawkish_bias`. No
+   new labeling rule was invented for it.
+2. **The meeting set dropped to three** — `REMAINING_2026_MEETING_DATES` is now
+   2026-09-16, 2026-10-28, 2026-12-09.
+3. **The July pin was retired** to `ARCHIVED_JULY_29_*`, and
+   `MEETING_HIKE_PROBABILITY_OVERRIDES` is now empty. September is 48 days out
+   and October/December are thinly traded, so nothing meets the "imminent and
+   precisely priced" bar the pin required. Live per-meeting reads are recorded
+   as a cross-check in `MARKET_PER_MEETING_HIKE_PROBABILITY` but are not pinned.
+4. **`CURRENT_AS_OF_DATE` advanced** 2026-07-16 → 2026-07-29. Posture is
+   `hawkish_bias` either way, so the initial state is unaffected.
+
+**The HMM base barely moved: 62.5% → 62.6%.** Two effects nearly cancelled, and
+not in the direction one would guess:
+
+| Step | P(≥1 hike) | Δ |
+| --- | --- | --- |
+| Old: 83 meetings, 4 remaining, July pinned at 10.7% | 62.5% | — |
+| Drop the July meeting | 63.0% | **+0.5pp** |
+| Retrain on 84 meetings (July 29 hold added) | 62.6% | −0.4pp |
+
+Dropping a meeting *raised* the estimate. The dropped meeting was pinned at
+10.7%, far below the 37.8% hawkish emission, so it contributed almost no hike
+probability while still consuming one step of posture decay away from the
+hawkish initial state. Removing it left the three remaining meetings starting
+closer to `hawkish_bias`. The retrain then shaved 0.4pp: adding a hawkish-posture
+*hold* nudged the hawkish hike emission down (0.386 → 0.378) while raising
+hawkish self-persistence slightly (0.814 → 0.818).
+
+**Archived old values from this step:** HMM base 62.5% (83 meetings, four
+remaining, July pinned at 10.7%, seed 20260716). The blend-layer values retired
+the same day — the 87.1% anchor, the +15.0pp adjustment and the 77.5% persisted
+probability — are tabulated once in "The blend layer, retired" below rather than
+duplicated here.
+
+### The blend layer, retired
+
+Forecast #5 carried a tier 3 layer that took the HMM output as its base rate and
+moved it toward a live market price:
+
+> **adjustment = 0.60 × (market anchor − HMM base)**
+
+That layer was **retired on 2026-07-29**. The reasoning is worth stating in full,
+because the decision was not "the adjustment got small so we dropped it."
+
+**The blend existed to correct the HMM toward a number that may never have
+existed.** Its anchor was 87.1% P(≥1 hike), stated as CME FedWatch's
+complement of a 12.9% P(0 hikes by December) as of 2026-07-21. On re-audit that
+figure could not be verified. The FedWatch tool itself was unreachable
+(`cmegroup.com` timed out; the rendered page never loaded the probability
+widget), and the 87.1% — along with an adjacent "32% one hike / 40% two / 18%
+three" December distribution summing to roughly the same place — appeared **only
+in search-engine synthesis, never in the body of any article actually read**. The
++15pp adjustment was therefore a 60%-weighted correction toward an unsourced
+quantity, and the blend's stated justification ("the market knows everything
+2026-specific") was doing work on behalf of a price no one could produce.
+
+**What replaced it is stronger than a blend.** Polymarket's *"Fed rate hike in
+2026?"* resolves YES if the upper bound of the target range is increased at any
+point between 2026-01-01 and the December 2026 meeting — the *same event* #5 asks
+about, read off the market's own rules text against `forecasts.py`'s
+`resolution_criteria`, not a proxy. Post-decision on 2026-07-29 at 15:35 ET it
+traded bid 0.62 / ask 0.63 on $5.16M volume: **62.5%** (`MARKET_CUMULATIVE_*`).
+The HMM, which sees no market data at any point, computes **62.6%**. Two methods
+sharing no inputs, converging to within a rounding error.
+
+Blending those two numbers produces a −0.1pp "correction," which is a no-op
+dressed as a method. Worse, keeping the layer would misrepresent what happened:
+it would present an agreement that was *found* as though it had been
+*manufactured*. A blend is the right tool when two estimates disagree and each
+has a known defect. When an independent structural model and a liquid direct
+market land on the same number, the correct action is to report the model's own
+answer and show the market beside it as the check that it is.
+
+So: the HMM output is authoritative, and the market reads — the 62.5% direct
+market and the reported CME FedWatch September read — are displayed as
+cross-checks in the same primary-plus-cross-check shape forecast #1 uses for its
+reference-class estimate. They are no longer inputs. `MEETING_HIKE_PROBABILITY_OVERRIDES`
+is empty and the tier 3 layer is gone, so **no market price enters forecast #5
+through any channel at all** — which is the precondition for the convergence
+meaning anything.
+
+**A note on the surviving CME read.** It is kept visible *because* it is the
+discordant one: 72% for a September +25bp, against Kalshi 52.5% and Polymarket
+52.4% for the same meeting priced within the same hour — a ~20pp gap between
+sources both quoting live pricing. It is also second-hand, reported by
+[Kiplinger's live FOMC blog](https://www.kiplinger.com/) (up from ~55%
+pre-announcement and ~30% a month earlier) and corroborated by TheStreet, since
+the tool was not reachable first-party. That is the same ordering as the July
+meeting, where FedWatch showed ~33% against Polymarket's 10.7% and the Fed held.
+Labeled as reported-not-scraped everywhere it appears.
+
+### Named finding: the independence error is the price of correlation
+
+This is the finding that *explains* the convergence, and the reason the direct
+market validates the HMM's structure rather than merely its answer.
+
+Chaining the three live per-meeting market hike probabilities (52.5%, 26.3%,
+31.7%) under `p_at_least_one_hike`'s independence assumption gives:
+
+| Method (all from the same 2026-07-29 15:35 ET snapshot) | P(≥1 hike) |
+| --- | --- |
+| Live per-meeting prices, chained as independent | **76.1%** |
+| Direct market on the joint event | **62.5%** |
+| HMM + Monte Carlo (no market inputs) | **62.6%** |
+
+**The 13.6pp gap is the market pricing correlation between meetings.** Both
+market figures come from real money on the same afternoon, so the wedge is not
+staleness, a data error, or two different questions — it is the difference between
+`1 − Π(1 − pᵢ)` and what traders will actually pay on the joint event. It is
+positive because policy is regime-persistent: the conditions that produce a
+September hike are largely the conditions that produce an October one, so hike
+outcomes are positively correlated and treating them as independent overstates
+the chance of at least one.
+
+The HMM lands at 62.6% rather than near 76% **because its latent posture chain
+generates exactly that correlation.** Hawkish self-persistence of 0.818 means the
+three remaining meetings are not three independent draws at the 37.8%
+hawkish emission — they are three draws from a state that mostly stays put, which
+concentrates outcomes into "hikes clustered" and "no hikes at all" and thins the
+"exactly one, in isolation" mass. Run the same three meetings independently at
+market prices and you get 76.1%; run them through the posture chain and you get
+62.6%; ask the market directly and you get 62.5%.
+
+That is the substantive point. The direct market is not simply corroborating a
+number. It is confirming that **modeling meeting-to-meeting correlation is
+required to price this question**, and putting a size on how much it is worth:
+13.6 percentage points. The state-dependence delta the module prints (−13.5pp
+versus flat independent chaining) is the same quantity computed from the model
+side, and it agrees with the market's to within 0.1pp. Two independent routes to
+the correlation premium.
+
+The independent-chaining figure is therefore retained *only* as this measurement,
+in `tier1_market.__main__`'s comparison table. It is strictly worse information
+than the direct market for answering #5 and is never used as an estimate.
+
+**Archived values from the retired layer:**
+
+| Item | Archived value |
+| --- | --- |
+| Blend rule | adjustment = 0.60 × (market anchor − HMM base) |
+| Market anchor | 87.1% (CME FedWatch cumulative, as of 2026-07-21, unverifiable) |
+| Tier 3 adjustment | +15.0pp |
+| HMM base at the time | 62.5% (83 meetings, four remaining, July pinned at 10.7%, 5,000 paths, seed 20260716) |
+| Persisted authoritative probability | 77.5% |
+| Code | `forecast5_blended_probability_pct()`, `_persist_forecast5_blend()` (`tier1_market.py`); `forecast5_tier3_estimate()`, `_render_tier3_blend()` (`tui.py`) |
+| Config | `_model_state.tier3["5"]` |
+
+The config dict is archived verbatim under the top-level
+`"_archived_model_state"` key in `forecast_state.json`, in a commented block near
+`tui.DEFAULT_MODEL_STATE`, and the retired functions in a commented block in
+`tier1_market.py`. Nothing was deleted.
+
+### The dissent adjustment was evaluated and declined
+
+See the dissent-blindness limitation above for why the 9–3 vote is a real signal
+that this model cannot see. It is **not** sized as an adjustment, for one reason:
+**there is no defensible way to size it.**
+
+Three unified hawkish dissents is roughly a once-a-decade event — 2026-07-29 was
+the first such vote since September 2016 — and the two clean modern precedents
+disagree about what follows. September 2016 (George, Mester, Rosengren, each
+preferring a hike) was followed by a hike two meetings later, in December 2016.
+August–November 2011 (Fisher, Kocherlakota, Plosser, opposing further
+accommodation) was followed by *more* easing and no hike for over four years. One
+hit, one miss, n ≈ 2, pointing opposite directions. Thornton and Wheelock's
+dissent history (St. Louis Fed, 2014) is descriptive, and no study establishing
+predictive value of dissent counts for subsequent rate moves was found. A
+reference class of two split cases supports a direction of interest, not a
+magnitude — so no magnitude is applied. This is the same discipline that declined
+the Bayesian refinement on #6: an adjustment whose size would be invented is
+worse than no adjustment, because it launders a guess into the arithmetic.
+
+**A second argument was withdrawn.** An earlier version of this section also
+argued that the market anchor was a *post-decision* price — Polymarket printed
+62.5% at 3:35 PM, ninety minutes after the 2:00 PM statement disclosed the
+dissents — so the signal was already inside the anchor and a factor on top would
+double-count it. **That argument died with the blend.** It was valid only while a
+market price was an input to #5. A pure HMM contains no market price and
+genuinely cannot see voting dispersion through any channel, so "already priced
+in" is not available as a reason. The decision rests on the reference class
+alone; recording the withdrawal because a correct conclusion resting on a
+now-false premise is a latent error.
+
+This also makes the dissent-blindness limitation **more** load-bearing than when
+it was written. While the blend existed, the model at least *indirectly* absorbed
+voting information through a post-decision price. With the blend retired that
+channel is closed: there is now no path whatsoever by which forecast #5 can see
+that three officials voted to hike immediately. The limitation is unmitigated,
+and it is documented rather than patched.
+
 ## Forecast #6 — Headline PCE inflation ≤ 3.5% by Dec 2026
 
 **Authoritative probability: 35% (YES = PCE YoY at or below 3.5% at the Dec 2026

@@ -90,7 +90,14 @@ FORECASTS = [
         question="Does the Fed raise rates at least once by year-end 2026?",
         resolution_date="2026-12-31",
         resolution_criteria="YES if fed funds target range is raised at any 2026 meeting; NO if held/cut all year.",
-        tiers=[1, 3],
+        # Was [1, 3]. The tier-3 market-blend layer was RETIRED on 2026-07-29 and #5
+        # is now a pure tier-1 HMM whose Monte Carlo output is the authoritative
+        # probability; the market reads it used to blend toward are displayed as
+        # cross-checks on the tier-1 screen instead. Retiring the layer removes a
+        # model view, so the slate's model-view count is 15, not 16. The archived
+        # config lives under "_archived_model_state" in forecast_state.json, in a
+        # commented block near tui.DEFAULT_MODEL_STATE, and in methodology_notes.md #5.
+        tiers=[1],
     ),
     Forecast(
         id=6,

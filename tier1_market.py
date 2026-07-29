@@ -35,29 +35,97 @@ from fomc_history import (
 
 
 REMAINING_2026_MEETING_DATES = (
-    "2026-07-29",
     "2026-09-16",
     "2026-10-28",
     "2026-12-09",
 )
 DEFAULT_MONTE_CARLO_PATHS = 10_000
 DEFAULT_RANDOM_SEED = 20260716
-# Single-meeting live-market P(hike) for the imminent July 29, 2026 meeting, as of
-# 2026-07-21: Polymarket (a ~$78M market) 10.7%, rateprobability.com 9.6%. We adopt
-# the deeper Polymarket read. This replaces the stale 0.251, which predated the
-# July repricing driven by the May 2026 CPI print (4.2% YoY).
-CME_FEDWATCH_JULY_29_HIKE_PROBABILITY = 0.107
-CME_FEDWATCH_JULY_29_AS_OF = "2026-07-21"
-CME_FEDWATCH_JULY_29_SOURCE = "Polymarket ($78M market) 10.7%; rateprobability.com 9.6%"
 
-# Per-meeting emission overrides. For an imminent, precisely-priced meeting we pin
-# P(hike) to the live market instead of drawing it from the HMM's unconditional
-# posture emissions (which would put ~39% on a hawkish-state meeting -- far above
-# what the market actually prices for July). Sept/Oct/Dec have no comparably clean
-# single-meeting read this far out, so they remain fully HMM-driven.
-MEETING_HIKE_PROBABILITY_OVERRIDES = {
-    "2026-07-29": CME_FEDWATCH_JULY_29_HIKE_PROBABILITY,
+# ---------------------------------------------------------------------------
+# ARCHIVED 2026-07-29 -- superseded, retained for provenance (same archival
+# pattern used for the superseded judgment estimates in methodology_notes.md).
+#
+# The July 29, 2026 FOMC meeting RESOLVED AS A HOLD: the target range was left
+# at 3.50-3.75%, voted 9-3, with Hammack, Kashkari and Logan dissenting in
+# favour of +25bp. The meeting therefore leaves the forward sample space and
+# enters the HMM training set (fomc_history._RAW_MEETINGS).
+#
+# The 10.7% below was the PRE-MEETING MARKET PRICE as of 2026-07-21, used to pin
+# July's simulated hike odds. Two things are worth recording about it:
+#   * It was materially too low by the time the meeting arrived. CME FedWatch
+#     had roughly a 1-in-3 chance of a July hike on the morning of the meeting
+#     (CNBC, 2026-07-29), and Kalshi/Polymarket had repriced to ~55% odds of a
+#     *September* hike pre-announcement. An eight-day-old pin on a fast-moving
+#     meeting decayed badly.
+#   * It was nonetheless directionally right: the Fed held. Prediction markets
+#     were closer to the outcome than CME FedWatch's 33%, which is the same
+#     ordering seen in the pre-meeting divergence noted in the original comment.
+# See methodology_notes.md, forecast #5, "The July 29, 2026 update".
+ARCHIVED_JULY_29_HIKE_PROBABILITY = 0.107
+ARCHIVED_JULY_29_AS_OF = "2026-07-21"
+ARCHIVED_JULY_29_SOURCE = "Polymarket ($78M market) 10.7%; rateprobability.com 9.6%"
+ARCHIVED_JULY_29_OVERRIDES = {"2026-07-29": ARCHIVED_JULY_29_HIKE_PROBABILITY}
+ARCHIVED_JULY_29_OUTCOME = "hold (9-3, three dissents preferring +25bp)"
+# ---------------------------------------------------------------------------
+
+# Per-meeting emission overrides. The July pin above was justified by the meeting
+# being IMMINENT and precisely priced. Nothing on the remaining calendar meets
+# that bar: September is 48 days out, and October/December are thinly traded. The
+# live per-meeting reads below are therefore recorded as a CROSS-CHECK only and
+# are deliberately NOT pinned into the simulation -- the HMM stays a genuinely
+# independent historical anchor. With the tier-3 blend retired, no market price
+# enters forecast #5 through any channel at all, which is what makes the HMM's
+# agreement with the direct market meaningful rather than circular.
+MEETING_HIKE_PROBABILITY_OVERRIDES: dict[str, float] = {}
+
+# Live per-meeting P(hike) reads, 2026-07-29 ~15:25-15:35 ET (post-decision),
+# from the Kalshi (KXFEDDECISION-*) and Polymarket public APIs; bucket mid-prices
+# normalised across each meeting's mutually-exclusive outcomes. Recorded so that
+# the model's "September is the live meeting" assumption is directly checkable.
+MARKET_PER_MEETING_HIKE_PROBABILITY = {
+    "2026-09-16": 0.525,   # Kalshi 52.5% / Polymarket 52.4%; cf. CME FedWatch 72%
+    "2026-10-28": 0.263,   # Kalshi 27.6% / Polymarket 25.1%
+    "2026-12-09": 0.317,   # Kalshi only; Polymarket has no December meeting market
 }
+MARKET_PER_MEETING_AS_OF = "2026-07-29T15:35-04:00"
+
+# CROSS-CHECK (not an input): the reported CME FedWatch read for September.
+# The FedWatch tool itself was not directly reachable -- cmegroup.com timed out
+# and the rendered page never loaded the probability widget -- so this is the
+# figure as reported by financial press quoting the tool, not a first-party
+# scrape, and it is labeled as such wherever it is displayed.
+#
+# It disagrees sharply with the real-money prediction markets above: 72% versus
+# Kalshi 52.5% / Polymarket 52.4% for the same meeting, a ~20pp gap between two
+# sources both quoting live pricing within the same hour. That is the same
+# CME-runs-hot-versus-prediction-markets ordering seen pre-July (FedWatch 33% vs
+# Polymarket 10.7%, where the markets were closer to the realized hold). Kept
+# visible precisely because it is the discordant read.
+MARKET_CME_FEDWATCH_SEPTEMBER_HIKE_PROBABILITY = 0.72
+MARKET_CME_FEDWATCH_AS_OF = "2026-07-29 (~1h post-decision)"
+MARKET_CME_FEDWATCH_SOURCE = (
+    "CME Group FedWatch as reported by Kiplinger's live FOMC blog, 2026-07-29 "
+    "(72% for a September +25bp, up from ~55% pre-announcement and ~30% a month "
+    "earlier); corroborated by TheStreet. Tool not reachable first-party."
+)
+
+# CROSS-CHECK (not an input): a DIRECT market on forecast #5's exact question
+# ("YES if the fed funds target range is raised at any 2026 meeting"). Polymarket
+# "Fed rate hike in 2026?" resolves YES if the upper bound of the target range is
+# increased at any point between 2026-01-01 and the December 2026 meeting -- the
+# same event, not a proxy.
+#
+# This was briefly the anchor of a tier-3 blend layer (which itself replaced an
+# unverifiable 87.1% CME cumulative figure). The blend is now RETIRED -- see the
+# archive block above forecast5 persistence below. The 62.5% is retained as a
+# displayed cross-check against the HMM's independent 62.6%, not as an input.
+MARKET_CUMULATIVE_HIKE_PROBABILITY = 0.625
+MARKET_CUMULATIVE_AS_OF = "2026-07-29T15:35-04:00"
+MARKET_CUMULATIVE_SOURCE = (
+    "Polymarket 'Fed rate hike in 2026?' (bid 0.62 / ask 0.63, $5.16M volume), "
+    "post-decision 2026-07-29 15:35 ET, via gamma-api.polymarket.com"
+)
 
 
 @dataclass
@@ -248,20 +316,37 @@ def print_hmm_report(
     comparison = Table(title="Old flat chaining vs. state-dependent HMM", box=box.ROUNDED)
     comparison.add_column("Method")
     comparison.add_column("P(at least one hike)", justify="right")
-    comparison.add_row("Flat independent chaining (placeholder meeting inputs)", f"{flat_probability * 100:.1f}%")
+    comparison.add_row("Flat independent chaining (live per-meeting market prices)", f"{flat_probability * 100:.1f}%")
     comparison.add_row("HMM + Monte Carlo", f"{result.probability_at_least_one_hike * 100:.1f}%")
+    comparison.add_row(
+        "Direct market on the same joint event",
+        f"{MARKET_CUMULATIVE_HIKE_PROBABILITY * 100:.1f}%",
+    )
     console.print(comparison)
+    console.print(
+        "[dim]Chaining the live per-meeting prices as if independent overstates the "
+        f"direct market on the identical event by "
+        f"{(flat_probability - MARKET_CUMULATIVE_HIKE_PROBABILITY) * 100:+.1f}pp -- a "
+        "measurement of the independence error p_at_least_one_hike documents, positive "
+        "because policy decisions are regime-correlated.[/dim]"
+    )
     console.print(
         "Hawkish-state cross-check: "
         f"HMM P(hike | hawkish) = {model.emission_matrix['hawkish_bias']['hike'] * 100:.1f}% | "
-        "July 29 meeting-specific market P(hike) = "
-        f"{CME_FEDWATCH_JULY_29_HIKE_PROBABILITY * 100:.1f}% "
-        f"(as of {CME_FEDWATCH_JULY_29_AS_OF}; {CME_FEDWATCH_JULY_29_SOURCE})"
+        "live per-meeting market P(hike) = "
+        + ", ".join(
+            f"{meeting_date[5:]} {probability * 100:.1f}%"
+            for meeting_date, probability in MARKET_PER_MEETING_HIKE_PROBABILITY.items()
+        )
+        + f" (as of {MARKET_PER_MEETING_AS_OF})"
     )
     console.print(
         "[dim]The HMM emission is an unconditional historical base rate, while the "
-        "market figure is meeting-specific live pricing; divergence is expected, not "
-        "an error. July 29's simulated hike odds are pinned to this market read.[/dim]"
+        "market figures are meeting-specific live pricing; divergence is expected, "
+        "not an error. No meeting is pinned any more -- the July 29 pin is archived "
+        "(ARCHIVED_JULY_29_*) now that the meeting has resolved as a hold, and no "
+        "market price enters the model at any point: every market figure printed here "
+        "is a cross-check on an independently computed number.[/dim]"
     )
 
     histogram = Table(title=f"Monte Carlo hike-count distribution ({result.paths:,} paths)", box=box.SIMPLE)
@@ -280,7 +365,10 @@ def print_hmm_report(
     if DATA_GAPS:
         console.print(f"[yellow]Historical data gaps: {list(DATA_GAPS)}[/yellow]")
     else:
-        console.print("[green]Historical data gaps: none across the 83 regular training meetings.[/green]")
+        console.print(
+            "[green]Historical data gaps: none across the "
+            f"{model.training_meetings} regular training meetings.[/green]"
+        )
 
 
 def pce_threshold_probability(current_pce: float, target: float,
@@ -315,37 +403,68 @@ def electricity_price_check(baseline: float, current: float, threshold_pct: floa
     }
 
 
-def forecast5_blended_probability_pct(hmm_probability_pct: float) -> float | None:
-    """Forecast #5's authoritative number: the HMM output blended toward market
-    pricing via the tier-3 adjustment layer stored in forecast_state.json
-    (_model_state.tier3["5"] -- the same config tui.py's blend layer edits).
+# ===========================================================================
+# ARCHIVED 2026-07-29 -- the forecast #5 TIER-3 MARKET-BLEND LAYER, retired.
+# Retained here for provenance (same archival pattern as ARCHIVED_JULY_29_*
+# above and the superseded estimates in methodology_notes.md). Forecast #5 is
+# now a PURE HMM: the Monte Carlo output IS the authoritative probability, and
+# the market reads are displayed cross-checks only.
+#
+# WHY IT WAS RETIRED, in full, because the reasoning is the point:
+#
+# The blend existed to correct the HMM toward a market anchor of 87.1% that
+# could not be verified -- it appeared only in search-engine synthesis, never in
+# any article body that was actually read. The correction was toward a number
+# that may never have existed. What replaced it is stronger than a blend: a
+# liquid direct market on the identical resolution question prices 62.5% and the
+# HMM computes 62.6% -- two methods sharing no inputs, converging to within a
+# rounding error. A blend between two such numbers is a no-op dressed up as a
+# method (it computed a -0.1pp "correction"), and keeping it would imply the
+# agreement was manufactured rather than found.
+#
+# The mechanical reason they converge is the finding worth recording. Chaining
+# the live per-meeting market prices under an independence assumption gives
+# 76.1%, against 62.5% from the direct market on the joint event. That 13.6pp
+# gap IS the market pricing correlation between meetings. The HMM lands where it
+# does because its sticky posture states (hawkish self-persistence 0.818)
+# generate exactly that correlation instead of treating meetings as independent
+# draws. So the direct market is not merely agreeing with the HMM's answer -- it
+# is validating the HMM's structural choice. See methodology_notes.md #5,
+# "Named finding: the independence error is the correlation price".
+#
+# ARCHIVED VALUES:
+#   forecast5_blended_probability_pct()  -- summed _model_state.tier3["5"]
+#     adjustments onto the HMM base; returned None when the config was absent.
+#   _persist_forecast5_blend()           -- wrote the blended value to #5 and
+#     refreshed tier3["5"].base_rate_pct to the HMM output.
+#   market anchor                        87.1% (CME FedWatch cumulative, as of
+#                                        2026-07-21, never verifiable)
+#   tier-3 adjustment                    +15.0pp ("~60% weight to the market",
+#                                        i.e. +15pp of a claimed 24.6pp gap)
+#   HMM base rate at the time            62.5% (5,000 paths, seed 20260716)
+#   persisted authoritative probability  77.5%
+#   blend rule                           adjustment = 0.60 x (anchor - base)
+# The full tier-3 config dict is archived under the top-level
+# "_archived_model_state" key in forecast_state.json and quoted verbatim in
+# methodology_notes.md #5.
+# ===========================================================================
 
-    The raw HMM Monte Carlo figure is NOT the authoritative probability; a
-    previous revision of this __main__ persisted it directly and silently
-    clobbered the blended value. Returns None when the stored blend config is
-    unavailable, in which case nothing should be persisted from here.
+
+def _persist_forecast5_hmm(hmm_probability_pct: float) -> None:
+    """Persist the pure HMM probability as forecast #5's authoritative value and
+    refresh the stored path count, so the standalone script and
+    tui.Tier1ModelScreen.rerun_simulation write the same two things.
+
+    There is no longer a tier-3 layer to reconcile with: what the HMM computes is
+    what #5 is. The silent-overwrite bug this replaced was not "the raw HMM value
+    got written" -- it was "a value got written by a plain run at all". That is
+    what the __main__ guard below still prevents.
     """
-    if not FORECAST_STATE_PATH.exists():
-        return None
+    set_forecast_probability(5, round(hmm_probability_pct, 1))
     state = json.loads(FORECAST_STATE_PATH.read_text(encoding="utf-8"))
-    config = state.get("_model_state", {}).get("tier3", {}).get("5")
-    if not isinstance(config, dict) or "adjustments" not in config:
-        return None
-    blended = hmm_probability_pct
-    for factor in config["adjustments"]:
-        magnitude = float(factor["magnitude_pts"])
-        blended += magnitude if factor["direction"] == "up" else -magnitude
-    return max(0.0, min(100.0, blended))
-
-
-def _persist_forecast5_blend(hmm_probability_pct: float, blended_pct: float) -> None:
-    """Persist the blended #5 probability and refresh the stored blend layer's
-    base rate to the HMM output just computed -- the same two writes
-    tui.Tier1ModelScreen.rerun_simulation performs, so the standalone script
-    and the TUI stay consistent."""
-    set_forecast_probability(5, round(blended_pct, 1))
-    state = json.loads(FORECAST_STATE_PATH.read_text(encoding="utf-8"))
-    state["_model_state"]["tier3"]["5"]["base_rate_pct"] = round(hmm_probability_pct, 1)
+    state.setdefault("_model_state", {}).setdefault("tier1", {}).setdefault("5", {})[
+        "simulations"
+    ] = DEFAULT_MONTE_CARLO_PATHS
     FORECAST_STATE_PATH.write_text(
         json.dumps(state, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -355,10 +474,16 @@ def _persist_forecast5_blend(hmm_probability_pct: float, blended_pct: float) -> 
 if __name__ == "__main__":
     # The legacy comparison retains placeholder per-meeting market inputs. It is
     # printed for methodological contrast, but it is not persisted.
+    # No longer placeholders: these are the live 2026-07-29 post-decision reads in
+    # MARKET_PER_MEETING_HIKE_PROBABILITY. The contrast this block draws is now the
+    # honest one -- independent chaining of real per-meeting prices versus the
+    # direct market on the same joint event (MARKET_CUMULATIVE_HIKE_PROBABILITY),
+    # which is the cleanest available measurement of the independence error that
+    # p_at_least_one_hike's docstring flags.
     meetings_2026 = [
-        FedMeeting("2026-09-16", p_hike=0.35, p_hold=0.55, p_cut=0.10),   # placeholder, pull live
-        FedMeeting("2026-10-28", p_hike=0.30, p_hold=0.60, p_cut=0.10),  # placeholder, pull live
-        FedMeeting("2026-12-09", p_hike=0.25, p_hold=0.65, p_cut=0.10),  # placeholder, pull live
+        FedMeeting("2026-09-16", p_hike=0.525, p_hold=0.455, p_cut=0.020),
+        FedMeeting("2026-10-28", p_hike=0.263, p_hold=0.640, p_cut=0.097),
+        FedMeeting("2026-12-09", p_hike=0.317, p_hold=0.624, p_cut=0.059),
     ]
     flat_probability = p_at_least_one_hike(meetings_2026)
     hmm = estimate_fed_posture_hmm()
@@ -367,25 +492,57 @@ if __name__ == "__main__":
     print_hmm_report(hmm, simulation, flat_probability)
 
     console = Console()
-    blended = forecast5_blended_probability_pct(hmm_probability_pct)
-    if blended is not None:
-        console.print(
-            f"Tier-3 blend layer: HMM {hmm_probability_pct:.1f}% -> authoritative "
-            f"[bold]{blended:.1f}%[/bold] (market-pricing adjustment from "
-            "forecast_state.json _model_state.tier3['5'])"
-        )
-    # A plain run only prints (repo convention shared with the other model
-    # modules). Persisting the raw HMM number here used to clobber the blended
-    # authoritative value -- persistence is now explicit and blend-aware.
+    console.print(
+        f"Forecast #5 authoritative probability: [bold]{hmm_probability_pct:.1f}%[/bold] "
+        f"(pure HMM, {simulation.paths:,} paths, seed {DEFAULT_RANDOM_SEED})\n"
+        f"[dim]Cross-checks (not inputs): direct market on the identical question "
+        f"{MARKET_CUMULATIVE_HIKE_PROBABILITY * 100:.1f}% "
+        f"(as of {MARKET_CUMULATIVE_AS_OF}) · CME FedWatch September "
+        f"{MARKET_CME_FEDWATCH_SEPTEMBER_HIKE_PROBABILITY * 100:.0f}% as reported "
+        f"({MARKET_CME_FEDWATCH_AS_OF}, tool not reachable first-party). The tier-3 "
+        "market-blend layer is retired; see the ARCHIVED block above.[/dim]"
+    )
+
+    # PERSISTENCE GUARD. The original silent-overwrite bug was that a plain run
+    # of this module wrote to forecast_state.json at all. That is still the thing
+    # being prevented: nothing below the `--persist` check executes without the
+    # explicit flag, matching the repo convention that plain runs only print.
+    #
+    # The guard's second job changed when the blend was retired. It used to refuse
+    # when _model_state.tier3["5"] was MISSING (because the raw HMM value was not
+    # then the authoritative quantity). That test is now inverted: the HMM value
+    # IS authoritative, so the dangerous state is a blend config having REAPPEARED
+    # -- which would mean two layers each claiming to define #5 and no way to tell
+    # from here which one a writer intended. It refuses in that case rather than
+    # guessing.
     if "--persist" in sys.argv[1:]:
-        if blended is None:
+        if not FORECAST_STATE_PATH.exists():
             console.print(
-                "[red]Refusing to persist: the tier-3 blend config for forecast #5 "
-                "(_model_state.tier3['5']) is missing from forecast_state.json, so "
-                "only the raw HMM number could be written -- which is not the "
-                "authoritative quantity. Restore the blend config (or set the "
-                "probability from the TUI) instead.[/red]"
+                "[red]Refusing to persist: forecast_state.json does not exist, so "
+                "there is no authoritative file to update.[/red]"
             )
         else:
-            _persist_forecast5_blend(hmm_probability_pct, blended)
-            console.print(f"[bold]Persisted blended {blended:.1f}% to forecast #5.[/bold]")
+            _state = json.loads(FORECAST_STATE_PATH.read_text(encoding="utf-8"))
+            _revived_blend = _state.get("_model_state", {}).get("tier3", {}).get("5")
+            if isinstance(_revived_blend, dict) and _revived_blend.get("adjustments"):
+                console.print(
+                    "[red]Refusing to persist: a tier-3 blend config for forecast #5 "
+                    "(_model_state.tier3['5']) is present again with adjustments, but "
+                    "the blend layer was retired on 2026-07-29 and #5 is a pure HMM. "
+                    "Two layers now claim to define #5 and this script cannot tell "
+                    "which was intended. Remove the revived config (it is archived "
+                    "under _archived_model_state) or restore the blend deliberately "
+                    "in code before persisting.[/red]"
+                )
+            else:
+                _old = _state.get("5")
+                _persist_forecast5_hmm(hmm_probability_pct)
+                console.print(
+                    f"[bold]Persisted forecast #5: {_old} -> "
+                    f"{hmm_probability_pct:.1f}%[/bold] (pure HMM)"
+                )
+    else:
+        console.print(
+            "[dim]Nothing written. Pass --persist to write this probability to "
+            "forecast_state.json.[/dim]"
+        )

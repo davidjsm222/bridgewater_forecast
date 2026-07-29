@@ -118,6 +118,14 @@ _RAW_MEETINGS = (
     ("2026-03-18", "hold", 3.625),
     ("2026-04-29", "hold", 3.625),
     ("2026-06-17", "hold", 3.625),
+    # 2026-07-29: HOLD at 3.50-3.75% (midpoint 3.625), voted 9-3. Hammack,
+    # Kashkari and Logan dissented, each preferring +25bp. This was a non-SEP
+    # meeting, so it carries no dot plot of its own; per the carry-forward rule
+    # documented in ``build_history`` it inherits the 2026-06-17 SEP (2026
+    # median 3.8%), giving +41.2 bps annualized -> hawkish_bias. No new rule was
+    # invented for it. Source:
+    # https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm
+    ("2026-07-29", "hold", 3.625),
 )
 
 
@@ -208,6 +216,14 @@ def build_history() -> tuple[tuple[FOMCMeetingHistory, ...], tuple[str, ...]]:
     gaps = []
     for meeting_date, action, target_midpoint in _RAW_MEETINGS:
         meeting_day = date.fromisoformat(meeting_date)
+        # NON-SEP MEETING RULE (carry-forward, not interpolation, not exclusion):
+        # only four of the eight annual meetings publish a dot plot. Every meeting
+        # in the training set -- SEP and non-SEP alike -- is labeled off the most
+        # recent SEP at or before its own date, i.e. the last eligible SEP below.
+        # A non-SEP meeting therefore reuses the previous SEP's median dot while
+        # its own target midpoint and days-to-year-end still move, so its
+        # annualized change (and hence its posture) is not merely copied. This is
+        # the rule applied to 2026-07-29.
         eligible_seps = [sep for sep in _SEP_MEDIANS if sep[0] <= meeting_date]
         if not eligible_seps:
             gaps.append(f"{meeting_date}: no prior SEP available")
@@ -243,7 +259,11 @@ def build_history() -> tuple[tuple[FOMCMeetingHistory, ...], tuple[str, ...]]:
 
 FOMC_HISTORY, DATA_GAPS = build_history()
 
-CURRENT_AS_OF_DATE = date(2026, 7, 16)
+# Advanced 2026-07-16 -> 2026-07-29 after the July FOMC. The posture label is
+# unchanged by the move (hawkish_bias either way: +38.1 bps on 7/16, +41.2 bps
+# on 7/29), so the HMM's initial state is unaffected; the date is refreshed only
+# so the reported "current posture" line matches the latest completed meeting.
+CURRENT_AS_OF_DATE = date(2026, 7, 29)
 CURRENT_TARGET_MIDPOINT = 3.625
 CURRENT_SEP_DATE = "2026-06-17"
 CURRENT_MEDIAN_DOT_RATE = 3.8
