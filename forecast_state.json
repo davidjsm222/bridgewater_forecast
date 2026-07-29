@@ -4,15 +4,38 @@
   "2": 61.0,
   "3": 5.5,
   "4": 57.0,
-  "5": 77.5,
+  "5": 62.6,
   "6": 35.0,
   "7": 1.9,
   "8": 9.0,
   "9": 2.3,
+  "_archived_model_state": {
+    "_note": "ARCHIVED, not deleted. Superseded model configs are retained here for provenance rather than dropped; the live config lives under _model_state. tui.load_model_state()/persist_model_state() only read and write _model_state, so entries here are inert and survive TUI writes.",
+    "tier3_5_market_blend_layer": {
+      "blend_rule": "adjustment = 0.60 x (market anchor - HMM base)",
+      "config": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 15.0,
+            "name": "CME FedWatch cumulative market pricing",
+            "rationale": "CME FedWatch (as of 2026-07-21) prices P(0 hikes by Dec) = 12.9%, i.e. 87.1% P(>=1 hike) -- a +24.6pp gap over the HMM's unconditional 62.5%. A real, current, market-priced signal incorporating all 2026-specific information the HMM's pooled history ignores. Sized as a partial blend (~60% weight to the market, +15pp of the 24.6pp gap), NOT a full override: the market's per-meeting hazard spikes to 61.5% at September (possible overreaction to the May 2026 CPI print) and its July read (21.9%) diverges from Polymarket's 10.7%, so the historical anchor is retained. Dot-plot posture and inflation are deliberately NOT added as separate factors -- they are already priced into this CME number (no double-count)."
+          }
+        ],
+        "base_rate_pct": 62.5,
+        "base_rate_source": "This model's own unconditional historical estimate: the Fed posture HMM's Monte Carlo P(at least one hike by year-end 2026), 5,000 paths, seed 20260716 (tier1_market.py). NOT an independent number -- the HMM output IS the base rate for this layer.",
+        "reference_class": "P(>=1 rate hike in 2026) from this project's own Fed-posture HMM (an unconditional historical base rate), blended toward current market pricing -- not a separate reference-class frequency"
+      },
+      "hmm_base_rate_at_retirement_pct": 62.6,
+      "persisted_authoritative_probability_pct": 77.5,
+      "reason": "Forecast #5 became a pure HMM. This layer blended the HMM base toward a market anchor of 87.1% (CME FedWatch cumulative, as of 2026-07-21) that could not be verified -- it appeared only in search-engine synthesis, never in an article body. The correction was toward a number that may never have existed. A liquid DIRECT market on forecast #5's identical resolution question then priced 62.5% against the HMM's independent 62.6%, making the blend a -0.1pp no-op and, worse, making a found agreement look manufactured. The 13.6pp gap between independent chaining of live per-meeting prices (76.1%) and that direct joint-event market (62.5%) is the market's price of correlation between meetings, which is exactly what the HMM's sticky posture states generate -- so the direct market validates the HMM's structure, not merely its answer. See methodology_notes.md #5 and the ARCHIVED block in tier1_market.py.",
+      "retired_on": "2026-07-29"
+    }
+  },
   "_model_state": {
     "tier1": {
       "5": {
-        "simulations": 5000
+        "simulations": 10000
       }
     },
     "tier2": {},
@@ -110,19 +133,6 @@
         "base_rate_pct": 50.0,
         "base_rate_source": "Judgment starting point, stated as such: there is no historical frequency for 'beating a specific analyst's forward estimate', so 50% is the deliberate uninformed prior. Bridgewater's ~150bp is itself a forward judgment call, not a historical baseline; with no reason to think it is biased high, even odds is the honest anchor.",
         "reference_class": "outcomes relative to a credible, forward-looking expert central estimate, absent specific evidence of bias"
-      },
-      "5": {
-        "adjustments": [
-          {
-            "direction": "up",
-            "magnitude_pts": 15.0,
-            "name": "CME FedWatch cumulative market pricing",
-            "rationale": "CME FedWatch (as of 2026-07-21) prices P(0 hikes by Dec) = 12.9%, i.e. 87.1% P(>=1 hike) -- a +24.6pp gap over the HMM's unconditional 62.5%. A real, current, market-priced signal incorporating all 2026-specific information the HMM's pooled history ignores. Sized as a partial blend (~60% weight to the market, +15pp of the 24.6pp gap), NOT a full override: the market's per-meeting hazard spikes to 61.5% at September (possible overreaction to the May 2026 CPI print) and its July read (21.9%) diverges from Polymarket's 10.7%, so the historical anchor is retained. Dot-plot posture and inflation are deliberately NOT added as separate factors -- they are already priced into this CME number (no double-count)."
-          }
-        ],
-        "base_rate_pct": 62.5,
-        "base_rate_source": "This model's own unconditional historical estimate: the Fed posture HMM's Monte Carlo P(at least one hike by year-end 2026), 5,000 paths, seed 20260716 (tier1_market.py). NOT an independent number -- the HMM output IS the base rate for this layer.",
-        "reference_class": "P(>=1 rate hike in 2026) from this project's own Fed-posture HMM (an unconditional historical base rate), blended toward current market pricing -- not a separate reference-class frequency"
       },
       "6": {
         "adjustments": [

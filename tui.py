@@ -23,9 +23,13 @@ from forecasts import FORECASTS, FORECAST_STATE_PATH, get, set_forecast_probabil
 from nuclear_competing_risks import nuclear_pathways_report
 from sovereign_ai_jumps import sovereign_ai_report
 from tier1_market import (
-    CME_FEDWATCH_JULY_29_AS_OF,
-    CME_FEDWATCH_JULY_29_HIKE_PROBABILITY,
-    CME_FEDWATCH_JULY_29_SOURCE,
+    MARKET_CME_FEDWATCH_AS_OF,
+    MARKET_CME_FEDWATCH_SEPTEMBER_HIKE_PROBABILITY,
+    MARKET_CUMULATIVE_AS_OF,
+    MARKET_CUMULATIVE_HIKE_PROBABILITY,
+    MARKET_CUMULATIVE_SOURCE,
+    MARKET_PER_MEETING_AS_OF,
+    MARKET_PER_MEETING_HIKE_PROBABILITY,
     DEFAULT_MONTE_CARLO_PATHS,
     DEFAULT_RANDOM_SEED,
     estimate_fed_posture_hmm,
@@ -471,47 +475,65 @@ DEFAULT_MODEL_STATE = {
                 },
             ],
         },
-        "5": {
-            # Tier-3 layer sitting ON TOP of #5's Tier-1 HMM. The HMM's own Monte
-            # Carlo output is the base rate here (not an independent reference
-            # class); the single adjustment blends that historical estimate toward
-            # current market pricing. The HMM model view is unchanged and remains
-            # the base-rate input. base_rate_pct is refreshed from the HMM whenever
-            # the simulation is rerun (see Tier1ModelScreen.rerun_simulation).
-            "reference_class": (
-                "P(>=1 rate hike in 2026) from this project's own Fed-posture HMM "
-                "(an unconditional historical base rate), blended toward current "
-                "market pricing -- not a separate reference-class frequency"
-            ),
-            "base_rate_pct": 62.5,
-            "base_rate_source": (
-                "This model's own unconditional historical estimate: the Fed posture "
-                "HMM's Monte Carlo P(at least one hike by year-end 2026), 5,000 paths, "
-                "seed 20260716 (tier1_market.py). NOT an independent number -- the HMM "
-                "output IS the base rate for this layer."
-            ),
-            "adjustments": [
-                {
-                    "name": "CME FedWatch cumulative market pricing",
-                    "direction": "up",
-                    "magnitude_pts": 15.0,
-                    "rationale": (
-                        "CME FedWatch (as of 2026-07-21) prices P(0 hikes by Dec) = "
-                        "12.9%, i.e. 87.1% P(>=1 hike) -- a +24.6pp gap over the HMM's "
-                        "unconditional 62.5%. A real, current, market-priced signal "
-                        "incorporating all 2026-specific information the HMM's pooled "
-                        "history ignores. Sized as a partial blend (~60% weight to the "
-                        "market, +15pp of the 24.6pp gap), NOT a full override: the "
-                        "market's per-meeting hazard spikes to 61.5% at September "
-                        "(possible overreaction to the May 2026 CPI print) and its July "
-                        "read (21.9%) diverges from Polymarket's 10.7%, so the historical "
-                        "anchor is retained. Dot-plot posture and inflation are "
-                        "deliberately NOT added as separate factors -- they are already "
-                        "priced into this CME number (no double-count)."
-                    ),
-                },
-            ],
-        },
+        # ===================================================================
+        # ARCHIVED 2026-07-29 -- tier3["5"], the forecast #5 MARKET-BLEND LAYER.
+        # Retired, not deleted: forecast #5 is now a PURE HMM whose Monte Carlo
+        # output IS the authoritative probability, and #5's tier list dropped to
+        # [1] in forecasts.py accordingly (this tier-3 view no longer exists).
+        # The market reads survive as displayed cross-checks on the tier-1 screen.
+        #
+        # The layer blended the HMM base toward a market anchor of 87.1% (CME
+        # FedWatch cumulative, as of 2026-07-21) that could not be verified -- it
+        # appeared only in search-engine synthesis, never in an article body. The
+        # correction was toward a number that may never have existed. A liquid
+        # DIRECT market on #5's identical resolution question then priced 62.5%
+        # against the HMM's independent 62.6%, so the blend became a -0.1pp no-op
+        # -- and keeping it would have made a found agreement look manufactured.
+        # Chaining live per-meeting prices as independent gives 76.1% versus that
+        # 62.5% joint-event market; the 13.6pp gap is the market's price of
+        # correlation between meetings, which is precisely what the HMM's sticky
+        # posture states generate. The direct market validates the HMM's
+        # structure, not just its answer.
+        #
+        # Verbatim archived config (blend rule: adjustment = 0.60 x (anchor - base);
+        # persisted authoritative probability 77.5%):
+        #   "5": {
+        #       "reference_class":
+        #           "P(>=1 rate hike in 2026) from this project's own Fed-posture "
+        #           "HMM (an unconditional historical base rate), blended toward "
+        #           "current market pricing -- not a separate reference-class "
+        #           "frequency",
+        #       "base_rate_pct": 62.5,
+        #       "base_rate_source":
+        #           "This model's own unconditional historical estimate: the Fed "
+        #           "posture HMM's Monte Carlo P(at least one hike by year-end "
+        #           "2026), 5,000 paths, seed 20260716 (tier1_market.py). NOT an "
+        #           "independent number -- the HMM output IS the base rate for "
+        #           "this layer.",
+        #       "adjustments": [{
+        #           "name": "CME FedWatch cumulative market pricing",
+        #           "direction": "up",
+        #           "magnitude_pts": 15.0,
+        #           "rationale":
+        #               "CME FedWatch (as of 2026-07-21) prices P(0 hikes by Dec) "
+        #               "= 12.9%, i.e. 87.1% P(>=1 hike) -- a +24.6pp gap over the "
+        #               "HMM's unconditional 62.5%. A real, current, market-priced "
+        #               "signal incorporating all 2026-specific information the "
+        #               "HMM's pooled history ignores. Sized as a partial blend "
+        #               "(~60% weight to the market, +15pp of the 24.6pp gap), NOT "
+        #               "a full override: the market's per-meeting hazard spikes "
+        #               "to 61.5% at September (possible overreaction to the May "
+        #               "2026 CPI print) and its July read (21.9%) diverges from "
+        #               "Polymarket's 10.7%, so the historical anchor is retained. "
+        #               "Dot-plot posture and inflation are deliberately NOT added "
+        #               "as separate factors -- they are already priced into this "
+        #               "CME number (no double-count).",
+        #       }],
+        #   },
+        # Also archived as structured JSON under the top-level
+        # "_archived_model_state" key in forecast_state.json, and quoted in
+        # methodology_notes.md #5.
+        # ===================================================================
         "2": {
             "reference_class": (
                 "First-year federal loan-based industrial-policy financing vehicles expanding committed "
@@ -743,21 +765,11 @@ def persist_model_state() -> None:
     )
 
 
-def forecast5_tier3_estimate(hmm_probability_pct: float) -> ReferenceClassEstimate:
-    """Build #5's Tier-3 blend layer with the HMM output as the base rate.
-
-    The HMM's Monte Carlo P(>=1 hike) is passed in as ``hmm_probability_pct`` so
-    the layer always blends the *current* HMM output (not a stale stored base
-    rate) with the market-pricing adjustment stored in MODEL_STATE.
-    """
-    config = MODEL_STATE["tier3"]["5"]
-    return ReferenceClassEstimate(
-        forecast_id=5,
-        reference_class=config["reference_class"],
-        base_rate_pct=hmm_probability_pct,
-        base_rate_source=config["base_rate_source"],
-        adjustments=[AdjustmentFactor(**factor) for factor in config["adjustments"]],
-    )
+# ARCHIVED 2026-07-29 -- forecast5_tier3_estimate() built #5's tier-3 blend layer
+# with the HMM output as its base rate, summing the stored market-pricing
+# adjustment onto it. The blend is retired and #5 is a pure HMM, so there is no
+# second layer to construct: Tier1ModelScreen now displays the Monte Carlo output
+# directly as authoritative. See the archived tier3["5"] config above.
 
 
 def probability_text(value: float | None) -> str:
@@ -896,13 +908,13 @@ class Tier1ModelScreen(ModalScreen[bool]):
                 yield Label("Monte Carlo paths:", classes="input-label")
                 yield Input(str(self.simulations), id="simulation-paths", select_on_focus=True)
             yield Static("", id="model-error")
+            yield Static("", id="hmm-headline")
             yield Static("", id="current-state")
             yield Static(self._state_diagram_markup(), id="state-diagram")
             yield Label("Simulated hike-count distribution", classes="section-label")
             yield DataTable(id="outcome-table", zebra_stripes=True)
             yield Static("", id="outcome-histogram")
             yield Static("", id="fedwatch-crosscheck")
-            yield Static("", id="tier3-blend")
             yield Label("Enter in paths field to rerun · Esc to close", classes="model-hint")
 
     def _state_diagram_markup(self) -> str:
@@ -988,36 +1000,57 @@ class Tier1ModelScreen(ModalScreen[bool]):
             outcome.update_cell(label, "paths", f"{self.result.raw_counts[label]:,}")
             bars.append(f"{label:8} {'█' * round(probability * 36)} {probability * 100:.1f}%")
         self.query_one("#outcome-histogram", Static).update("\n".join(bars))
+        self._render_headline()
         historical_hike = self.model.emission_matrix["hawkish_bias"]["hike"]
         self.query_one("#fedwatch-crosscheck", Static).update(
             f"HMM P(hike | hawkish): [bold]{historical_hike * 100:.1f}%[/bold] · "
-            f"July 29 market P(hike): [bold]{CME_FEDWATCH_JULY_29_HIKE_PROBABILITY * 100:.1f}%[/bold] "
-            f"(as of {CME_FEDWATCH_JULY_29_AS_OF})\n"
-            f"[dim]Source: {CME_FEDWATCH_JULY_29_SOURCE}. Historical state base rate versus "
-            "meeting-specific live pricing; divergence is expected. July 29's simulated hike "
-            "odds are pinned to this market read, not the HMM emission.[/dim]"
+            "live per-meeting market P(hike): "
+            + " · ".join(
+                f"{meeting_date[5:]} [bold]{probability * 100:.1f}%[/bold]"
+                for meeting_date, probability in MARKET_PER_MEETING_HIKE_PROBABILITY.items()
+            )
+            + f" (as of {MARKET_PER_MEETING_AS_OF})\n"
+            f"[dim]{escape(MARKET_CUMULATIVE_SOURCE)}. The HMM emission is an "
+            "unconditional historical base rate while the market figures are "
+            "meeting-specific live pricing, so divergence is expected. The July 29 "
+            "meeting has resolved as a hold, so no meeting is pinned; with the tier-3 "
+            "blend retired, no market price enters this model through any channel -- "
+            "which is what makes the agreement above a check rather than a "
+            "circularity.[/dim]"
         )
-        self._render_tier3_blend()
 
-    def _render_tier3_blend(self) -> None:
-        """Show the Tier-3 layer that sits on top of this HMM: the HMM's own
-        P(>=1 hike) is the base rate, blended toward CME market pricing. The HMM
-        itself (matrices, diagram, histogram) is unchanged -- this is a separate
-        layer whose output is #5's authoritative probability."""
-        hmm_pct = round(self.result.probability_at_least_one_hike * 100, 1)
-        estimate = forecast5_tier3_estimate(hmm_pct)
-        line = (
-            f"[bold]Tier-3 blend layer[/bold] (this HMM is the base-rate input): "
-            f"base [bold]{hmm_pct:.1f}%[/bold]"
+    def _render_headline(self) -> None:
+        """Primary number plus cross-checks, in the same shape #1's Poisson screen
+        uses: the model's own output is authoritative and the outside reads sit
+        beneath it as checks, never as inputs.
+
+        (This replaced a Tier-3 blend line. #5 was briefly the HMM blended toward a
+        market anchor; that layer is retired and archived -- see the archived
+        tier3["5"] config near DEFAULT_MODEL_STATE.)"""
+        hmm_pct = self.result.probability_at_least_one_hike * 100
+        # Chain the live per-meeting prices as if independent -- deliberately the
+        # WRONG assumption, computed only to measure how wrong it is.
+        no_hike = 1.0
+        for probability in MARKET_PER_MEETING_HIKE_PROBABILITY.values():
+            no_hike *= 1.0 - probability
+        chained = 1.0 - no_hike
+        gap = (chained - MARKET_CUMULATIVE_HIKE_PROBABILITY) * 100
+        self.query_one("#hmm-headline", Static).update(
+            f"P(≥1 hike by year-end 2026) = [bold]{hmm_pct:.1f}%[/bold] · "
+            f"{self.result.paths:,} paths, seed {DEFAULT_RANDOM_SEED} · "
+            f"[bold cyan]← primary (pure HMM)[/bold cyan]\n"
+            f"[dim]Cross-check, direct market on this forecast's exact question: "
+            f"[bold]{MARKET_CUMULATIVE_HIKE_PROBABILITY * 100:.1f}%[/bold] "
+            f"(as of {MARKET_CUMULATIVE_AS_OF}) · cross-check, CME FedWatch September: "
+            f"[bold]{MARKET_CME_FEDWATCH_SEPTEMBER_HIKE_PROBABILITY * 100:.0f}%[/bold] "
+            f"as reported ({MARKET_CME_FEDWATCH_AS_OF}; tool not reachable "
+            f"first-party) · persisted: {probability_text(get(5).probability)}\n"
+            f"Independence error: chaining the live per-meeting prices as independent "
+            f"gives {chained * 100:.1f}% vs the "
+            f"{MARKET_CUMULATIVE_HIKE_PROBABILITY * 100:.1f}% joint "
+            f"market — {gap:+.1f}pp is the market's price of correlation between "
+            f"meetings, which the sticky posture states below generate directly.[/dim]"
         )
-        for adj in estimate.adjustments:
-            sign = "+" if adj.direction == "up" else "-"
-            line += f" · {adj.name} [bold]{sign}{adj.magnitude_pts:.0f}pp[/bold]"
-        line += (
-            f"\n→ authoritative #5 = [bold]{estimate.final_probability():.1f}%[/bold] "
-            "[dim](blended P(>=1 hike); persisted value)[/dim]"
-        )
-        self.query_one("#tier3-blend", Static).update(line)
 
     @on(Input.Submitted, "#simulation-paths")
     def rerun_simulation(self, event: Input.Submitted) -> None:
@@ -1039,11 +1072,10 @@ class Tier1ModelScreen(ModalScreen[bool]):
         )
         hmm_pct = round(self.result.probability_at_least_one_hike * 100, 1)
         MODEL_STATE["tier1"]["5"]["simulations"] = simulations
-        # The HMM output is the base rate of #5's Tier-3 blend layer; refresh it
-        # and persist the *blended* probability, never the raw HMM value.
-        MODEL_STATE["tier3"]["5"]["base_rate_pct"] = hmm_pct
-        blended = round(forecast5_tier3_estimate(hmm_pct).final_probability(), 1)
-        set_forecast_probability(5, blended)
+        # #5 is a pure HMM: this Monte Carlo output IS the authoritative value.
+        # There is no blend layer left to reconcile with, so this writes the same
+        # quantity tier1_market.py --persist writes (_persist_forecast5_hmm).
+        set_forecast_probability(5, hmm_pct)
         persist_model_state()
         self.changed = True
         self.update_result_widgets()
@@ -2231,7 +2263,7 @@ class ForecastApp(App[None]):
     .button-row { height: 3; align: center middle; }
     .button-row Button { margin: 0 1; }
 
-    #current-state, #fedwatch-crosscheck, #final-probability, #trend-statistics, #trend-nowcast, #sep-crosscheck, #threshold-info, #threshold-result, #judgment-note { height: auto; padding: 1; }
+    #hmm-headline, #current-state, #fedwatch-crosscheck, #final-probability, #trend-statistics, #trend-nowcast, #sep-crosscheck, #threshold-info, #threshold-result, #judgment-note { height: auto; padding: 1; }
     #state-diagram, #waterfall, #bayes-panel { height: auto; width: auto; padding: 1; }
     #outcome-table { height: 6; }
     #outcome-histogram { height: 5; padding: 0 1; }
