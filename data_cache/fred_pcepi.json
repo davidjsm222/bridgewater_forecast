@@ -1,6 +1,13 @@
 {
   "calculation": "100 * (PCEPI_t / PCEPI_t_minus_12_months - 1)",
   "forecast_id": 6,
+  "june_2026_print_provenance": {
+    "bea_release": "Personal Income and Outlays, June 2026",
+    "bea_release_date": "2026-07-30",
+    "bea_release_url": "https://www.bea.gov/news/2026/personal-income-and-outlays-june-2026",
+    "figures": "Headline PCE price index -0.1% MoM (first monthly decline since April 2020), +3.7% YoY; core +0.1% MoM, +3.3% YoY. Cached via FRED PCEPI on 2026-07-31: June index 131.392, YoY 3.668%. This refresh also carried small BEA revisions to earlier months vs the 2026-07-24 cache vintage (e.g. May YoY 4.073 -> 4.079, April 3.795 -> 3.791).",
+    "note": "Provenance annotation added manually 2026-07-31; a future force-refresh via data_sources.pull_pce_inflation rewrites this file's fixed schema and will drop this key (acceptable: a refresh supersedes it)."
+  },
   "observations": [
     {
       "date": "2015-01-01",
@@ -679,16 +686,21 @@
     },
     {
       "date": "2026-04-01",
-      "index_value": 130.938,
-      "year_over_year_pct": 3.795482
+      "index_value": 130.932,
+      "year_over_year_pct": 3.790725
     },
     {
       "date": "2026-05-01",
-      "index_value": 131.527,
-      "year_over_year_pct": 4.072638
+      "index_value": 131.535,
+      "year_over_year_pct": 4.078968
+    },
+    {
+      "date": "2026-06-01",
+      "index_value": 131.392,
+      "year_over_year_pct": 3.668053
     }
   ],
-  "retrieved_at_utc": "2026-07-24T03:24:04.569766Z",
+  "retrieved_at_utc": "2026-07-31T17:13:44.508333Z",
   "schema_version": 1,
   "series": {
     "frequency": "Monthly",

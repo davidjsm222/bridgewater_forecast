@@ -430,47 +430,62 @@ DEFAULT_MODEL_STATE = {
                 "sourced evidence from the body whose policy decisions drive the outcome -- a "
                 "stronger anchor than a naive 50% or the flat historical trend fit. The exact "
                 "per-participant count is not machine-readable (Figure 3.C is a chart image), so the "
-                "bound's midpoint is used."
+                "bound's midpoint is used. ANCHOR VINTAGE CHECK (2026-07-31): the June SEP predates "
+                "both the June CPI and the June PCE print (BEA, 2026-07-30), but the print landed on "
+                "the SEP's implied deceleration path -- 4.1% -> 3.7% against a 3.6% year-end median "
+                "-- rather than against it, so the anchor is tracked, not invalidated, and is "
+                "retained unchanged."
             ),
             "adjustments": [
                 {
                     "name": "Fed's active hawkish posture",
                     "direction": "up",
-                    "magnitude_pts": 10.0,
+                    "magnitude_pts": 6.0,
                     "rationale": (
-                        "Forecast #5's authoritative probability is now 77.5% (its HMM base rate "
-                        "blended with CME FedWatch market pricing), up from the 63% HMM-only figure, "
-                        "and the June 2026 SEP median dot (3.8%) sits above the current 3.625% "
-                        "midpoint (~one more hike signalled). Hiking is the Fed's direct tool for "
-                        "pushing inflation back toward target, so a materially higher, "
-                        "market-corroborated hike probability raises P(PCE -> at or below 3.5%) more "
-                        "than the HMM-only read did. Sized up from +6pp to +10pp accordingly, but "
-                        "still bounded: hikes act with long lags and do not guarantee the target is "
-                        "hit by the Dec print."
+                        "The June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint "
+                        "(~one more hike signalled), and hiking is the Fed's direct tool for pushing "
+                        "inflation back toward target; forecast #5 prices P(>=1 hike in 2026) at "
+                        "62.6%. RESIZED +10pp -> +6pp on 2026-07-31, mechanically: the +10pp sizing "
+                        "existed specifically because #5 then stood at 77.5% (its HMM base blended "
+                        "with market pricing) rather than the ~63% HMM-only figure; that blend was "
+                        "retired 2026-07-29 and #5 is now the pure-HMM 62.6%, so the factor reverts "
+                        "to the +6pp it was sized at under the HMM-only read. Still bounded: hikes "
+                        "act with long lags and do not guarantee the target is hit by the Dec print."
                     ),
                 },
                 {
                     "name": "Recent trend momentum (wrong direction)",
                     "direction": "down",
-                    "magnitude_pts": 12.0,
+                    "magnitude_pts": 4.0,
                     "rationale": (
-                        "PCE YoY accelerated 2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07 over the last five "
-                        "prints -- real, recent, and moving away from YES; the linear trend projects "
-                        "~4.49% for Dec 2026. Strongest concrete evidence against resolution, hence "
-                        "the largest single adjustment."
+                        "RESIZED -12pp -> -4pp on 2026-07-31. The -12pp rested on five consecutive "
+                        "accelerating prints (2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07); the June 2026 "
+                        "print broke that streak -- headline PCE fell 0.1% on the month, the first "
+                        "monthly decline since April 2020, taking YoY 4.08% -> 3.67% (BEA, "
+                        "2026-07-30). Decisive consideration: the base rate is anchored to a SEP "
+                        "whose 2026 median (3.6%) already projects deceleration from here, and June "
+                        "landed on that implied path rather than above it -- the prints are now "
+                        "tracking the anchor, which is most of what -12pp was capturing, so the "
+                        "factor mostly stands down. A residual -4pp remains because the level is "
+                        "still ~0.2pp above the 3.5% threshold, the June relief was energy-driven "
+                        "(gasoline/energy goods -9.2% on the month, tied to a brief Iran ceasefire "
+                        "that reporting indicates has since lapsed), and core fell only a tenth "
+                        "(3.4% -> 3.3%)."
                     ),
                 },
                 {
                     "name": "Single-print resolution dispersion",
                     "direction": "up",
-                    "magnitude_pts": 3.0,
+                    "magnitude_pts": 4.0,
                     "rationale": (
-                        "Resolution is a single Dec 2026 YoY print, and monthly YoY has swung up to "
-                        "~0.67pp in one month recently (Feb->Mar). That realized-print volatility "
-                        "(distinct from the SEP's dispersion of participant point views) puts real "
-                        "left-tail mass below 3.5% even with the central path above it. Small, and it "
-                        "is the same narrow-band-understates-uncertainty point that motivated the "
-                        "reframe."
+                        "Resolution is a single Dec 2026 YoY print, and this factor got MORE "
+                        "relevant with June, not less: the central path now sits roughly a tenth "
+                        "above the threshold (SEP median 3.6% vs the 3.5% bar) instead of half a "
+                        "point, while realized single-month moves in the YoY series are of the same "
+                        "order as that whole gap -- June alone moved -0.41pp, Feb->Mar 2026 moved "
+                        "+0.67pp, and the month-over-month stdev of the YoY series runs ~0.21-0.25pp "
+                        "(trailing 24m/12m, fred_pcepi.json). RESIZED +3pp -> +4pp on 2026-07-31 "
+                        "accordingly. Distinct from the SEP's dispersion of participant point views."
                     ),
                 },
             ],

@@ -4,7 +4,10 @@
 Tier 1, HMM + Monte Carlo. [methodology summary, cross-check vs FedWatch, regime-pooling caveat]
 
 ## #6 — Inflation containment
-Tier 2, trend extrapolation. [PCE accelerating 2.87%→4.07%, doesn't model Fed policy feedback]
+Tier 3, SEP-anchored reference class (34% base) + three sized factors, with a Bayesian
+likelihood-ratio arm and an independent SEP-distribution route as cross-checks. 40% as of
+2026-07-31 (June PCE print: −0.1% MoM, YoY 4.1%→3.7%). [The tier-2 trend extrapolation
+this line used to describe is archived — see methodology_notes.md #6.]
 
 ## #4 — AI capex GDP contribution
 Tier 2, trend extrapolation. [no significant trend found, t=0.43, R²=0.02, probability reflects distributional spread not extrapolation]

@@ -27,6 +27,7 @@ the right level of formality.
 """
 
 import json
+import statistics
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -139,7 +140,7 @@ class BayesianUpdate:
 # implied_additive_lrs() can replay them step by step.
 ADDITIVE_STEPS = {
     4: (+6.0, +6.0, -5.0),
-    6: (+10.0, -12.0, +3.0),
+    6: (+6.0, -4.0, +4.0),
 }
 
 
@@ -217,67 +218,75 @@ BAYES_6 = BayesianUpdate(
         "participants projecting 2026 PCE at or below 3.5% (June 2026 SEP). See "
         "methodology_notes.md #6 and fomc_history.CURRENT_SEP_PCE_PROJECTION."
     ),
-    additive_result_pct=35.0,
+    additive_result_pct=40.0,
     factors=(
         LikelihoodFactor(
             name="Fed's active hawkish posture",
-            lr=1.40,
-            lr_range=(1.15, 1.70),
+            lr=1.19,
+            lr_range=(1.00, 1.45),
             rationale=(
-                "Forecast #5's authoritative P(>=1 hike in 2026) is 77.5% (HMM blended with CME "
-                "FedWatch pricing) and the June 2026 SEP median dot (3.8%) sits above the current "
-                "3.625% midpoint. Hiking is the Fed's direct tool for pushing inflation back toward "
-                "target."
+                "The June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint "
+                "(~one more hike signalled) and forecast #5 prices P(>=1 hike in 2026) at 62.6% "
+                "(pure HMM; the market-blend layer that put it at 77.5% was retired 2026-07-29). "
+                "Hiking is the Fed's direct tool for pushing inflation back toward target."
             ),
             derivation=(
-                "Evidence E = the market-corroborated hike odds plus the above-midpoint median dot. "
-                "Worlds where December PCE lands at or below 3.5% contain actively-hiking Feds more "
-                "often than worlds where it stays above (the causal hike -> disinflation channel). "
-                "Discounted for circularity: hawkishness is itself caused by currently-high "
-                "inflation, which is evidence for NO -- the posture is expected under both "
-                "hypotheses, just more so under YES. 1.40, range 1.15-1.70. The additive +10pp "
-                "implied ~1.53 from the same evidence; the Bayesian estimate is slightly more "
-                "conservative."
+                "Derived from the resized additive step rather than picked. The +6pp step from "
+                "the 34% base implies LR = odds(40)/odds(34) = 1.29. The previous config applied "
+                "a deliberate circularity discount to its step-implied LR (1.40 against an "
+                "implied 1.53, a x0.92 haircut: hawkishness is itself caused by currently-high "
+                "inflation, so the posture is expected under both hypotheses, just more so under "
+                "YES). That discount's premise survives the resize, so the same x0.92 applies: "
+                "1.29 x 0.92 = 1.19, range 1.00-1.45. The old 1.40 also anchored to #5 at 77.5% "
+                "-- the market blend retired 2026-07-29 -- so it inherited the same stale premise "
+                "as the additive +10pp and falls with it."
             ),
         ),
         LikelihoodFactor(
             name="Recent trend momentum (wrong direction)",
-            lr=0.45,
-            lr_range=(0.30, 0.60),
+            lr=0.85,
+            lr_range=(0.70, 1.00),
             rationale=(
-                "PCE YoY accelerated 2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07 over the last five "
-                "prints; the linear trend projects ~4.49% for Dec 2026. Strongest concrete "
-                "evidence against resolution."
+                "The five-print acceleration (2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07) broke with "
+                "June 2026: headline PCE fell 0.1% on the month (first monthly decline since "
+                "April 2020), YoY 4.08% -> 3.67% (BEA, 2026-07-30). The prints now track the SEP "
+                "anchor's implied deceleration path; what survives against YES is the ~0.2pp "
+                "residual gap to 3.5%, the energy-driven (and since-lapsed-ceasefire) nature of "
+                "the June relief, and core falling only a tenth."
             ),
             derivation=(
-                "Evidence E = five accelerating prints ending at 4.07 (fred_pcepi.json), 0.57pp "
-                "above threshold with ~7 months of prints left. Under YES the December print "
-                "requires a genuine turn starting almost immediately; E is much more probable "
-                "under NO. Tempered by the fact that turns *follow* run-ups -- conditional on YES "
-                "happening at all, a preceding acceleration is common -- so E is not vanishingly "
-                "rare under YES. 0.45, range 0.30-0.60 (the additive-implied 0.60 sits inside the "
-                "range). VERIFIED 2026-07-23: the historical cross-check's 14 qualifying months "
-                "collapse to a SINGLE 2021-22 surge (n = 1 episode; see "
-                "pce_momentum_crosscheck()['small_n_verdict']), so the 2/14 month-level frequency "
-                "is weak directional corroboration only -- the 0.45 point rests on the reasoning "
-                "above, not on a calibrated sample, which is why the additive 35% remains the "
-                "persisted authoritative number and the posterior is reported as a sensitivity."
+                "Derived from the resized additive step. The -4pp step from 40% implies LR = "
+                "odds(36)/odds(40) = 0.84; rounded to 0.85, range 0.70-1.00. The previous config "
+                "went materially harsher than its step (0.45 against an implied 0.60, x0.75) on "
+                "the strength of the unbroken run-up -- an extra severity whose empirical "
+                "corroboration was already found wanting on 2026-07-23 (the cross-check's 14 "
+                "qualifying months collapse to a single 2021-22 surge, n = 1 episode; see "
+                "pce_momentum_crosscheck()['small_n_verdict']) and whose premise the June print "
+                "removed outright, so no extra harshening is applied now. The range's 1.00 end "
+                "covers the reading that June's energy-driven swing leaves the momentum evidence "
+                "roughly uninformative; 0.70 covers relapse (the ceasefire behind the energy "
+                "relief has lapsed, and the level still sits above threshold)."
             ),
         ),
         LikelihoodFactor(
             name="Single-print resolution dispersion",
-            lr=1.25,
-            lr_range=(1.10, 1.45),
+            lr=1.19,
+            lr_range=(1.05, 1.40),
             rationale=(
-                "Resolution is a single Dec 2026 YoY print, and monthly YoY has swung up to "
-                "~0.67pp in one month recently (Feb->Mar 2026). Realized-print volatility puts "
-                "real left-tail mass below 3.5% even with the central path above it."
+                "Resolution is a single Dec 2026 YoY print, the central path now sits roughly a "
+                "tenth above the threshold (SEP median 3.6% vs 3.5%), and realized single-month "
+                "moves are the same order as that whole gap: June -0.41pp, Feb->Mar 2026 "
+                "+0.67pp, MoM stdev of the YoY series ~0.21-0.25pp (fred_pcepi.json)."
             ),
             derivation=(
-                "Evidence E = the realized ~0.67pp single-month YoY swing. With the central path "
-                "above the threshold, YES-worlds are disproportionately drawn from high-volatility "
-                "worlds (a quiet series ending at ~4.5 cannot resolve YES; a jumpy one can), so "
-                "P(E | YES) > P(E | NO). 1.25, range 1.10-1.45."
+                "Derived from the resized additive step. The +4pp step from 36% implies LR = "
+                "odds(40)/odds(36) = 1.19, range 1.05-1.40. The previous config sized its LR "
+                "slightly above its step's implied value (1.25 vs 1.14, x1.10) because the +3pp "
+                "step under-conveyed the volatility evidence; the step itself is now +4pp, which "
+                "absorbs exactly that, so applying the upsize again would double-count and the "
+                "implied value is taken as-is. Directionally: with the central path just above "
+                "the bar, YES-worlds are disproportionately high-volatility worlds, so "
+                "P(E | YES) > P(E | NO)."
             ),
         ),
     ),
@@ -319,15 +328,19 @@ def q1_seasonality_crosscheck() -> dict | None:
 def pce_momentum_crosscheck(
     threshold_gap_pp: float = 0.57, horizon_months: int = 7
 ) -> dict | None:
-    """How often did an inflation run-up like today's precede a fast decline?
+    """How often did an inflation run-up like the Jan-May 2026 one precede a fast decline?
 
+    ARCHIVED QUERY (kept verbatim, defaults frozen at the May-2026 vintage): this
+    grounded the old -12pp / LR 0.45 momentum sizing while the run-up was intact.
     Evidence months E: PCE YoY at or above 3.5% AND up on the prior print AND
-    up at least 0.4pp over the trailing four prints (the shape of the current
-    2.87 -> 4.07 run). Success: YoY seven months later had fallen by at least
-    the 0.57pp now separating the level from the 3.5% threshold. Small-n by
-    construction (the cache holds essentially one full inflation episode,
-    2021-22, plus the current one) -- reported as corroboration for the LR
-    derivation, never as a standalone frequency.
+    up at least 0.4pp over the trailing four prints (the shape of the then-current
+    2.87 -> 4.07 run). Success: YoY seven months later had fallen by at least the
+    0.57pp then separating the level from the 3.5% threshold. The June 2026 print
+    (-0.41pp MoM in YoY terms) broke the run-up, so the current month no longer
+    matches the evidence filter -- the query is retained as the documented record
+    behind the retired sizing, plus its small-n verdict (a single 2021-22 surge,
+    n = 1 episode), which is what justified NOT carrying extra momentum severity
+    into the resized LR. Never a standalone frequency.
     """
     path = DATA_CACHE_DIR / "fred_pcepi.json"
     if not path.exists():
@@ -376,8 +389,81 @@ def pce_momentum_crosscheck(
             "'LR below 1' directionally but cannot arbitrate 0.45 vs 0.60."
         ),
         "note": (
-            "Months matching today's run-up shape with a scoreable "
-            f"{horizon_months}-month outcome; 'declined' = YoY fell >= {threshold_gap_pp}pp."
+            "Months matching the Jan-May 2026 run-up shape (broken by the June 2026 print; "
+            f"archived query) with a scoreable {horizon_months}-month outcome; "
+            f"'declined' = YoY fell >= {threshold_gap_pp}pp."
+        ),
+    }
+
+
+def sep_print_distribution_route(
+    threshold_pct: float = 3.5,
+    sep_median_pct: float = 3.6,
+    path_sd_candidates: tuple[float, ...] = (0.10, 0.30, 0.35),
+) -> dict | None:
+    """Third, scheme-independent route to P(YES) for #6 (added 2026-07-31).
+
+    The additive arm and the Bayesian arm share the same 34% base rate and the
+    same three pieces of evidence, so their agreement is weaker than it looks.
+    This route uses neither scheme: treat the December print as
+    N(SEP median, path_sd^2 + print_sd^2) -- dispersion in where the true
+    central path lands, plus noise in the single monthly print that resolves
+    the forecast -- and read off P(print <= threshold).
+
+    path_sd candidates come from the June 2026 SEP's published dispersion read
+    two defensible ways: the 3.5-3.7 central tendency as roughly +/-1 sd (0.10)
+    and the 2.7-4.1 full range of 19 participants as roughly +/-2 to +/-2.3 sd
+    (0.35 and 0.30). print_sd is estimated from realized month-over-month moves
+    of the YoY series in the cache (trailing 12m/24m/36m standard deviations),
+    NOT assumed. Reported as a grid because single-point precision would be
+    false; the central cell is the one pairing the range-based path sd with the
+    trailing-24m print sd.
+    """
+    path = DATA_CACHE_DIR / "fred_pcepi.json"
+    if not path.exists():
+        return None
+    observations = [
+        o for o in json.loads(path.read_text(encoding="utf-8")).get("observations", [])
+        if o.get("year_over_year_pct") is not None
+    ]
+    yoy = [o["year_over_year_pct"] for o in observations]
+    deltas = [b - a for a, b in zip(yoy, yoy[1:])]
+    if len(deltas) < 36:
+        return None
+    print_sds = {
+        f"trailing_{months}m": round(statistics.stdev(deltas[-months:]), 3)
+        for months in (12, 24, 36)
+    }
+    normal = statistics.NormalDist()
+    grid = []
+    for path_sd in path_sd_candidates:
+        for label, print_sd in print_sds.items():
+            total_sd = (path_sd**2 + print_sd**2) ** 0.5
+            grid.append({
+                "path_sd": path_sd,
+                "print_sd_source": label,
+                "print_sd": print_sd,
+                "total_sd": round(total_sd, 3),
+                "p_yes_pct": round(
+                    normal.cdf((threshold_pct - sep_median_pct) / total_sd) * 100, 1
+                ),
+            })
+    p_values = [cell["p_yes_pct"] for cell in grid]
+    central = next(
+        cell for cell in grid
+        if cell["path_sd"] == 0.30 and cell["print_sd_source"] == "trailing_24m"
+    )
+    return {
+        "center_pct": sep_median_pct,
+        "threshold_pct": threshold_pct,
+        "print_sd_realized": print_sds,
+        "grid": grid,
+        "p_yes_range_pct": (min(p_values), max(p_values)),
+        "central_p_yes_pct": central["p_yes_pct"],
+        "note": (
+            "Independent of both the additive and Bayesian arms (shares neither their "
+            "base-rate arithmetic nor their factor list beyond the SEP itself). "
+            "Model: Dec print ~ N(SEP median, path_sd^2 + print_sd^2)."
         ),
     }
 
@@ -413,6 +499,9 @@ def bayesian_report(forecast_id: int) -> dict:
         "crosscheck": (
             q1_seasonality_crosscheck() if forecast_id == 4 else pce_momentum_crosscheck()
         ),
+        "independent_route": (
+            sep_print_distribution_route() if forecast_id == 6 else None
+        ),
     }
 
 
@@ -444,6 +533,15 @@ def print_report(forecast_id: int, console: Console | None = None) -> None:
         console.print(f"[bold]{factor['name']}[/bold]: {factor['derivation']}")
     if report["crosscheck"]:
         console.print(f"[dim]Data cross-check: {report['crosscheck']}[/dim]")
+    if report.get("independent_route"):
+        route = report["independent_route"]
+        console.print(
+            f"[bold]Independent SEP-distribution route[/bold] (shares neither arm's scheme): "
+            f"P(Dec print <= {route['threshold_pct']}) = "
+            f"{route['p_yes_range_pct'][0]:.1f}-{route['p_yes_range_pct'][1]:.1f}% across the "
+            f"documented grid, central {route['central_p_yes_pct']:.1f}% "
+            f"(path sd 0.30, print sd {route['print_sd_realized']['trailing_24m']:.3f} realized)"
+        )
     persisted = forecast.probability
     console.print(
         f"Posterior [bold]{report['posterior_pct']:.1f}%[/bold] vs additive tier 3 "

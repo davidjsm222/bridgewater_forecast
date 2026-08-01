@@ -5,7 +5,7 @@
   "3": 5.5,
   "4": 57.0,
   "5": 62.6,
-  "6": 35.0,
+  "6": 40.0,
   "7": 1.9,
   "8": 9.0,
   "9": 2.3,
@@ -30,6 +30,37 @@
       "persisted_authoritative_probability_pct": 77.5,
       "reason": "Forecast #5 became a pure HMM. This layer blended the HMM base toward a market anchor of 87.1% (CME FedWatch cumulative, as of 2026-07-21) that could not be verified -- it appeared only in search-engine synthesis, never in an article body. The correction was toward a number that may never have existed. A liquid DIRECT market on forecast #5's identical resolution question then priced 62.5% against the HMM's independent 62.6%, making the blend a -0.1pp no-op and, worse, making a found agreement look manufactured. The 13.6pp gap between independent chaining of live per-meeting prices (76.1%) and that direct joint-event market (62.5%) is the market's price of correlation between meetings, which is exactly what the HMM's sticky posture states generate -- so the direct market validates the HMM's structure, not merely its answer. See methodology_notes.md #5 and the ARCHIVED block in tier1_market.py.",
       "retired_on": "2026-07-29"
+    },
+    "tier3_6_pre_june2026_pce_factors": {
+      "config": {
+        "adjustments": [
+          {
+            "direction": "up",
+            "magnitude_pts": 10.0,
+            "name": "Fed's active hawkish posture",
+            "rationale": "Forecast #5's authoritative probability is now 77.5% (its HMM base rate blended with CME FedWatch market pricing), up from the 63% HMM-only figure, and the June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint (~one more hike signalled). Hiking is the Fed's direct tool for pushing inflation back toward target, so a materially higher, market-corroborated hike probability raises P(PCE -> at or below 3.5%) more than the HMM-only read did. Sized up from +6pp to +10pp accordingly, but still bounded: hikes act with long lags and do not guarantee the target is hit by the Dec print."
+          },
+          {
+            "direction": "down",
+            "magnitude_pts": 12.0,
+            "name": "Recent trend momentum (wrong direction)",
+            "rationale": "PCE YoY accelerated 2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07 over the last five prints -- real, recent, and moving away from YES; the linear trend projects ~4.49% for Dec 2026. Strongest concrete evidence against resolution, hence the largest single adjustment."
+          },
+          {
+            "direction": "up",
+            "magnitude_pts": 3.0,
+            "name": "Single-print resolution dispersion",
+            "rationale": "Resolution is a single Dec 2026 YoY print, and monthly YoY has swung up to ~0.67pp in one month recently (Feb->Mar). That realized-print volatility (distinct from the SEP's dispersion of participant point views) puts real left-tail mass below 3.5% even with the central path above it. Small, and it is the same narrow-band-understates-uncertainty point that motivated the reframe."
+          }
+        ],
+        "base_rate_pct": 34.0,
+        "base_rate_source": "34% = midpoint of the 21-47% bound on the share of the 19 FOMC participants projecting 2026 PCE at or below 3.5%, derived from the June 2026 SEP (median 3.6%, central tendency 3.5-3.7%, range 2.7-4.1%; fomcprojtabl20260617.htm). This is sourced evidence from the body whose policy decisions drive the outcome -- a stronger anchor than a naive 50% or the flat historical trend fit. The exact per-participant count is not machine-readable (Figure 3.C is a chart image), so the bound's midpoint is used.",
+        "reference_class": "PCE inflation landing at or below a threshold by a horizon, benchmarked to the FOMC's own contemporaneous year-end projection distribution for the same variable"
+      },
+      "correction_note": "The archived momentum rationale attributes its ~4.49% Dec 2026 projection to 'the linear trend' on the five prints it lists. Traced 2026-07-31: 4.49 is actually the archived tier-2 fit (tier2_trend.pce_trend_forecast, PCE_TREND_MONTHS=12) -- a linear fit on the trailing TWELVE YoY points (Jun 2025-May 2026), reproduced exactly at 4.49. The five prints alone project ~6.4% for December; refit with June included gives ~5.4% (six-print window) and ~4.5% (12-month window). The figure was right, its attribution was wrong; recorded here so no unexplained number is carried.",
+      "persisted_authoritative_probability_pct": 35.0,
+      "reason": "Forecast #6's three adjustment factors were resized after the June 2026 PCE print (BEA Personal Income and Outlays, released 2026-07-30: headline -0.1% MoM -- the first monthly decline since April 2020 -- taking YoY 4.1% -> 3.7%; core 3.4% -> 3.3%). The +10pp hawkish factor's stated premise (forecast #5 at 77.5%, from the retired market-blend layer) was already gone -- #5 is a pure HMM at 62.6% -- so the factor reverted to its original +6pp. The -12pp momentum factor rested on a five-print acceleration streak that June broke; with the prints now tracking the SEP anchor's own implied deceleration path (4.1 -> 3.7 against a 3.6 year-end median) rather than running above it, the factor mostly stood down, to -4pp. Single-print dispersion rose +3pp -> +4pp because the central path now sits roughly a tenth above the 3.5% threshold instead of half a point. Net 34 + 6 - 4 + 4 = 40.0%, persisted 2026-07-31, replacing 35.0%. The 34% SEP base rate is unchanged: the June SEP predates the print but was tracked, not contradicted, by it. See methodology_notes.md #6.",
+      "retired_on": "2026-07-31"
     }
   },
   "_model_state": {
@@ -138,25 +169,25 @@
         "adjustments": [
           {
             "direction": "up",
-            "magnitude_pts": 10.0,
+            "magnitude_pts": 6.0,
             "name": "Fed's active hawkish posture",
-            "rationale": "Forecast #5's authoritative probability is now 77.5% (its HMM base rate blended with CME FedWatch market pricing), up from the 63% HMM-only figure, and the June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint (~one more hike signalled). Hiking is the Fed's direct tool for pushing inflation back toward target, so a materially higher, market-corroborated hike probability raises P(PCE -> at or below 3.5%) more than the HMM-only read did. Sized up from +6pp to +10pp accordingly, but still bounded: hikes act with long lags and do not guarantee the target is hit by the Dec print."
+            "rationale": "The June 2026 SEP median dot (3.8%) sits above the current 3.625% midpoint (~one more hike signalled), and hiking is the Fed's direct tool for pushing inflation back toward target; forecast #5 prices P(>=1 hike in 2026) at 62.6%. RESIZED +10pp -> +6pp on 2026-07-31, mechanically: the +10pp sizing existed specifically because #5 then stood at 77.5% (its HMM base blended with market pricing) rather than the ~63% HMM-only figure; that blend was retired 2026-07-29 and #5 is now the pure-HMM 62.6%, so the factor reverts to the +6pp it was sized at under the HMM-only read. Still bounded: hikes act with long lags and do not guarantee the target is hit by the Dec print."
           },
           {
             "direction": "down",
-            "magnitude_pts": 12.0,
+            "magnitude_pts": 4.0,
             "name": "Recent trend momentum (wrong direction)",
-            "rationale": "PCE YoY accelerated 2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07 over the last five prints -- real, recent, and moving away from YES; the linear trend projects ~4.49% for Dec 2026. Strongest concrete evidence against resolution, hence the largest single adjustment."
+            "rationale": "RESIZED -12pp -> -4pp on 2026-07-31. The -12pp rested on five consecutive accelerating prints (2.87 -> 2.87 -> 3.54 -> 3.80 -> 4.07); the June 2026 print broke that streak -- headline PCE fell 0.1% on the month, the first monthly decline since April 2020, taking YoY 4.08% -> 3.67% (BEA, 2026-07-30). Decisive consideration: the base rate is anchored to a SEP whose 2026 median (3.6%) already projects deceleration from here, and June landed on that implied path rather than above it -- the prints are now tracking the anchor, which is most of what -12pp was capturing, so the factor mostly stands down. A residual -4pp remains because the level is still ~0.2pp above the 3.5% threshold, the June relief was energy-driven (gasoline/energy goods -9.2% on the month, tied to a brief Iran ceasefire that reporting indicates has since lapsed), and core fell only a tenth (3.4% -> 3.3%)."
           },
           {
             "direction": "up",
-            "magnitude_pts": 3.0,
+            "magnitude_pts": 4.0,
             "name": "Single-print resolution dispersion",
-            "rationale": "Resolution is a single Dec 2026 YoY print, and monthly YoY has swung up to ~0.67pp in one month recently (Feb->Mar). That realized-print volatility (distinct from the SEP's dispersion of participant point views) puts real left-tail mass below 3.5% even with the central path above it. Small, and it is the same narrow-band-understates-uncertainty point that motivated the reframe."
+            "rationale": "Resolution is a single Dec 2026 YoY print, and this factor got MORE relevant with June, not less: the central path now sits roughly a tenth above the threshold (SEP median 3.6% vs the 3.5% bar) instead of half a point, while realized single-month moves in the YoY series are of the same order as that whole gap -- June alone moved -0.41pp, Feb->Mar 2026 moved +0.67pp, and the month-over-month stdev of the YoY series runs ~0.21-0.25pp (trailing 24m/12m, fred_pcepi.json). RESIZED +3pp -> +4pp on 2026-07-31 accordingly. Distinct from the SEP's dispersion of participant point views."
           }
         ],
         "base_rate_pct": 34.0,
-        "base_rate_source": "34% = midpoint of the 21-47% bound on the share of the 19 FOMC participants projecting 2026 PCE at or below 3.5%, derived from the June 2026 SEP (median 3.6%, central tendency 3.5-3.7%, range 2.7-4.1%; fomcprojtabl20260617.htm). This is sourced evidence from the body whose policy decisions drive the outcome -- a stronger anchor than a naive 50% or the flat historical trend fit. The exact per-participant count is not machine-readable (Figure 3.C is a chart image), so the bound's midpoint is used.",
+        "base_rate_source": "34% = midpoint of the 21-47% bound on the share of the 19 FOMC participants projecting 2026 PCE at or below 3.5%, derived from the June 2026 SEP (median 3.6%, central tendency 3.5-3.7%, range 2.7-4.1%; fomcprojtabl20260617.htm). This is sourced evidence from the body whose policy decisions drive the outcome -- a stronger anchor than a naive 50% or the flat historical trend fit. The exact per-participant count is not machine-readable (Figure 3.C is a chart image), so the bound's midpoint is used. ANCHOR VINTAGE CHECK (2026-07-31): the June SEP predates both the June CPI and the June PCE print (BEA, 2026-07-30), but the print landed on the SEP's implied deceleration path -- 4.1% -> 3.7% against a 3.6% year-end median -- rather than against it, so the anchor is tracked, not invalidated, and is retained unchanged.",
         "reference_class": "PCE inflation landing at or below a threshold by a horizon, benchmarked to the FOMC's own contemporaneous year-end projection distribution for the same variable"
       },
       "7": {

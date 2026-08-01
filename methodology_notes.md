@@ -763,9 +763,13 @@ and it is documented rather than patched.
 
 ## Forecast #6 — Headline PCE inflation ≤ 3.5% by Dec 2026
 
-**Authoritative probability: 35% (YES = PCE YoY at or below 3.5% at the Dec 2026
-print), from a tier 3 reference-class / base-rate-plus-adjustments estimate.**
-Reframed from the earlier tier 2 Student-t trend fit (see archive below).
+**Authoritative probability: 40% (was 35%; factors resized 2026-07-31 for the
+June 2026 PCE print — YES = PCE YoY at or below 3.5% at the Dec 2026 print),
+from a tier 3 reference-class / base-rate-plus-adjustments estimate.**
+Reframed from the earlier tier 2 Student-t trend fit (see archive below); the
+June resize, the archived previous factor configuration, and the three
+independent routes to ~40% are documented in "The June 2026 print update"
+subsection below.
 
 ### Why trend extrapolation alone was insufficient
 
@@ -798,34 +802,53 @@ the other tier 3 forecasts:
   accessible-data table for it), so the midpoint of the bound is the anchor. This
   is **real, sourced evidence from the body whose decisions drive the outcome** —
   a stronger prior than a naive 50% or the flat historical trend fit.
-- **+10pp — Fed's active hawkish posture.** Forecast #5's authoritative
-  probability is now 77.5% (its HMM base rate blended with CME FedWatch market
-  pricing), up from the 63% HMM-only figure, and the June 2026 SEP median dot
-  (3.8%) is above the current 3.625% midpoint (~one more hike signalled). Hiking
-  is the Fed's direct tool for pushing inflation toward target, so a materially
-  higher, market-corroborated hike probability raises P(PCE → ≤3.5%) more than the
-  HMM-only read did. Sized up from +6pp to +10pp accordingly, but still bounded:
-  hikes act with long lags and don't guarantee the target is hit by the December
-  print.
-- **−12pp — Recent trend momentum (wrong direction).** PCE YoY accelerated
-  2.87 → 2.87 → 3.54 → 3.80 → 4.07 over the last five prints; the linear trend
-  projects ~4.49% for Dec 2026. This is the strongest concrete evidence against
-  resolution, hence the largest single adjustment. (This is the one thing the old
-  trend fit got right — preserved here as an explicit factor rather than as the
-  whole model.)
-- **+3pp — Single-print resolution dispersion.** Resolution is a single December
-  YoY print, and monthly YoY has swung up to ~0.67pp in one month recently
-  (Feb→Mar). That realized-print volatility (distinct from the SEP's dispersion
-  of participant *point* views) puts real left-tail mass below 3.5% even with the
-  central path above it. Small; it is the same narrow-band-understates-uncertainty
-  point that motivated the reframe.
+  **Anchor vintage check (2026-07-31): the June SEP predates both the June CPI
+  and the June PCE print, but the print landed on the SEP's implied deceleration
+  path — 4.1% → 3.7% against a 3.6% year-end median — rather than against it, so
+  the anchor is tracked, not invalidated, and is retained unchanged.**
+- **+6pp — Fed's active hawkish posture** *(was +10pp; resized 2026-07-31,
+  mechanically)*. The June 2026 SEP median dot (3.8%) is above the current
+  3.625% midpoint (~one more hike signalled), hiking is the Fed's direct tool
+  for pushing inflation toward target, and forecast #5 prices P(≥1 hike in 2026)
+  at 62.6%. The +10pp sizing existed *specifically because* #5 then stood at
+  77.5% (HMM blended with market pricing) rather than the ~63% HMM-only figure;
+  that blend was retired 2026-07-29 and #5 is the pure-HMM 62.6%, so the factor
+  reverts to the +6pp it carried under the HMM-only read. Still bounded: hikes
+  act with long lags and don't guarantee the target is hit by the December print.
+- **−4pp — Recent trend momentum (wrong direction)** *(was −12pp; resized
+  2026-07-31)*. The −12pp rested on five consecutive accelerating prints
+  (2.87 → 2.87 → 3.54 → 3.80 → 4.07); the June print broke the streak — headline
+  PCE fell 0.1% on the month, the first monthly decline since April 2020, taking
+  YoY 4.08% → 3.67% (BEA, 2026-07-30). The decisive consideration: the base rate
+  is anchored to a SEP whose 2026 median (3.6%) already projects deceleration,
+  and June landed on that implied path rather than above it — the prints now
+  track the anchor instead of running against it, which is most of what −12pp
+  was capturing, so the factor mostly stands down. The residual −4pp holds
+  because the level is still ~0.2pp above threshold, the June relief was
+  energy-driven (gasoline/energy goods −9.2% on the month, tied to a brief Iran
+  ceasefire that reporting indicates has since lapsed), and core fell only a
+  tenth (3.4% → 3.3%).
+- **+4pp — Single-print resolution dispersion** *(was +3pp; resized 2026-07-31
+  upward — this factor got more relevant, not less)*. Resolution is a single
+  December YoY print, the central path now sits roughly a tenth above the
+  threshold (SEP median 3.6% vs the 3.5% bar) instead of half a point, and
+  realized single-month moves in the YoY series are the same order as that whole
+  gap: June alone moved −0.41pp, Feb→Mar 2026 +0.67pp, and the MoM stdev of the
+  YoY series runs ~0.21–0.25pp (trailing 24m/12m, `fred_pcepi.json`). Distinct
+  from the SEP's dispersion of participant *point* views.
 
-**Net: 34 + 10 − 12 + 3 = 35%.** Clearly below the SEP-implied base rate — recent
-momentum dominates — but an order of magnitude above the old trend model's 3.8%,
-because the estimate now carries real macro uncertainty instead of a purely
-statistical band.
+**Net: 34 + 6 − 4 + 4 = 40%** (was 34 + 10 − 12 + 3 = 35%). Now slightly *above*
+the SEP-implied base rate: with the prints tracking the anchor's own path, the
+question is dominated by whether a ~3.6% central path plus realized print noise
+crosses 3.5% in one particular month — genuinely close to a coin flip weighted
+toward NO.
 
-### Bayesian reframing — and a flagged divergence (2026-07-22)
+### Bayesian reframing — and a flagged divergence (2026-07-22; superseded 2026-07-31)
+
+*Historical record. The LR table and 28.9% posterior below describe the
+pre-June-print configuration; the LRs were re-derived from the resized additive
+steps on 2026-07-31 — see "The June 2026 print update" below for the live
+numbers.*
 
 The additive factors are now formally reframed as a Bayesian likelihood-ratio
 update (`bayesian_update.py`): prior = the 34% SEP-anchored base rate, each
@@ -838,8 +861,9 @@ factor an LR, combined in odds form. Factors and rationales unchanged.
 | Single-print resolution dispersion | 1.25 (1.10–1.45) | +3pp | 1.14 |
 
 **Posterior: odds 0.515 × 1.40 × 0.45 × 1.25 = 0.406 → 28.9%** (sensitivity band
-16–43%). **This diverges from the additive 35% by −6.1pp — flagged, not silently
-adopted.** The persisted number **remains 35%** pending a deliberate decision.
+16–43%). **This diverged from the additive 35% by −6.1pp — flagged, not silently
+adopted.** The persisted number remained 35% (decision documented in the next
+section); both figures are now superseded by the 2026-07-31 resize.
 
 Where the divergence comes from (visible factor-by-factor in the implied-LR
 column): almost entirely the momentum factor. The additive −12pp step implied an
@@ -868,6 +892,84 @@ this file as the formal recombination and sensitivity (posterior 28.9%, band
 16–43%), but its harsher momentum LR is a reasoned judgment with weak empirical
 corroboration, not a calibrated estimate, so it does not override the additive
 arithmetic it was meant to check.
+
+*Coda (2026-07-31): the June print retired the question. The extra momentum
+severity's premise — an unbroken five-print acceleration — is gone, so the
+re-derived momentum LR applies no harshening beyond its additive step, and the
+two arms now agree within 2pp. `pce_momentum_crosscheck()` is kept, defaults
+frozen at the May-2026 vintage, as the documented record behind the old sizing.*
+
+### The June 2026 print update — factors resized, three routes to ~40% (2026-07-31)
+
+**The print.** BEA's Personal Income and Outlays, June 2026 (released
+2026-07-30): headline PCE **−0.1% MoM — the first monthly decline since April
+2020 — taking YoY 4.1% → 3.7%** (cache: 4.079 → 3.668); core +0.1% MoM,
+3.4% → 3.3% YoY. The decline was energy-driven — gasoline/energy goods −9.2% on
+the month, the largest drop since August 2022, as oil fell from ~$90 to ~$73
+during a brief mid-June US–Iran ceasefire; reporting indicates that ceasefire
+has since lapsed and prices have partially rebounded, so the relief may not
+repeat. Verified against the BEA release and contemporaneous coverage (CNN,
+US News, Yahoo Finance) before any number moved. The cache refresh
+(`fred_pcepi.json`, FRED PCEPI, 2026-07-31) added June (index 131.392, YoY
+3.668%) with a BEA-provenance annotation, and carried small BEA revisions to
+prior months (May YoY 4.073 → 4.079, April 3.795 → 3.791).
+
+**The resize.** Base rate untouched (see the anchor vintage check in the
+base-rate bullet); the three factors moved +10 → +6, −12 → −4, +3 → +4, with
+each rationale rewritten rather than re-magnituded — see the factor bullets
+above for the full reasoning. **Net 35% → 40%, persisted 2026-07-31.** The
+previous configuration is archived verbatim in `forecast_state.json` under
+`_archived_model_state.tier3_6_pre_june2026_pce_factors` (same pattern as #5's
+retired blend layer), with a correction note documented below.
+
+**The re-derived Bayesian arm.** Rather than picking fresh LRs, each was derived
+from its resized additive step, preserving the previous config's deliberate
+step-vs-LR adjustment only where its premise survived:
+
+| Factor | Step-implied LR | Old deliberate adjustment | Applied now? | LR (range) |
+|---|---|---|---|---|
+| Fed's active hawkish posture | odds(40)/odds(34) = 1.29 | ×0.92 circularity haircut | Yes — premise survives | 1.19 (1.00–1.45) |
+| Recent trend momentum | odds(36)/odds(40) = 0.84 | ×0.75 extra severity | No — premise (unbroken run-up) died with June; corroboration was already n = 1 | 0.85 (0.70–1.00) |
+| Single-print dispersion | odds(40)/odds(36) = 1.19 | ×1.10 upsize | No — the step's own move +3 → +4 absorbs it; reapplying would double-count | 1.19 (1.05–1.40) |
+
+**Posterior: odds 0.515 × 1.19 × 0.85 × 1.19 = 0.620 → 38.3%** (sensitivity band
+27.5–51.1%), vs the additive 40.0% — divergence −1.7pp, inside the 3pp flag
+threshold, so the two arms agree and the additive number persists. (The target
+sketched before derivation was ~38.7% with LRs near 1.20/0.85/1.20; the exact
+derivation gives 1.19s and lands 0.4pp lower — same answer within rounding.)
+
+**The independent third route.** The two arms above share the same 34% base rate
+and the same three pieces of evidence, so their agreement is weaker than it
+looks. `sep_print_distribution_route()` (`bayesian_update.py`) uses neither
+scheme: the December print is modeled as N(SEP median 3.6, σ_path² + σ_print²),
+where σ_path is the dispersion in where the true central path lands — read from
+the June SEP's published spread two defensible ways: central tendency 3.5–3.7 as
+roughly ±1σ (0.10), and the 2.7–4.1 full range of 19 participants as roughly
+±2σ to ±2.3σ (0.35 / 0.30) — and σ_print is **realized, not assumed**: the MoM
+stdev of the YoY series from the cache (trailing 12m 0.254, 24m 0.218, 36m
+0.208; full-sample ex-COVID 0.241). P(Dec ≤ 3.5%) across the 3×3 grid: **33.2%
+(tightest: CT-based path sd × 36m print sd) to 40.9%, central 39.4%** (range-based
+0.30 × trailing-24m 0.218). The pre-verification sketch (σ_path 0.30, σ_print
+0.25 → ~40%) checks out against the realized volatilities.
+
+**Three routes, one answer:** additive 40.0% (persisted) · Bayesian 38.3% ·
+SEP-distribution 33.2–40.9% central 39.4%. The third route is the one that
+shares no factor arithmetic with the other two.
+
+**Correction — where "~4.49% for Dec 2026" actually came from.** The old
+momentum rationale attributed the ~4.49% December projection to "the linear
+trend" on the five prints it listed. Traced 2026-07-31: **4.49 is the archived
+tier-2 fit** (`tier2_trend.pce_trend_forecast`, `PCE_TREND_MONTHS = 12`) — a
+linear fit on the trailing *twelve* YoY points (Jun 2025 – May 2026), reproduced
+exactly at 4.49. The five prints alone project **~6.4%** (slope 0.33/mo); with
+June included, ~5.4% (six-print window) or ~4.5% (12-month window). The figure
+was real but mis-attributed; the archive entry records the method
+(`correction_note` in `_archived_model_state.tier3_6_pre_june2026_pce_factors`)
+so no unexplained number is carried forward.
+
+**Timing note.** The next PCE release (July data) is August 26, 2026 — after the
+resolution window opens but well before it closes; this configuration should be
+revisited on that print.
 
 ### Archived: the old tier 2 trend fit (3.8%)
 

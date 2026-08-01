@@ -8,7 +8,9 @@ the reasoning legible and arguable instead of a hidden gut number.
 
 from dataclasses import dataclass, field
 
-from forecasts import set_forecast_probability
+# NOTE: this module deliberately does NOT import set_forecast_probability.
+# Persistence of tier-3 estimates happens in the TUI's editable screens (tui.py)
+# or per-forecast model modules behind --persist -- never from this file.
 
 
 @dataclass
@@ -50,8 +52,16 @@ class ReferenceClassEstimate:
 
 
 if __name__ == "__main__":
-    # Example scaffold for forecast #1 (chip export controls) -- fill in real
-    # base rate research before using this for the actual submission.
+    # Example scaffold for forecast #1 (chip export controls) -- ILLUSTRATIVE
+    # ONLY. The real #1 estimate is the Poisson model (export_controls_poisson.py,
+    # 87.1%) with its audited tier-3 config in forecast_state.json; this stale
+    # placeholder (55% base) exists to demo the ReferenceClassEstimate API.
+    # FIXED 2026-07-31: this block used to call set_forecast_probability(1, ...)
+    # unconditionally, so a plain `python3 tier3_judgment.py` clobbered #1's
+    # persisted 87.1% with the placeholder's 60.0 -- the same plain-run-must-
+    # not-write bug class as the original tier1_market #5 clobber. Plain runs
+    # now only print; this scaffold never persists (there is deliberately no
+    # --persist path here, because this config is not a real estimate).
     example = ReferenceClassEstimate(
         forecast_id=1,
         reference_class="US export control tightening actions on China-bound advanced chips, 2022-2026",
@@ -70,5 +80,8 @@ if __name__ == "__main__":
         magnitude_pts=5,
         rationale="less remaining room to tighten further without a new triggering event",
     ))
-    set_forecast_probability(1, example.final_probability())
     example.print_table()
+    print(
+        "(example scaffold only -- not persisted; forecast #1's authoritative "
+        "number comes from export_controls_poisson.py)"
+    )

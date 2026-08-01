@@ -298,9 +298,13 @@
     {
       "date": "2026-01-01",
       "value": 1673.041
+    },
+    {
+      "date": "2026-04-01",
+      "value": 1712.946
     }
   ],
-  "retrieved_at_utc": "2026-07-24T03:24:08.406006Z",
+  "retrieved_at_utc": "2026-07-31T17:23:22.163331Z",
   "schema_version": 1,
   "series": {
     "frequency": "Quarterly",
