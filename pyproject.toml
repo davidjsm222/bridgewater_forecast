@@ -26,7 +26,6 @@ py-modules = [
     "export_controls_poisson",
     "fomc_history",
     "forecasts",
-    "manual_research",
     "nuclear_competing_risks",
     "sovereign_ai_jumps",
     "tier1_market",

@@ -14,7 +14,6 @@ that forecast's model screen, `p` edits probability, and `q` quits.
 
 ## Structure
 - `data_sources.py` -- cache-first FRED, EIA, and Federal Register API pulls
-- `manual_research.py` -- empty, structured research templates for forecasts without clean APIs
 - `forecasts.py` -- the 10 forecasts, resolution dates/criteria, tier tags
 - `tier1_market.py` -- Fed posture HMM + Monte Carlo (forecast #5), legacy chaining/threshold helpers
 - `fomc_history.py` -- the 2016-2026 FOMC meeting history and SEP-derived posture labeling that trains the #5 HMM
