@@ -9,14 +9,19 @@ pip install -e . --break-system-packages
 ```
 forecast
 ```
-Controls: arrow keys navigate, Enter opens detail, `p` edits probability, and `q` quits.
+Controls: arrow keys navigate, Enter opens detail, `m` from a detail view opens
+that forecast's model screen, `p` edits probability, and `q` quits.
 
 ## Structure
 - `data_sources.py` -- cache-first FRED, EIA, and Federal Register API pulls
 - `manual_research.py` -- empty, structured research templates for forecasts without clean APIs
 - `forecasts.py` -- the 10 forecasts, resolution dates/criteria, tier tags
 - `tier1_market.py` -- Fed posture HMM + Monte Carlo (forecast #5), legacy chaining/threshold helpers
-- `tier2_trend.py` -- linear trend fit + sigma-distance-to-threshold (archived fits for #3, #4, #6)
+- `fomc_history.py` -- the 2016-2026 FOMC meeting history and SEP-derived posture labeling that trains the #5 HMM
+- `tier2_trend.py` -- shared linear-trend / Student-t fit machinery, plus the archived tier-2
+  fits for #4 and #6 (both since reframed to tier-3 estimates; neither fit persists anything).
+  #6 additionally carries a live Bayesian likelihood-ratio arm in `bayesian_update.py`.
+  #3's abandoned fit is archived as a commented config in `tui.py`, not here.
 - `tier3_judgment.py` -- reference-class base rate + named adjustment factors (all layered forecasts)
 
 Quantitative process models (each runnable standalone, `python3 <module>.py`;
@@ -45,12 +50,22 @@ with an explicit `--persist` flag, because several of them intentionally
 disagree with the persisted judgment number (each prints a divergence note; see
 methodology_notes.md for which divergences are flagged-but-not-adopted).
 `tier1_market.py` follows the same convention: a plain run only prints, and
-`--persist` writes the market-BLENDED forecast #5 value (raw HMM output plus
-the stored tier-3 adjustment layer), refusing if the blend config is missing.
+`--persist` writes forecast #5's pure-HMM Monte Carlo output (62.6%; the tier-3
+market-blend layer that used to sit on top was retired 2026-07-29 -- see
+methodology_notes.md #5). Because #5 is now defined by a single layer, the
+persistence guard refuses when a tier-3 blend config for #5 has REAPPEARED in
+the state file (two layers each claiming to define one forecast) or when the
+state file is absent -- the inverse of the original guard, which protected the
+blend from the raw HMM.
 
-The `ReferenceClassEstimate.print_table()` output in `tier3_judgment.py` is
-close to what should land in the appendix's methodology table -- base rate,
-named adjustments, final number, all visible.
+`tier2_trend.py` and `tier3_judgment.py` are print-only on any run (the example
+scaffold in `tier3_judgment.py` that once persisted #1 unconditionally was
+fixed 2026-07-31). All modules were audited plain-run-clean against a
+state-file hash on 2026-07-31/08-01.
+
+The `ReferenceClassEstimate.print_table()` output in `tier3_judgment.py`
+mirrors the per-forecast methodology tables in `methodology_notes.md` -- base
+rate, named adjustments, final number, all visible.
 
 ## Live public data
 
@@ -79,10 +94,16 @@ COMMERCIAL-sector monthly observation (July 2026, 10.33 cents/kWh), the latest
 actual published before the submission deadline (see
 `data_cache/eia_virginia_retail_electricity.json`, `baseline_period` 2026-07).
 
-## Trend uncertainty correction
+## Trend uncertainty correction (archived tier-2 machinery)
 
-Tier 2 probabilities do not treat the in-sample regression residual as the
-complete forecast error. The calculation uses
+No persisted probability resolves on a tier-2 trend fit any more -- #3, #4 and
+#6 were all reframed away from trend extrapolation (see methodology_notes.md
+for each decision). The machinery below stays in `tier2_trend.py` because the
+archived fits are kept runnable for the record; this section documents how
+their uncertainty bands were built.
+
+The archived tier-2 probabilities do not treat the in-sample regression
+residual as the complete forecast error. The calculation uses
 `max(in-sample residual std, expanding-window one-step RMSE)` as its base,
 multiplies it by the standard linear-regression future-prediction factor, and
 applies an additional `sqrt(8/n)` scale penalty when fewer than eight points
